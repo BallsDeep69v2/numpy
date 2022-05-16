@@ -7,6 +7,9 @@ public class BuchAusleihen {
     public class DashboardController {
 
         @FXML
+        private Button backBtn;
+
+        @FXML
         private ChoiceBox<?> personcb;
 
         @FXML

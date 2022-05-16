@@ -1,13 +1,13 @@
 package controller;
 
 import javafx.fxml.FXML;
-import javafx.scene.control.RadioButton;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.text.Text;
 
 public class Ausleiheansicht {
+
+        @FXML
+        private Button backBtn;
 
         @FXML
         private Text search;

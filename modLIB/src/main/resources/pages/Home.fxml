@@ -43,16 +43,12 @@
          <children>
             <Button fx:id="btnDashboard" contentDisplay="TOP" mnemonicParsing="false" prefHeight="199.0" prefWidth="266.0" stylesheets="@../css/fullpackstyling.css" text="Ausleiheübersciht">
                <graphic>
-                  <FontAwesomeIconView fill="#2d75e8" glyphName="HOME" size="70" />
+                  <FontAwesomeIconView fill="#2d75e8" glyphName="ADDRESS-BOOK" size="70" />
                </graphic>
             </Button>
             <Button fx:id="btnExemplarAnsicht" contentDisplay="TOP" mnemonicParsing="false" prefHeight="199.0" prefWidth="266.0" stylesheets="@../css/fullpackstyling.css" text="Exemplarübersiht" GridPane.columnIndex="1">
                <graphic>
-                  <ImageView fitHeight="71.0" fitWidth="72.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../pictures/list-icon-1425.png" />
-                     </image>
-                  </ImageView>
+                  <FontAwesomeIconView fill="#2d75e8" glyphName="ADDRESS-BOOK" size="70" />
                </graphic>
             </Button>
             <Button fx:id="btnBuchtypen" contentDisplay="TOP" mnemonicParsing="false" prefHeight="199.0" prefWidth="266.0" stylesheets="@../css/fullpackstyling.css" text="Buchtypenübersicht" GridPane.columnIndex="2">

@@ -13,7 +13,7 @@ public class ModLIBApp extends Application {
     public void start(Stage stage) throws Exception {
         modLIBStage.setSTAGE(stage);
         stage.setScene(new Scene(FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/pages/Home.fxml")))));
-        stage.setTitle("moin");
+        stage.setTitle("modLIB");
         stage.show();
     }
 }

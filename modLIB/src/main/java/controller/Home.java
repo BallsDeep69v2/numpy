@@ -17,31 +17,28 @@ import java.util.ResourceBundle;
 
 public class Home implements Initializable {
     @FXML
-    private Button btnDashboard;
+    private Button btnAusleihenAnsicht;
 
     @FXML
     private Button btnExemplarAnsicht;
 
     @FXML
-    private Button btnBuchtypen;
+    private Button btnBuchtypenAnsicht;
 
     @FXML
-    private Button btnNeuTyp;
+    private Button btnNeuerBuchtyp;
 
     @FXML
-    private Button btnNeuBuchExemplar;
+    private Button btnNeuesExemplar;
 
     @FXML
-    private Button btnNeuAusleihe;
+    private Button btnNeueAusleihe;
 
     @FXML
-    private Button btnClasses1;
+    private Button btnPersonen;
 
     @FXML
-    private Button btnPersonAnsicht;
-
-    @FXML
-    private ImageView btnPersonübersicht;
+    private Button btnPersonenAnsicht;
 
     @FXML
     private Button btnAnalyse;
@@ -49,25 +46,10 @@ public class Home implements Initializable {
     @FXML
     private Button btnLogout;
 
-    @FXML
-    private Button btnAusleiheAnsicht;
-    @FXML
-    void handleButtonClicks(ActionEvent event) {
-
-    }
-
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
         Stage stage = modLIBStage.STAGE;
-
-        btnDashboard.setOnAction(actionEvent -> {
-            try {
-                stage.setScene(new Scene(FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/pages/Dashboard.fxml")))));
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        });
 /*
         btnStudents.setOnAction(actionEvent -> {
             try {
@@ -87,9 +69,9 @@ public class Home implements Initializable {
 
  */
 
-        btnDashboard.setOnAction(actionEvent -> {
+        btnAusleihenAnsicht.setOnAction(actionEvent -> {
             try {
-                stage.setScene(new Scene(FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/pages/Dashboard.fxml")))));
+                stage.setScene(new Scene(FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/pages/Ausleihansicht.fxml")))));
             } catch (IOException e) {
                 e.printStackTrace();
             }

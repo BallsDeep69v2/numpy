@@ -3,30 +3,37 @@ package controller;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
-import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TextField;
-import javafx.scene.layout.GridPane;
 
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class NeuePerson implements Initializable {
+public class NeuerBuchtyp implements Initializable {
 
-
-    @FXML
-    private GridPane emailtf;
-
-    @FXML
-    private ChoiceBox<?> classcb;
-
-    @FXML
-    private TextField nametf;
-
-    @FXML
-    private TextField nachtf;
 
     @FXML
     private Button backBtn;
+
+    @FXML
+    private TextField isbntf;
+
+    @FXML
+    private TextField autortf;
+
+    @FXML
+    private TextField titeltf;
+
+    @FXML
+    private TextField genretf;
+
+    @FXML
+    private TextField pagestf;
+
+    @FXML
+    private TextField kbtf;
+
+    @FXML
+    private TextField jahrtf;
 
 
     @Override

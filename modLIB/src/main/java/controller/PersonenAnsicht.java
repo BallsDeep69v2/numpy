@@ -1,13 +1,18 @@
 package controller;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.text.Text;
-public class PersonenAnsicht {
+
+import java.net.URL;
+import java.util.ResourceBundle;
+
+public class PersonenAnsicht implements Initializable {
 
 
-    public class DashboardController {
 
         @FXML
         private Text search;
@@ -33,6 +38,12 @@ public class PersonenAnsicht {
         @FXML
         private TableColumn<?, ?> klasse;
 
-    }
+    @FXML
+    private Button backBtn;
 
+
+        @Override
+        public void initialize(URL url, ResourceBundle resourceBundle) {
+
+        }
 }

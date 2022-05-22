@@ -2,26 +2,25 @@ package controller;
 
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.chart.BarChart;
 import javafx.scene.control.Button;
+import javafx.scene.control.ChoiceBox;
 
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class Statistiken implements Initializable {
-
-
-    @FXML
-    private BarChart<?, ?> bar1;
-
-    @FXML
-    private BarChart<?, ?> bar2;
-
-    @FXML
-    private BarChart<?, ?> bar3;
+public class NeueAusleihe implements Initializable {
 
     @FXML
     private Button backBtn;
+
+    @FXML
+    private ChoiceBox<?> personcb;
+
+    @FXML
+    private ChoiceBox<?> idcb;
+
+    @FXML
+    private Button scanbtn;
 
 
     @Override

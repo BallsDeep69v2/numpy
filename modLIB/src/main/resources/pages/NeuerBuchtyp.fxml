@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.image.Image?>
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="756.0" prefWidth="1344.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.NeuerBuchtyp">
+   <children>
+      <Pane layoutY="-2.0" prefHeight="139.0" prefWidth="1344.0" style="-fx-background-color: #2D75E8;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="-2.0">
+         <children>
+            <GridPane layoutX="8.0" layoutY="-3.0" prefHeight="152.0" prefWidth="1330.0">
+               <columnConstraints>
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+               </columnConstraints>
+               <rowConstraints>
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints />
+                  <RowConstraints />
+                  <RowConstraints />
+                  <RowConstraints />
+                  <RowConstraints />
+               </rowConstraints>
+               <children>
+                  <Label prefHeight="70.0" prefWidth="375.0" text="Buchtyp Einfügen" textFill="WHITE" GridPane.rowSpan="6">
+                     <font>
+                        <Font size="48.0" />
+                     </font>
+                  </Label>
+               </children>
+            </GridPane>
+             <Button fx:id="backBtn" layoutX="6.0" layoutY="10.0" mnemonicParsing="false" stylesheets="@../css/fullpackstyling.css" >
+                 <graphic>
+                     <ImageView fitHeight="24.0" preserveRatio="true">
+                         <image>
+                             <Image url="@../icons/arrow-left.png" />
+                         </image>
+                     </ImageView>
+                 </graphic>
+             </Button>
+         </children>
+      </Pane>
+      <GridPane layoutY="137.0" prefHeight="619.0" prefWidth="1344.0">
+        <columnConstraints>
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+        </columnConstraints>
+        <rowConstraints>
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        </rowConstraints>
+         <children>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="ISBN" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Autor" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Titel" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Genre" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Seitenzahl" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER" />
+            <TextField fx:id="isbntf" GridPane.columnIndex="1" />
+            <TextField fx:id="autortf" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <TextField fx:id="titeltf" GridPane.columnIndex="3" />
+            <TextField fx:id="genretf" GridPane.columnIndex="3" GridPane.rowIndex="1" />
+            <TextField fx:id="pagestf" GridPane.columnIndex="2" GridPane.rowIndex="3" />
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Kurzbeschreibung" GridPane.halignment="CENTER" GridPane.rowIndex="2" />
+            <TextField fx:id="kbtf" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Ausgabejahr" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="2" />
+            <TextField fx:id="jahrtf" GridPane.columnIndex="3" GridPane.rowIndex="2" />
+            <Button mnemonicParsing="false" text="Button" />
+         </children>
+      </GridPane>
+   </children>
+</AnchorPane>

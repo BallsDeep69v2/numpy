@@ -1,13 +1,12 @@
 package controller;
 
 import app.modLIBStage;
-import javafx.event.ActionEvent;
+
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -50,28 +49,11 @@ public class Home implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
         Stage stage = modLIBStage.STAGE;
-/*
-        btnStudents.setOnAction(actionEvent -> {
-            try {
-                stage.setScene(new Scene(FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/pages/Students.fxml")))));
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        });
 
-        btn_Timetable.setOnAction(actionEvent -> {
+        btnAnalyse.setOnAction(actionEvent -> {
+            stage.hide();
             try {
-                stage.setScene(new Scene(FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/pages/Dashboard.fxml")))));
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        });
-
- */
-
-        btnAusleihenAnsicht.setOnAction(actionEvent -> {
-            try {
-                stage.setScene(new Scene(FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/pages/Ausleihansicht.fxml")))));
+                stage.setScene(new Scene(FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/pages/Statistiken.fxml")))));
             } catch (IOException e) {
                 e.printStackTrace();
             }

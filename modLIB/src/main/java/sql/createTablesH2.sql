@@ -40,20 +40,3 @@ CREATE TABLE Ausleihe
     ,ausleihe_status bit not null
     ,constraint ausleihe_pk primary key (ausleihe_buchexemplar_id, ausleihe_schueler_id, ausleihe_datum)
 );
-
-
-INSERT INTO Schueler VALUES (123, 'Simon', 'Schiller', 2011);
-INSERT INTO Schueler VALUES (333, 'Fabian', 'Kirschbaum', 2020);
-INSERT INTO Schueler VALUES (567, 'Michael', 'Reiter', 2017);
-INSERT INTO Schueler VALUES (987, 'Daniel', 'Mayer', 2018);
-
-INSERT INTO Buchtyp VALUES ('111111111', 'Datenbanken 1', 'Max Mustermann',4);
-INSERT INTO Buchtyp VALUES ('222222222', 'Programmieren 1', 'Paul Pfiel',2);
-INSERT INTO Buchtyp VALUES ('333333333', 'Wie man lebt', 'Max Lackner',2);
-INSERT INTO Buchtyp VALUES ('444444444', 'Wie man isst', 'Robin Karner',3);
-
-
-INSERT INTO Buchexemplar (buchexemplar_verschollen, buchexemplar_buchtyp_isbn) VALUES (0, '111111111');
-INSERT INTO Buchexemplar (buchexemplar_verschollen, buchexemplar_buchtyp_isbn) VALUES (0, '111111111');
-INSERT INTO Buchexemplar (buchexemplar_verschollen, buchexemplar_buchtyp_isbn) VALUES (1, '222222222');
-INSERT INTO Buchexemplar (buchexemplar_verschollen, buchexemplar_buchtyp_isbn) VALUES (0, '222222222');

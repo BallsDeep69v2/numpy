@@ -18,9 +18,10 @@ import java.util.Objects;
 public class Ausleihe {
     private static final List<Ausleihe> AUSLEIHE_LIST = new ArrayList<>();
     private BuchExemplar exemplar;
-    private Person ausleiher;
+    private Schueler ausleiher;
     private LocalDate beginDate;
-    private boolean zurueckgegeben;
+
+    private boolean status;
 
     public static boolean addAusleihe(Ausleihe ausleihe){
         return AUSLEIHE_LIST.add(ausleihe);

@@ -13,8 +13,7 @@ public class ModLIBApp extends Application {
     @Override
     public void start(Stage stage) throws Exception {
         ModLIBStage.setSTAGE(stage);
-        stage.setScene(new Scene(FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/pages/Login.fxml")))));
-//        stage.setScene(new Scene(FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/pages/AusleihenAnsicht.fxml")))));
+        stage.setScene(new Scene(FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/pages/DefaultAnsicht.fxml")))));
         stage.setTitle("modLIB");
         stage.show();
     }

@@ -7,6 +7,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
+import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
@@ -32,6 +33,7 @@ public class Login implements Initializable {
                 try {
                     ModLIBStage.STAGE.setScene(new Scene(FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/pages/Home.fxml")))));
                     ModLIBStage.STAGE.centerOnScreen();
+                    ((Stage)loginbtn.getScene().getWindow()).close();
                 } catch (IOException e) {
                     e.printStackTrace();
                 }

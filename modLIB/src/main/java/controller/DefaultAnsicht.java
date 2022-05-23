@@ -1,36 +1,50 @@
 package controller;
+import app.modLIBStage;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.stage.Stage;
 
-public class DefaultAnsicht {
+import java.io.IOException;
+import java.net.URL;
+import java.util.Objects;
+import java.util.ResourceBundle;
 
-    @FXML
-    private TableView<?> tbData;
-
-    @FXML
-    private TableColumn<?, ?> ISBN;
-
-    @FXML
-    private TableColumn<?, ?> title;
+public class DefaultAnsicht implements Initializable {
 
     @FXML
-    private TableColumn<?, ?> autor;
+    private TableView<String> tbData;
 
     @FXML
-    private TableColumn<?, ?> genre;
+    private TableColumn<String, Integer> ISBN;
 
     @FXML
-    private TableColumn<?, ?> kurzb;
+    private TableColumn<String, String> title;
 
     @FXML
-    private TableColumn<?, ?> jahr;
+    private TableColumn<String, String> autor;
 
     @FXML
-    private TableColumn<?, ?> pages;
+    private TableColumn<String, String> genre;
+
+    @FXML
+    private TableColumn<String, String> kurzb;
+
+    @FXML
+    private TableColumn<String, Integer> jahr;
+
+    @FXML
+    private TableColumn<String, Integer> pages;
 
     @FXML
     private Button btnLogin;
 
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+
+    }
 }

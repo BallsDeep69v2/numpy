@@ -1,0 +1,10 @@
+
+r
+java:S3008"PRename this field "STAGE" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(¨·ò†ùÿÿÿÿ8·æÊÿ0
+\
+java:S1118":Add a private constructor to hide the implicit public one.(‰„ìÀşÿÿÿÿ8¾æÊÿ0
+s
+java:S1104"QMake STAGE a static final constant or non-public and provide accessors if needed.(¨·ò†ùÿÿÿÿ8ÄæÊÿ0
+M
+java:S1444"+Make this "public static STAGE" field final(¨·ò†ùÿÿÿÿ8ÄæÊÿ0
+n	java:S101"MRename this class name to match the regular expression '^[A-Z][a-zA-Z0-9]*$'.(‰„ìÀşÿÿÿÿ8ÄæÊÿ0

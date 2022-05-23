@@ -2,7 +2,7 @@ package app;
 
 import javafx.stage.Stage;
 
-public class modLIBStage {
+public class ModLIBStage {
 
     public static Stage STAGE;
 

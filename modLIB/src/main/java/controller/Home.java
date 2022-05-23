@@ -1,6 +1,6 @@
 package controller;
 
-import app.modLIBStage;
+import app.ModLIBStage;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -34,9 +34,6 @@ public class Home implements Initializable {
     private Button btnNeueAusleihe;
 
     @FXML
-    private Button btnPersonen;
-
-    @FXML
     private Button btnPersonenAnsicht;
 
     @FXML
@@ -48,11 +45,75 @@ public class Home implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
-        Stage stage = modLIBStage.STAGE;
+        Stage stage = ModLIBStage.STAGE;
 
-        btnAnalyse.setOnMouseClicked(actionEvent -> {
+        btnAusleihenAnsicht.setOnAction(actionEvent -> {
+            try {
+                stage.setScene(new Scene(FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/pages/AusleihenAnsicht.fxml")))));
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        });
+
+        btnExemplarAnsicht.setOnAction(actionEvent -> {
+            try {
+                stage.setScene(new Scene(FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/pages/BuchexemplarAnsicht.fxml")))));
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        });
+
+        btnBuchtypenAnsicht.setOnAction(actionEvent -> {
+            try {
+                stage.setScene(new Scene(FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/pages/BuchtypenAnsicht.fxml")))));
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        });
+
+        btnNeuerBuchtyp.setOnAction(actionEvent -> {
+            try {
+                stage.setScene(new Scene(FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/pages/NeuerBuchtype.fxml")))));
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        });
+
+        btnNeuesExemplar.setOnAction(actionEvent -> {
+            try {
+                stage.setScene(new Scene(FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/pages/NeuesBuchexemplar.fxml")))));
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        });
+
+        btnNeueAusleihe.setOnAction(actionEvent -> {
+            try {
+                stage.setScene(new Scene(FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/pages/NeueAusleihe.fxml")))));
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        });
+
+        btnPersonenAnsicht.setOnAction(actionEvent -> {
+            try {
+                stage.setScene(new Scene(FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/pages/PersonenAnsicht.fxml")))));
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        });
+
+        btnAnalyse.setOnAction(actionEvent -> {
             try {
                 stage.setScene(new Scene(FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/pages/Statistiken.fxml")))));
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        });
+
+        btnLogout.setOnAction(actionEvent -> {
+            try {
+                stage.setScene(new Scene(FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/pages/DefaultAnsicht.fxml")))));
             } catch (IOException e) {
                 e.printStackTrace();
             }

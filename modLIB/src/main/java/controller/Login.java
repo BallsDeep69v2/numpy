@@ -1,6 +1,6 @@
 package controller;
 
-import app.modLIBStage;
+import app.ModLIBStage;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -31,8 +31,8 @@ public class Login implements Initializable {
         loginbtn.setOnAction(actionEvent -> {
             if (usernametf.getText().equals(passwtf.getText())) {
                 try {
-                    modLIBStage.STAGE.setScene(new Scene(FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/pages/Home.fxml")))));
-                    modLIBStage.STAGE.centerOnScreen();
+                    ModLIBStage.STAGE.setScene(new Scene(FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/pages/Home.fxml")))));
+                    ModLIBStage.STAGE.centerOnScreen();
                 } catch (IOException e) {
                     e.printStackTrace();
                 }

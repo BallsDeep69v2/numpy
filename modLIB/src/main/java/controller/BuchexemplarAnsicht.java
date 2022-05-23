@@ -12,46 +12,41 @@ import java.util.ResourceBundle;
 
 public class BuchexemplarAnsicht implements Initializable {
 
-
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-
     }
 
+    @FXML
+    private Button backBtn;
 
+    @FXML
+    private Text search;
 
-        @FXML
-        private Button backBtn;
+    @FXML
+    private TextField searchwordtf;
 
-        @FXML
-        private Text search;
+    @FXML
+    private TableView<String> tbData;
 
-        @FXML
-        private TextField searchwordtf;
+    @FXML
+    private TableColumn<String, Integer> ISBN;
 
-        @FXML
-        private TableView<String> tbData;
+    @FXML
+    private TableColumn<String, String> title;
 
-        @FXML
-        private TableColumn<String, Integer> ISBN;
+    @FXML
+    private TableColumn<String, String> autor;
 
-        @FXML
-        private TableColumn<String, String> title;
+    @FXML
+    private TableColumn<String, String> genre;
 
-        @FXML
-        private TableColumn<String, String> autor;
+    @FXML
+    private TableColumn<String, String> kurzb;
 
-        @FXML
-        private TableColumn<String, String> genre;
+    @FXML
+    private TableColumn<String, Integer> jahr;
 
-        @FXML
-        private TableColumn<String, String> kurzb;
-
-        @FXML
-        private TableColumn<String, Integer> jahr;
-
-        @FXML
-        private TableColumn<String, String> pages;
-
+    @FXML
+    private TableColumn<String, String> pages;
 
 }

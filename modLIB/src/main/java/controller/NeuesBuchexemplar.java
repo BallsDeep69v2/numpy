@@ -1,6 +1,6 @@
 package controller;
 
-import app.modLIBStage;
+import app.ModLIBStage;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -32,7 +32,7 @@ public class NeuesBuchexemplar implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        Stage stage = modLIBStage.STAGE;
+        Stage stage = ModLIBStage.STAGE;
         backBtn.setOnAction(
                 actionEvent -> {
                     try {

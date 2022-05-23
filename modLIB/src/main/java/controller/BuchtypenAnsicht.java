@@ -1,5 +1,5 @@
 package controller;
-import app.modLIBStage;
+import app.ModLIBStage;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -20,42 +20,41 @@ public class BuchtypenAnsicht implements Initializable {
 
 
     @FXML
-        private Button backBtn;
+    private Button backBtn;
 
-        @FXML
-        private Text search;
+    @FXML
+    private Text search;
 
-        @FXML
-        private TextField searchwordtf;
+    @FXML
+    private TextField searchwordtf;
 
-        @FXML
-        private TableView<String> tbData;
+    @FXML
+    private TableView<String> tbData;
 
-        @FXML
-        private TableColumn<String, Integer> ISBN;
+    @FXML
+    private TableColumn<String, Integer> ISBN;
 
-        @FXML
-        private TableColumn<String, String> title;
+    @FXML
+    private TableColumn<String, String> title;
 
-        @FXML
-        private TableColumn<String, String> autor;
+    @FXML
+    private TableColumn<String, String> autor;
 
-        @FXML
-        private TableColumn<String, String> genre;
+    @FXML
+    private TableColumn<String, String> genre;
 
-        @FXML
-        private TableColumn<String, String> kurzb;
+    @FXML
+    private TableColumn<String, String> kurzb;
 
-        @FXML
-        private TableColumn<String, Integer> jahr;
+    @FXML
+    private TableColumn<String, Integer> jahr;
 
-        @FXML
-        private TableColumn<String, Integer> pages;
-
+    @FXML
+    private TableColumn<String, Integer> pages;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        Stage stage = modLIBStage.STAGE;
+        Stage stage = ModLIBStage.STAGE;
         backBtn.setOnAction(
                 actionEvent -> {
                     try {

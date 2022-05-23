@@ -25,9 +25,6 @@ public class Login implements Initializable {
     @FXML
     private Button loginbtn;
 
-
-
-
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         loginbtn.setOnAction(actionEvent -> {

@@ -14,6 +14,7 @@ public class ModLIBApp extends Application {
     public void start(Stage stage) throws Exception {
         modLIBStage.setSTAGE(stage);
         stage.setScene(new Scene(FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/pages/Login.fxml")))));
+//        stage.setScene(new Scene(FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/pages/AusleihenAnsicht.fxml")))));
         stage.setTitle("modLIB");
         stage.show();
     }

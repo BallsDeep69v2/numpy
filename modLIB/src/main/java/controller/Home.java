@@ -51,7 +51,7 @@ public class Home implements Initializable {
         Stage stage = modLIBStage.STAGE;
 
         btnAnalyse.setOnMouseClicked(actionEvent -> {
-            try {
+                try {
                 stage.setScene(new Scene(FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/pages/Statistiken.fxml")))));
             } catch (IOException e) {
                 e.printStackTrace();

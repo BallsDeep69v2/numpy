@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="756.0" prefWidth="1344.0" style="-fx-background-color: #fff;" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.Home">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="756.0" prefWidth="1344.0" style="-fx-background-color: #fff;" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <Pane prefHeight="173.0" prefWidth="980.0" style="-fx-background-color: #2D75E8;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
@@ -30,7 +30,7 @@
                   <Font size="11.0" />
                </font>
             </Label>
-            <ImageView layoutX="33.0" layoutY="50.0" fitHeight="100.0" preserveRatio="true">
+            <ImageView fitHeight="100.0" layoutX="33.0" layoutY="50.0" preserveRatio="true">
                <image>
                   <Image url="@../icons/book.png" />
                </image>
@@ -78,7 +78,7 @@
             </Button>
             <Button fx:id="btnNeuesExemplar" contentDisplay="TOP" mnemonicParsing="false" prefHeight="199.0" prefWidth="266.0" stylesheets="@../css/fullpackstyling.css" text="neues Buchexmplar" GridPane.columnIndex="1" GridPane.rowIndex="1">
                <graphic>
-                  <ImageView fitHeight="50.0"  preserveRatio="true">
+                  <ImageView fitHeight="50.0" preserveRatio="true">
                      <image>
                         <Image url="@../icons/book-medical.png" />
                      </image>
@@ -87,7 +87,7 @@
             </Button>
             <Button fx:id="btnNeueAusleihe" contentDisplay="TOP" mnemonicParsing="false" prefHeight="199.0" prefWidth="266.0" stylesheets="@../css/fullpackstyling.css" text="neue Ausleihe" GridPane.rowIndex="1">
                <graphic>
-                  <ImageView fitHeight="50.0"  preserveRatio="true">
+                  <ImageView fitHeight="50.0" preserveRatio="true">
                      <image>
                         <Image url="@../icons/plus.png" />
                      </image>

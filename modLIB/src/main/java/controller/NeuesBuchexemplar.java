@@ -15,10 +15,10 @@ public class NeuesBuchexemplar implements Initializable {
     private Button insertbtn;
 
     @FXML
-    private ChoiceBox<?> typcb;
+    private ChoiceBox<String> typcb;
 
     @FXML
-    private ChoiceBox<?> buechercb;
+    private ChoiceBox<String> buechercb;
 
     @FXML
     private Button backBtn;

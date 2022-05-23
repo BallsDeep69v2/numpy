@@ -14,10 +14,10 @@ public class NeueAusleihe implements Initializable {
     private Button backBtn;
 
     @FXML
-    private ChoiceBox<?> personcb;
+    private ChoiceBox<String> personcb;
 
     @FXML
-    private ChoiceBox<?> idcb;
+    private ChoiceBox<String> idcb;
 
     @FXML
     private Button scanbtn;

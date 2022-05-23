@@ -58,5 +58,7 @@ public class Home implements Initializable {
             }
         });
 
+        btnLogout.setOnAction(actionEvent -> stage.close());
+
     }
 }

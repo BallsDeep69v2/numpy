@@ -12,13 +12,13 @@ public class Statistiken implements Initializable {
 
 
     @FXML
-    private BarChart<?, ?> bar1;
+    private BarChart<Integer, Integer> bar1;
 
     @FXML
-    private BarChart<?, ?> bar2;
+    private BarChart<Integer, Integer> bar2;
 
     @FXML
-    private BarChart<?, ?> bar3;
+    private BarChart<Integer, Integer> bar3;
 
     @FXML
     private Button backBtn;

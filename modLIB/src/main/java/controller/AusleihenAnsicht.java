@@ -6,6 +6,7 @@ import javafx.scene.control.*;
 import javafx.scene.text.Text;
 
 import java.net.URL;
+import java.sql.Date;
 import java.util.ResourceBundle;
 
 public class AusleihenAnsicht implements Initializable {
@@ -26,19 +27,19 @@ public class AusleihenAnsicht implements Initializable {
     private RadioButton closed;
 
     @FXML
-    private TableView<?> tbData;
+    private TableView<String> tbData;
 
     @FXML
-    private TableColumn<?, ?> date;
+    private TableColumn<String, Date> date;
 
     @FXML
-    private TableColumn<?, ?> name;
+    private TableColumn<String, String> name;
 
     @FXML
-    private TableColumn<?, ?> title;
+    private TableColumn<String, String> title;
 
     @FXML
-    private TableColumn<?, ?> status;
+    private TableColumn<String, String> status;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {

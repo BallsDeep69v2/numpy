@@ -21,22 +21,22 @@ public class PersonenAnsicht implements Initializable {
         private TextField searchword;
 
         @FXML
-        private TableView<?> tbData;
+        private TableView<String> tbData;
 
         @FXML
-        private TableColumn<?, ?> klasse1;
+        private TableColumn<String, String> klasse1;
 
         @FXML
-        private TableColumn<?, ?> firstName;
+        private TableColumn<String, String> firstName;
 
         @FXML
-        private TableColumn<?, ?> lastName;
+        private TableColumn<String, String> lastName;
 
         @FXML
-        private TableColumn<?, ?> email;
+        private TableColumn<String, String> email;
 
         @FXML
-        private TableColumn<?, ?> klasse;
+        private TableColumn<String, String> klasse;
 
     @FXML
     private Button backBtn;

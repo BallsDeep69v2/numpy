@@ -17,7 +17,7 @@ public class NeuePerson implements Initializable {
     private GridPane emailtf;
 
     @FXML
-    private ChoiceBox<?> classcb;
+    private ChoiceBox<String> classcb;
 
     @FXML
     private TextField nametf;

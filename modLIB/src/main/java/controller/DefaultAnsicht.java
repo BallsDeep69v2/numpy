@@ -7,28 +7,28 @@ import javafx.scene.control.TableView;
 public class DefaultAnsicht {
 
     @FXML
-    private TableView<?> tbData;
+    private TableView<String> tbData;
 
     @FXML
-    private TableColumn<?, ?> ISBN;
+    private TableColumn<String, Integer> ISBN;
 
     @FXML
-    private TableColumn<?, ?> title;
+    private TableColumn<String, String> title;
 
     @FXML
-    private TableColumn<?, ?> autor;
+    private TableColumn<String, String> autor;
 
     @FXML
-    private TableColumn<?, ?> genre;
+    private TableColumn<String, String> genre;
 
     @FXML
-    private TableColumn<?, ?> kurzb;
+    private TableColumn<String, String> kurzb;
 
     @FXML
-    private TableColumn<?, ?> jahr;
+    private TableColumn<String, Integer> jahr;
 
     @FXML
-    private TableColumn<?, ?> pages;
+    private TableColumn<String, Integer> pages;
 
     @FXML
     private Button btnLogin;

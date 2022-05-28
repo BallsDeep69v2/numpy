@@ -14,10 +14,10 @@ import java.util.Optional;
 
 public class JdbcBuchExemplarRepository implements BuchExemplarRepository {
 
-    private Connection connection;
-    private JdbcBuchTypRepository buchTypRepository;
+    private final Connection connection;
+    private final JdbcBuchTypRepository buchTypRepository;
 
-    public JdbcBuchExemplarRepository(Connection connection){
+    public JdbcBuchExemplarRepository(Connection connection) {
         this.connection = connection;
         buchTypRepository = new JdbcBuchTypRepository(connection);
     }
@@ -31,7 +31,7 @@ public class JdbcBuchExemplarRepository implements BuchExemplarRepository {
             var resultSet = statement.executeQuery();
             List<BuchExemplar> exemplare = new ArrayList<>();
 
-            while(resultSet.next()){
+            while (resultSet.next()) {
                 exemplare.add(getBuchExemplarFromResultSet(resultSet));
             }
             return exemplare;
@@ -51,7 +51,7 @@ public class JdbcBuchExemplarRepository implements BuchExemplarRepository {
             var resultSet = statement.executeQuery();
             List<BuchExemplar> exemplare = new ArrayList<>();
 
-            while(resultSet.next()){
+            while (resultSet.next()) {
                 exemplare.add(getBuchExemplarFromResultSet(resultSet));
             }
             return exemplare;
@@ -61,19 +61,18 @@ public class JdbcBuchExemplarRepository implements BuchExemplarRepository {
     }
 
     @Override
-    public BuchExemplar save(BuchExemplar buchExemplar) {
+    public BuchExemplar save(BuchTyp buchTyp) {
         var sql = """
-                insert into BuchExemplar
+                insert into BuchExemplar(buchexemplar_buchtyp_isbn)
                 values(?);""";
         try (var statement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
-            statement.setString(1, buchExemplar.getTyp().getIsbn());
+            statement.setString(1, buchTyp.getIsbn());
 
             statement.executeUpdate();
             ResultSet generatedKey = statement.getGeneratedKeys();
 
             if (generatedKey.next()) {
-                buchExemplar.setId((int)generatedKey.getLong(1));
-                return buchExemplar;
+                return new BuchExemplar((int) generatedKey.getLong(1), buchTyp);
             } else {
                 throw new SQLException("Buchexemplar konnte nicht gespeichert werden");
             }
@@ -95,7 +94,7 @@ public class JdbcBuchExemplarRepository implements BuchExemplarRepository {
             var resultSet = statement.executeQuery();
             if (resultSet.next()) {
                 return Optional.of(getBuchExemplarFromResultSet(resultSet));
-            }else{
+            } else {
                 return Optional.empty();
             }
         } catch (SQLException throwables) {
@@ -104,25 +103,12 @@ public class JdbcBuchExemplarRepository implements BuchExemplarRepository {
     }
 
     @Override
-    public boolean saveAll(List<BuchExemplar> buchExemplar) {
-        try{
-            try {
-                connection.setAutoCommit(false);
-                List<BuchExemplar> exemplare = new ArrayList<>();
-                for (BuchExemplar b : buchExemplar) {
-                    this.save(b);
-                }
-                connection.commit();
-                return true;
-            } catch (RuntimeSQLException e) {
-                connection.rollback();
-                return false;
-            } finally {
-                connection.setAutoCommit(true);
-            }
-        }catch (SQLException sqlE){
-            throw new RuntimeSQLException(sqlE.getMessage(), sqlE.getCause());
+    public List<BuchExemplar> saveMultiple(BuchTyp buchTyp, int menge) {
+        var exemplare = new ArrayList<BuchExemplar>();
+        for (int i = 0; i < menge; i++) {
+            exemplare.add(this.save(buchTyp));
         }
+        return exemplare;
     }
 
     @Override

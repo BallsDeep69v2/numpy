@@ -1,9 +1,6 @@
 package domain;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -17,17 +14,28 @@ import java.util.Objects;
 @ToString
 public class Ausleihe {
     private static final List<Ausleihe> AUSLEIHE_LIST = new ArrayList<>();
+    @NonNull
     private BuchExemplar exemplar;
+    @NonNull
     private Schueler ausleiher;
+    @NonNull
     private LocalDate beginDate;
 
+    //status ist false, wenn das Buch noch ausgeborgt ist, und true, wenn es zurueckgegeben wurde
     private boolean status;
 
-    public static boolean addAusleihe(Ausleihe ausleihe){
+    public Ausleihe(@NonNull BuchExemplar exemplar, @NonNull Schueler ausleiher, @NonNull LocalDate beginDate) {
+        this.exemplar = exemplar;
+        this.ausleiher = ausleiher;
+        this.beginDate = beginDate;
+        this.status = false;
+    }
+
+    public static boolean addAusleihe(Ausleihe ausleihe) {
         return AUSLEIHE_LIST.add(ausleihe);
     }
 
-    public static boolean removeAusleihe(Ausleihe ausleihe){
+    public static boolean removeAusleihe(Ausleihe ausleihe) {
         return AUSLEIHE_LIST.remove(ausleihe);
     }
 

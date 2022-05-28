@@ -12,9 +12,10 @@ public interface SchuelerRepository {
 
     Optional<Schueler> findBySchuelerID(int schuelerkennung);
 
-    boolean saveAll(List<Schueler> s);
+    void saveAll(List<Schueler> s);
 
     Optional<Schueler> update(Schueler s);
 
+    //Liefert true, wenn Schueler geloescht wurde, und false, wenn kein passender Schueler geloescht wurde
     boolean delete(Schueler s);
 }

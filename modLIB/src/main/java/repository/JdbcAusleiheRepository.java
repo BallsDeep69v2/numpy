@@ -5,6 +5,7 @@ import domain.BuchExemplar;
 import errorhandling.RuntimeSQLException;
 
 import java.sql.*;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -44,7 +45,7 @@ public class JdbcAusleiheRepository implements AusleiheRepository {
         var sql = """
                 select *
                 from Ausleihe
-                where ausleihe_status = 0;""";
+                where ausleihe_status = false;""";
         try (var statement = connection.prepareStatement(sql)) {
             var resultSet = statement.executeQuery();
             List<Ausleihe> ausleihen = new ArrayList<>();
@@ -63,7 +64,7 @@ public class JdbcAusleiheRepository implements AusleiheRepository {
         var sql = """
                 select *
                 from Ausleihe
-                where ausleihe_status = 0
+                where ausleihe_status = false
                 and ausleihe_buchexemplar_id = ?;""";
         try (var statement = connection.prepareStatement(sql)) {
             statement.setInt(1, buchExemplar.getId());
@@ -82,8 +83,9 @@ public class JdbcAusleiheRepository implements AusleiheRepository {
 
     @Override
     public Ausleihe save(Ausleihe ausleihe) {
-        if (findPendingByExemplar(ausleihe.getExemplar()).isEmpty())
+        if (findPendingByExemplar(ausleihe.getExemplar()).isPresent())
             throw new IllegalArgumentException("Dieses Buch ist bereits ausgeborgt");
+
         var sql = """
                 insert into ausleihe
                 values(?,?,?,?);""";
@@ -108,13 +110,43 @@ public class JdbcAusleiheRepository implements AusleiheRepository {
 
     @Override
     public void update(Ausleihe ausleihe) {
-        if (findPendingByExemplar(ausleihe.getExemplar()).isEmpty())
-            throw new IllegalArgumentException("Dieses Buch ist bereits ausgeborgt");
         var sql = """
                 update ausleihe
                 set ausleihe_status = ?;""";
         try (var statement = connection.prepareStatement(sql)) {
             statement.setBoolean(1,ausleihe.isStatus());
+
+            statement.executeUpdate();
+        } catch (SQLException throwables) {
+            throw new RuntimeSQLException(throwables.getMessage(), throwables.getCause());
+        }
+    }
+
+    @Override
+    public void delete(Ausleihe ausleihe) {
+        var sql = """
+                delete 
+                from Ausleihe
+                where ausleihe_buchtyp_isbn = ? and ausleihe_schueler_id = ? and ausleihe_datum = ?;""";
+        try (var statement = connection.prepareStatement(sql)) {
+            statement.setString(1,ausleihe.getExemplar().getTyp().getIsbn());
+            statement.setInt(2,ausleihe.getAusleiher().getId());
+            statement.setDate(3, Date.valueOf(ausleihe.getBeginDate()));
+
+            statement.executeUpdate();
+        } catch (SQLException throwables) {
+            throw new RuntimeSQLException(throwables.getMessage(), throwables.getCause());
+        }
+    }
+
+    @Override
+    public void deleteAllBefore(LocalDate date) {
+        var sql = """
+                delete 
+                from Ausleihe
+                where ausleihe_status = true and ausleihe_datum < ?;""";
+        try (var statement = connection.prepareStatement(sql)) {
+            statement.setDate(1, Date.valueOf(date));
 
             statement.executeUpdate();
         } catch (SQLException throwables) {

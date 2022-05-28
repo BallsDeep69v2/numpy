@@ -23,7 +23,7 @@ public record JdbcSchuelerRepository(Connection connection)
             var resultSet = statement.executeQuery();
             List<Schueler> schueler = new ArrayList<>();
 
-            while(resultSet.next()){
+            while (resultSet.next()) {
                 schueler.add(getSchuelerFromResultSet(resultSet));
             }
             return schueler;
@@ -35,8 +35,8 @@ public record JdbcSchuelerRepository(Connection connection)
     @Override
     public Schueler save(Schueler s) {
         var sql = """
-                insert into Schueler
-                values(?,?,?,?);""";
+                insert into Schueler(schueler_vorname , schueler_nachname , schueler_klasse , schueler_email)
+                values( ? , ? , ? , ? );""";
         try (var statement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
             statement.setString(1, s.getFirstName());
             statement.setString(2, s.getLastName());
@@ -70,7 +70,7 @@ public record JdbcSchuelerRepository(Connection connection)
             var resultSet = statement.executeQuery();
             if (resultSet.next()) {
                 return Optional.of(getSchuelerFromResultSet(resultSet));
-            }else{
+            } else {
                 return Optional.empty();
             }
         } catch (SQLException throwables) {
@@ -79,28 +79,27 @@ public record JdbcSchuelerRepository(Connection connection)
     }
 
     @Override
-    public boolean saveAll(List<Schueler> s) {
-        try{
+    public void saveAll(List<Schueler> s) {
+        try {
             try {
                 connection.setAutoCommit(false);
                 for (Schueler schueler : s) {
                     this.save(schueler);
                 }
                 connection.commit();
-                return true;
             } catch (RuntimeSQLException e) {
                 connection.rollback();
-                return false;
             } finally {
                 connection.setAutoCommit(true);
             }
-        }catch (SQLException sqlE){
+        } catch (SQLException sqlE) {
             throw new RuntimeSQLException(sqlE.getMessage(), sqlE.getCause());
         }
     }
 
     @Override
     public Optional<Schueler> update(Schueler s) {
+        if (s.getId() == null) throw new IllegalArgumentException("ID darf fuer diese Methode nicht leer sein");
         var sql = """
                 update Schueler
                 set schueler_vorname = ?,

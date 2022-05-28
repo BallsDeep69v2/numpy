@@ -17,17 +17,16 @@ public interface BuchExemplarRepository {
 
     //Speichert das uebergebene BuchExemplar in die DB
     //Wenn das Buchexemplar schon vorhanden ist - Exception
-    BuchExemplar save(BuchExemplar buchExemplar);
+    BuchExemplar save(BuchTyp buchTyp);
 
     //Liefert das BuchExemplar anhand der ID
     Optional<BuchExemplar> findById(int id);
 
     //Speichert eine ganze Liste von BuchExemplaren in die DB
     //Die Methode save wird auf die ganze Liste aufgerufen --> Exception bei doppleten Exemplaren
-    boolean saveAll(List<BuchExemplar> buchExemplar);
+    List<BuchExemplar> saveMultiple(BuchTyp buchTyp, int menge);
 
     //Loescht ein BuchExemplar von der DB
     //Falls nicht vorhanden - return false
     boolean delete(BuchExemplar buchExemplar);
-
 }

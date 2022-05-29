@@ -93,4 +93,17 @@ class JdbcAusleiheRepositoryTest {
         }
     }
 
+    @Nested
+    class Deleting{
+        @Test
+        void deleteSingleElementWorks(){
+            fillDBWithStandardTestData();
+            Ausleihe toDelete = ausleiheRepository.findAll().get(0);
+
+            ausleiheRepository.delete(toDelete);
+
+            assertThat(ausleiheRepository.findAll()).doesNotContain(toDelete);
+        }
+    }
+
 }

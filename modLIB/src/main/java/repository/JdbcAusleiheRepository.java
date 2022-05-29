@@ -127,9 +127,9 @@ public class JdbcAusleiheRepository implements AusleiheRepository {
         var sql = """
                 delete 
                 from Ausleihe
-                where ausleihe_buchtyp_isbn = ? and ausleihe_schueler_id = ? and ausleihe_datum = ?;""";
+                where ausleihe_buchexemplar_id = ? and ausleihe_schueler_id = ? and ausleihe_datum = ?;""";
         try (var statement = connection.prepareStatement(sql)) {
-            statement.setString(1,ausleihe.getExemplar().getTyp().getIsbn());
+            statement.setInt(1,ausleihe.getExemplar().getId());
             statement.setInt(2,ausleihe.getAusleiher().getId());
             statement.setDate(3, Date.valueOf(ausleihe.getBeginDate()));
 

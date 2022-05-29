@@ -45,5 +45,14 @@ class JdbcBuchTypRepositoryTest {
 
     @Nested
     class Updating{
+        @Test
+        void updatingWorks(){
+            BuchTyp buchTypToAdd = new BuchTyp("1234", "irgendwas", "irgendwer");
+            buchTypRepository.save(buchTypToAdd);
+            buchTypToAdd.setAuthor("Goethe");
+            buchTypRepository.update(buchTypToAdd);
+
+            assertThat(buchTypRepository.findByISBN(buchTypToAdd.getIsbn()).orElseThrow().getAuthor()).isEqualTo("Goethe");
+        }
     }
 }

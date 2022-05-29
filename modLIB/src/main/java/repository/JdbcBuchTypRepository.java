@@ -105,7 +105,7 @@ public record JdbcBuchTypRepository(Connection connection) implements BuchTypRep
                 buchtyp_beschreibung = ?,
                 buchtyp_genre = ?,
                 buchtyp_jahr = ?,
-                buchtyp_seitenzahl = ?,
+                buchtyp_seitenzahl = ?
 
                 where buchtyp_isbn = ?;""";
         try (var statement = connection.prepareStatement(sql)) {

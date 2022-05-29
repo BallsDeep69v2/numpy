@@ -8,8 +8,8 @@ import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.List;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatThrownBy;
+import static org.junit.jupiter.api.Assertions.*;
+import static org.assertj.core.api.Assertions.*;
 
 public class JdbcSchuelerRepositoryTest {
 
@@ -30,9 +30,9 @@ public class JdbcSchuelerRepositoryTest {
     }
 
     @Nested
-    class Saving{
+    class Saving {
         @Test
-        void savedSchuelerHasID(){
+        void savedSchuelerHasID() {
             Schueler schuelerToAdd = new Schueler("Paul", "Schöppl", "4BHIF", "p.schoeppl@htlstp.at");
 
             Schueler savedSchueler = schuelerRepository.save(schuelerToAdd);
@@ -41,7 +41,7 @@ public class JdbcSchuelerRepositoryTest {
         }
 
         @Test
-        void savedSchuelerAppearsInDB(){
+        void savedSchuelerAppearsInDB() {
             Schueler schuelerToAdd = new Schueler("Paul", "Schöppl", "4BHIF", "p.schoeppl@htlstp.at");
 
             Schueler savedSchueler = schuelerRepository.save(schuelerToAdd);
@@ -50,13 +50,35 @@ public class JdbcSchuelerRepositoryTest {
         }
 
         @Test
-        void savesMultipleSchuelerWorks(){
+        void savesMultipleSchuelerWorks() {
             var schuelerToAdd = List.of(new Schueler("Paul", "Schöppl", "4BHIF", "p.schoeppl@htlstp.at"),
                     new Schueler("Temo", "Natroshvili", "4BHIF", "t.natroschwili@htlstp.at"));
 
             schuelerRepository.saveAll(schuelerToAdd);
 
             assertThat(schuelerRepository.findAll()).containsExactlyInAnyOrderElementsOf(schuelerToAdd);
+        }
+    }
+
+    @Nested
+    class Deleting {
+        @Test
+        void works() {
+            var schuelerToAdd = List.of(new Schueler("Paul", "Schöppl", "4BHIF", "p.schoeppl@htlstp.at"),
+                    new Schueler("Temo", "Natroshvili", "4BHIF", "t.natroschwili@htlstp.at"));
+            schuelerRepository.saveAll(schuelerToAdd);
+            var schuelerToDelete = schuelerToAdd.get(0);
+
+            schuelerRepository.delete(schuelerToDelete);
+
+            assertThat(schuelerRepository.findAll()).doesNotContain(schuelerToDelete);
+        }
+
+        @Test
+        void doesNotThrowExceptionIfSchuelerDoesNotExist() {
+            Schueler schuelerToAdd = new Schueler(1, "Paul", "Schöppl", "4BHIF", "p.schoeppl@htlstp.at");
+
+            assertDoesNotThrow(() -> schuelerRepository.delete(schuelerToAdd));
         }
     }
 }

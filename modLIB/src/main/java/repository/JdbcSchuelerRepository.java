@@ -123,6 +123,7 @@ public record JdbcSchuelerRepository(Connection connection)
 
     @Override
     public boolean delete(Schueler s) {
+        if(s.getId() == null) throw new IllegalArgumentException("ID des Schuelers darf nicht null sein");
         var sql = """
                 delete from Schueler
                 where schueler_id = ?;""";

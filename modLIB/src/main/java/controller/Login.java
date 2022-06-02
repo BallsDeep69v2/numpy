@@ -34,13 +34,10 @@ public class Login implements Initializable {
 
             if (usernametf.getText().equals(passwtf.getText())) {
                 try {
-                    GenerateQRCode.createQRImage("Moin Login Meister",125);
                     ModLIBStage.STAGE.setScene(new Scene(FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/pages/Home.fxml")))));
                     ModLIBStage.STAGE.centerOnScreen();
                     ((Stage)loginbtn.getScene().getWindow()).close();
                 } catch (IOException e) {
-                    e.printStackTrace();
-                } catch (WriterException e) {
                     e.printStackTrace();
                 }
             }

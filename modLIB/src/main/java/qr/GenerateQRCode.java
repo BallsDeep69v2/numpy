@@ -15,9 +15,21 @@ import javax.print.attribute.standard.Copies;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.*;
+import java.nio.charset.StandardCharsets;
 import java.util.Hashtable;
 
 public class GenerateQRCode {
+
+    public static void main(String[] args) {
+        try {
+            createQRImage("12345678",128);
+
+        } catch (WriterException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 
     public static void createQRImage(String qrCodeText, int size) throws WriterException, IOException {
 
@@ -38,6 +50,7 @@ public class GenerateQRCode {
         graphics.fillRect(0, 0, matrixWidth, matrixWidth);
         // Paint and save the image using the ByteMatrix
         graphics.setColor(Color.BLACK);
+        graphics.drawString("88",55,120);
 
         for (int i = 0; i < matrixWidth; i++) {
             for (int j = 0; j < matrixWidth; j++) {
@@ -46,6 +59,7 @@ public class GenerateQRCode {
                 }
             }
         }
+
         ImageIO.write(image, "png", qrFile);
     }
 }

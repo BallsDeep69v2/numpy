@@ -8,35 +8,29 @@ import com.google.zxing.qrcode.QRCodeWriter;
 import com.google.zxing.qrcode.decoder.ErrorCorrectionLevel;
 
 import javax.imageio.ImageIO;
-import javax.print.*;
-import javax.print.attribute.HashPrintRequestAttributeSet;
-import javax.print.attribute.PrintRequestAttributeSet;
-import javax.print.attribute.standard.Copies;
 import java.awt.*;
 import java.awt.image.BufferedImage;
-import java.io.*;
-import java.nio.charset.StandardCharsets;
-import java.util.Hashtable;
+import java.io.File;
+import java.io.IOException;
+import java.util.HashMap;
 
 public class GenerateQRCode {
 
     public static void main(String[] args) {
         try {
-            createQRImage("12345678",128);
+            createQRImage("1234567891025", 128);
 
-        } catch (WriterException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
+        } catch (WriterException | IOException e) {
             e.printStackTrace();
         }
     }
 
     public static void createQRImage(String qrCodeText, int size) throws WriterException, IOException {
 
-        File qrFile = new File(System.getProperty("user.dir") + File.separator + "modLIB" + File.separator + "src" + File.separator + "main" + File.separator + "resources" + File.separator + "qrcodes" + File.separator + "qrCode.png");
+        File qrFile = new File(System.getProperty("user.dir") + File.separator + "src" + File.separator + "main" + File.separator + "resources" + File.separator + "qrcodes" + File.separator + "qrCode" + qrCodeText + ".png");
 
         // Create the ByteMatrix for the QR-Code that encodes the given String
-        Hashtable<EncodeHintType, ErrorCorrectionLevel> hintMap = new Hashtable<>();
+        HashMap<EncodeHintType, ErrorCorrectionLevel> hintMap = new HashMap<>();
         hintMap.put(EncodeHintType.ERROR_CORRECTION, ErrorCorrectionLevel.L);
         QRCodeWriter qrCodeWriter = new QRCodeWriter();
         BitMatrix byteMatrix = qrCodeWriter.encode(qrCodeText, BarcodeFormat.QR_CODE, size, size, hintMap);
@@ -50,7 +44,9 @@ public class GenerateQRCode {
         graphics.fillRect(0, 0, matrixWidth, matrixWidth);
         // Paint and save the image using the ByteMatrix
         graphics.setColor(Color.BLACK);
-        graphics.drawString("88",55,120);
+        graphics.drawString(qrCodeText, 18, 18);
+        graphics.drawString("01", 55, 120);
+
 
         for (int i = 0; i < matrixWidth; i++) {
             for (int j = 0; j < matrixWidth; j++) {

@@ -7,24 +7,26 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-
 @Getter
 @Setter
-@AllArgsConstructor
 @ToString
+@AllArgsConstructor
 public class Ausleihe {
     private static final List<Ausleihe> AUSLEIHE_LIST = new ArrayList<>();
+
     @NonNull
     private BuchExemplar exemplar;
+
     @NonNull
-    private Schueler ausleiher;
+    private Person ausleiher;
+
     @NonNull
     private LocalDate beginDate;
 
     //status ist false, wenn das Buch noch ausgeborgt ist, und true, wenn es zurueckgegeben wurde
     private boolean status;
 
-    public Ausleihe(@NonNull BuchExemplar exemplar, @NonNull Schueler ausleiher, @NonNull LocalDate beginDate) {
+    public Ausleihe(@NonNull BuchExemplar exemplar, @NonNull Person ausleiher, @NonNull LocalDate beginDate) {
         this.exemplar = exemplar;
         this.ausleiher = ausleiher;
         this.beginDate = beginDate;

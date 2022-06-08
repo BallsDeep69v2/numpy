@@ -1,6 +1,6 @@
 package repository;
 
-import domain.Schueler;
+import domain.Person;
 import org.junit.jupiter.api.*;
 import repository.setup.TestConnectionSupplier;
 
@@ -11,7 +11,7 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.assertj.core.api.Assertions.*;
 
-public class JdbcSchuelerRepositoryTest {
+public class JdbcPersonRepositoryTest {
 
     private final TestConnectionSupplier connectionSupplier = new TestConnectionSupplier();
     private Connection connection;
@@ -33,26 +33,26 @@ public class JdbcSchuelerRepositoryTest {
     class Saving {
         @Test
         void savedSchuelerHasID() {
-            Schueler schuelerToAdd = new Schueler("Paul", "Schöppl", "4BHIF", "p.schoeppl@htlstp.at");
+            Person personToAdd = new Person("Paul", "Schöppl", "4BHIF", "p.schoeppl@htlstp.at");
 
-            Schueler savedSchueler = schuelerRepository.save(schuelerToAdd);
+            Person savedPerson = schuelerRepository.save(personToAdd);
 
-            assertThat(savedSchueler).hasNoNullFieldsOrProperties();
+            assertThat(savedPerson).hasNoNullFieldsOrProperties();
         }
 
         @Test
         void savedSchuelerAppearsInDB() {
-            Schueler schuelerToAdd = new Schueler("Paul", "Schöppl", "4BHIF", "p.schoeppl@htlstp.at");
+            Person personToAdd = new Person("Paul", "Schöppl", "4BHIF", "p.schoeppl@htlstp.at");
 
-            Schueler savedSchueler = schuelerRepository.save(schuelerToAdd);
+            Person savedPerson = schuelerRepository.save(personToAdd);
 
-            assertThat(schuelerRepository.findBySchuelerID(savedSchueler.getId())).isNotEmpty();
+            assertThat(schuelerRepository.findBySchuelerID(savedPerson.getId())).isNotEmpty();
         }
 
         @Test
         void savesMultipleSchuelerWorks() {
-            var schuelerToAdd = List.of(new Schueler("Paul", "Schöppl", "4BHIF", "p.schoeppl@htlstp.at"),
-                    new Schueler("Temo", "Natroshvili", "4BHIF", "t.natroschwili@htlstp.at"));
+            var schuelerToAdd = List.of(new Person("Paul", "Schöppl", "4BHIF", "p.schoeppl@htlstp.at"),
+                    new Person("Temo", "Natroshvili", "4BHIF", "t.natroschwili@htlstp.at"));
 
             schuelerRepository.saveAll(schuelerToAdd);
 
@@ -64,8 +64,8 @@ public class JdbcSchuelerRepositoryTest {
     class Deleting {
         @Test
         void works() {
-            var schuelerToAdd = List.of(new Schueler("Paul", "Schöppl", "4BHIF", "p.schoeppl@htlstp.at"),
-                    new Schueler("Temo", "Natroshvili", "4BHIF", "t.natroschwili@htlstp.at"));
+            var schuelerToAdd = List.of(new Person("Paul", "Schöppl", "4BHIF", "p.schoeppl@htlstp.at"),
+                    new Person("Temo", "Natroshvili", "4BHIF", "t.natroschwili@htlstp.at"));
             schuelerRepository.saveAll(schuelerToAdd);
             var schuelerToDelete = schuelerToAdd.get(0);
 
@@ -76,9 +76,9 @@ public class JdbcSchuelerRepositoryTest {
 
         @Test
         void doesNotThrowExceptionIfSchuelerDoesNotExist() {
-            Schueler schuelerToAdd = new Schueler(1, "Paul", "Schöppl", "4BHIF", "p.schoeppl@htlstp.at");
+            Person personToAdd = new Person(1, "Paul", "Schöppl", "4BHIF", "p.schoeppl@htlstp.at");
 
-            assertDoesNotThrow(() -> schuelerRepository.delete(schuelerToAdd));
+            assertDoesNotThrow(() -> schuelerRepository.delete(personToAdd));
         }
     }
 }

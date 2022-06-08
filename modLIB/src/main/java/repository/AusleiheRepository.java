@@ -2,7 +2,6 @@ package repository;
 
 import domain.Ausleihe;
 import domain.BuchExemplar;
-import domain.Schueler;
 
 import java.time.LocalDate;
 import java.util.List;

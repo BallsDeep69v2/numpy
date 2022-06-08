@@ -1,21 +1,21 @@
 package repository;
 
-import domain.Schueler;
+import domain.Person;
 
 import java.util.List;
 import java.util.Optional;
 
 public interface SchuelerRepository {
-    List<Schueler> findAll();
+    List<Person> findAll();
 
-    Schueler save(Schueler s);
+    Person save(Person s);
 
-    Optional<Schueler> findBySchuelerID(int schuelerkennung);
+    Optional<Person> findBySchuelerID(int schuelerkennung);
 
-    void saveAll(List<Schueler> s);
+    void saveAll(List<Person> s);
 
-    Optional<Schueler> update(Schueler s);
+    Optional<Person> update(Person s);
 
     //Liefert true, wenn Schueler geloescht wurde, und false, wenn kein passender Schueler geloescht wurde
-    boolean delete(Schueler s);
+    boolean delete(Person s);
 }

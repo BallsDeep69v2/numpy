@@ -1,9 +1,8 @@
 package repository;
 
 import domain.Ausleihe;
-import domain.BuchExemplar;
 import domain.BuchTyp;
-import domain.Schueler;
+import domain.Person;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Nested;
@@ -16,7 +15,6 @@ import java.time.LocalDate;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.*;
 
 class JdbcAusleiheRepositoryTest {
 
@@ -43,12 +41,12 @@ class JdbcAusleiheRepositoryTest {
     }
 
     void fillDBWithStandardTestData() {
-        Schueler schueler = new Schueler();
+        Person person = new Person();
         BuchTyp buchtyp = new BuchTyp("isbn", "buchtyp", "test");
-        schuelerRepository.save(schueler);
+        schuelerRepository.save(person);
         buchTypRepository.save(buchtyp);
         var exemplar = exemplarRepository.save(buchtyp);
-        Ausleihe ausleihe = new Ausleihe(exemplar, schueler, LocalDate.now());
+        Ausleihe ausleihe = new Ausleihe(exemplar, person, LocalDate.now());
 
         ausleiheRepository.save(ausleihe);
     }
@@ -57,12 +55,12 @@ class JdbcAusleiheRepositoryTest {
     class Saving {
         @Test
         void saveSingleAusleiheWorks() {
-            Schueler schueler = new Schueler();
+            Person person = new Person();
             BuchTyp buchtyp = new BuchTyp("isbn", "buchtyp", "test");
-            schuelerRepository.save(schueler);
+            schuelerRepository.save(person);
             buchTypRepository.save(buchtyp);
             var exemplar = exemplarRepository.save(buchtyp);
-            Ausleihe ausleihe = new Ausleihe(exemplar, schueler, LocalDate.now());
+            Ausleihe ausleihe = new Ausleihe(exemplar, person, LocalDate.now());
             ausleiheRepository.save(ausleihe);
 
             assertThat(ausleiheRepository.findAll()).containsExactly(ausleihe);

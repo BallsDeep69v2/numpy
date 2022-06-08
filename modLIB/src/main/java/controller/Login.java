@@ -1,7 +1,6 @@
 package controller;
 
 import app.ModLIBStage;
-import com.google.zxing.WriterException;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -9,7 +8,6 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
-import qr.GenerateQRCode;
 
 import java.io.IOException;
 import java.net.URL;

@@ -1,8 +1,7 @@
 package repository;
 
-import domain.Schueler;
+import domain.Person;
 import errorhandling.RuntimeSQLException;
-import repository.SchuelerRepository;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -15,25 +14,25 @@ import java.util.Optional;
 public record JdbcSchuelerRepository(Connection connection)
         implements SchuelerRepository {
     @Override
-    public List<Schueler> findAll() {
+    public List<Person> findAll() {
         var sql = """
                 select *
                 from Schueler;""";
         try (var statement = connection.prepareStatement(sql)) {
             var resultSet = statement.executeQuery();
-            List<Schueler> schueler = new ArrayList<>();
+            List<Person> person = new ArrayList<>();
 
             while (resultSet.next()) {
-                schueler.add(getSchuelerFromResultSet(resultSet));
+                person.add(getSchuelerFromResultSet(resultSet));
             }
-            return schueler;
+            return person;
         } catch (SQLException throwables) {
             throw new RuntimeSQLException(throwables.getMessage(), throwables.getCause());
         }
     }
 
     @Override
-    public Schueler save(Schueler s) {
+    public Person save(Person s) {
         var sql = """
                 insert into Schueler(schueler_vorname , schueler_nachname , schueler_klasse , schueler_email)
                 values( ? , ? , ? , ? );""";
@@ -58,7 +57,7 @@ public record JdbcSchuelerRepository(Connection connection)
     }
 
     @Override
-    public Optional<Schueler> findBySchuelerID(int schuelerID) {
+    public Optional<Person> findBySchuelerID(int schuelerID) {
         var sql = """
                 select *
                 from Schueler
@@ -79,12 +78,12 @@ public record JdbcSchuelerRepository(Connection connection)
     }
 
     @Override
-    public void saveAll(List<Schueler> s) {
+    public void saveAll(List<Person> s) {
         try {
             try {
                 connection.setAutoCommit(false);
-                for (Schueler schueler : s) {
-                    this.save(schueler);
+                for (Person person : s) {
+                    this.save(person);
                 }
                 connection.commit();
             } catch (RuntimeSQLException e) {
@@ -98,7 +97,7 @@ public record JdbcSchuelerRepository(Connection connection)
     }
 
     @Override
-    public Optional<Schueler> update(Schueler s) {
+    public Optional<Person> update(Person s) {
         if (s.getId() == null) throw new IllegalArgumentException("ID darf fuer diese Methode nicht leer sein");
         var sql = """
                 update Schueler
@@ -122,7 +121,7 @@ public record JdbcSchuelerRepository(Connection connection)
     }
 
     @Override
-    public boolean delete(Schueler s) {
+    public boolean delete(Person s) {
         if(s.getId() == null) throw new IllegalArgumentException("ID des Schuelers darf nicht null sein");
         var sql = """
                 delete from Schueler
@@ -137,8 +136,8 @@ public record JdbcSchuelerRepository(Connection connection)
         }
     }
 
-    private Schueler getSchuelerFromResultSet(ResultSet set) throws SQLException {
-        return new Schueler(set.getInt("schueler_id"),
+    private Person getSchuelerFromResultSet(ResultSet set) throws SQLException {
+        return new Person(set.getInt("schueler_id"),
                 set.getString("schueler_vorname"),
                 set.getString("schueler_nachname"),
                 set.getString("schueler_klasse"),

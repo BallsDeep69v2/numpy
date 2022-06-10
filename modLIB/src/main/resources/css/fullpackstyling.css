@@ -2,6 +2,9 @@
 {
 -fx-background-color : #F3F3F3;
 }
+.bluebutton{
+    -fx-background-color : #5799d6;
+}
 .button:hover
 {
 -fx-background-color : #A1C1F4 ;
@@ -9,6 +12,24 @@
 .button:pressed
 {
 -fx-background-color : #73A3EF ;
+}
+
+.text-field {
+	-fx-accent: -fx-primary-color;
+	-fx-background-color: -fx-grey-color, white;
+	-fx-background-insets: 0, 0 0 1 0;
+	-fx-background-radius: 0;
+    -fx-border-width: 0 0 1px 0;
+    -fx-border-color: #5799d6;
+    -fx-border-style: solid;
+}
+.text-field:focused {
+	-fx-background-color: -fx-primary-color, white;
+}
+
+.bluetextfield{
+    -fx-text-fill: white;
+    -fx-border-color: black;
 }
 
 .table-view .column-header,

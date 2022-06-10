@@ -1,8 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
@@ -11,88 +14,79 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<?import javafx.scene.image.ImageView?>
-<?import javafx.scene.image.Image?>
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="756.0"
-            prefWidth="1344.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="controller.NeuerBuchtyp">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="756.0" prefWidth="1344.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.NeuerBuchtyp">
     <children>
-        <Pane layoutY="-2.0" prefHeight="139.0" prefWidth="1344.0" style="-fx-background-color: #2D75E8;"
-              AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="-2.0">
+        <Pane layoutY="-2.0" prefHeight="139.0" prefWidth="1344.0" style="-fx-background-color: #2D75E8;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="-2.0">
             <children>
-                <GridPane layoutX="8.0" layoutY="-3.0" prefHeight="152.0" prefWidth="1330.0">
+                <GridPane hgap="10.0" layoutX="8.0" layoutY="-3.0" prefHeight="152.0" prefWidth="1330.0">
                     <columnConstraints>
-                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
-                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
-                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                     </columnConstraints>
                     <rowConstraints>
-                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
-                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
-                        <RowConstraints/>
-                        <RowConstraints/>
-                        <RowConstraints/>
-                        <RowConstraints/>
-                        <RowConstraints/>
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints />
+                        <RowConstraints />
+                        <RowConstraints />
+                        <RowConstraints />
+                        <RowConstraints />
                     </rowConstraints>
                     <children>
-                        <Label prefHeight="70.0" prefWidth="375.0" text="Buchtyp Einfügen" textFill="WHITE"
-                               GridPane.rowSpan="6">
+                        <Label prefHeight="70.0" prefWidth="375.0" text="Buchtyp Einfügen" textFill="WHITE" GridPane.rowIndex="1" GridPane.rowSpan="6">
                             <font>
-                                <Font size="48.0"/>
+                                <Font size="48.0" />
                             </font>
                         </Label>
+                      <Button fx:id="backBtn" mnemonicParsing="false" stylesheets="@../css/fullpackstyling.css">
+                          <graphic>
+                              <ImageView fitHeight="24.0" preserveRatio="true">
+                                  <image>
+                                      <Image url="@../icons/arrow-left.png" />
+                                  </image>
+                              </ImageView>
+                          </graphic>
+                      </Button>
                     </children>
+               <padding>
+                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+               </padding>
                 </GridPane>
-                <Button fx:id="backBtn" layoutX="6.0" layoutY="10.0" mnemonicParsing="false"
-                        stylesheets="@../css/fullpackstyling.css">
-                    <graphic>
-                        <ImageView fitHeight="24.0" preserveRatio="true">
-                            <image>
-                                <Image url="@../icons/arrow-left.png"/>
-                            </image>
-                        </ImageView>
-                    </graphic>
-                </Button>
             </children>
         </Pane>
-        <GridPane layoutY="137.0" prefHeight="619.0" prefWidth="1344.0">
+        <GridPane hgap="20.0" layoutY="137.0" prefHeight="619.0" prefWidth="1344.0">
             <columnConstraints>
-                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
-                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
-                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
-                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
+                <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" maxWidth="385.0" minWidth="10.0" prefWidth="162.0" />
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="796.0" minWidth="10.0" prefWidth="428.0" />
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="689.0" minWidth="10.0" prefWidth="184.0" />
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="622.0" minWidth="10.0" prefWidth="504.0" />
             </columnConstraints>
             <rowConstraints>
-                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
-                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
-                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
-                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
             </rowConstraints>
             <children>
-                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="ISBN" GridPane.halignment="CENTER"
-                      GridPane.valignment="CENTER"/>
-                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Autor" GridPane.halignment="CENTER"
-                      GridPane.rowIndex="1" GridPane.valignment="CENTER"/>
-                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Titel" GridPane.columnIndex="2"
-                      GridPane.halignment="CENTER" GridPane.valignment="CENTER"/>
-                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Genre" GridPane.columnIndex="2"
-                      GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER"/>
-                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Seitenzahl" GridPane.columnIndex="1"
-                      GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER"/>
-                <TextField fx:id="isbntf" GridPane.columnIndex="1"/>
-                <TextField fx:id="autortf" GridPane.columnIndex="1" GridPane.rowIndex="1"/>
-                <TextField fx:id="titeltf" GridPane.columnIndex="3"/>
-                <TextField fx:id="genretf" GridPane.columnIndex="3" GridPane.rowIndex="1"/>
-                <TextField fx:id="pagestf" GridPane.columnIndex="2" GridPane.rowIndex="3"/>
-                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Kurzbeschreibung" GridPane.halignment="CENTER"
-                      GridPane.rowIndex="2"/>
-                <TextField fx:id="kbtf" GridPane.columnIndex="1" GridPane.rowIndex="2"/>
-                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Ausgabejahr" GridPane.columnIndex="2"
-                      GridPane.halignment="CENTER" GridPane.rowIndex="2"/>
-                <TextField fx:id="jahrtf" GridPane.columnIndex="3" GridPane.rowIndex="2"/>
-                <Button mnemonicParsing="false" text="Button"/>
+                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="ISBN" GridPane.halignment="RIGHT" GridPane.valignment="CENTER" />
+                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Autor" GridPane.halignment="RIGHT" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
+                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Titel" GridPane.columnIndex="2" GridPane.halignment="RIGHT" GridPane.valignment="CENTER" />
+                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Genre" GridPane.columnIndex="2" GridPane.halignment="RIGHT" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
+                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Seitenzahl" GridPane.halignment="RIGHT" GridPane.rowIndex="3" GridPane.valignment="CENTER" />
+                <TextField fx:id="isbntf" stylesheets="@../css/fullpackstyling.css" GridPane.columnIndex="1" />
+                <TextField fx:id="autortf" stylesheets="@../css/fullpackstyling.css" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                <TextField fx:id="titeltf" stylesheets="@../css/fullpackstyling.css" GridPane.columnIndex="3" />
+                <TextField fx:id="genretf" stylesheets="@../css/fullpackstyling.css" GridPane.columnIndex="3" GridPane.rowIndex="1" />
+                <TextField fx:id="pagestf" stylesheets="@../css/fullpackstyling.css" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Kurzbeschreibung" GridPane.halignment="RIGHT" GridPane.rowIndex="2" />
+                <TextField fx:id="kbtf" stylesheets="@../css/fullpackstyling.css" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Ausgabejahr" GridPane.columnIndex="2" GridPane.halignment="RIGHT" GridPane.rowIndex="2" />
+                <TextField fx:id="jahrtf" stylesheets="@../css/fullpackstyling.css" GridPane.columnIndex="3" GridPane.rowIndex="2" />
+            <Button fx:id="scanbtn" mnemonicParsing="false" prefHeight="25.0" prefWidth="114.0" styleClass="bluebutton" stylesheets="@../css/fullpackstyling.css" text="Einscannen" textFill="WHITE" GridPane.columnIndex="2" GridPane.halignment="RIGHT" GridPane.rowIndex="3" />
+            <Button fx:id="addbtn" mnemonicParsing="false" prefHeight="25.0" prefWidth="95.0" styleClass="bluebutton" stylesheets="@../css/fullpackstyling.css" text="Bestätigen" textFill="WHITE" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="3" />
             </children>
+         <padding>
+            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+         </padding>
         </GridPane>
     </children>
 </AnchorPane>

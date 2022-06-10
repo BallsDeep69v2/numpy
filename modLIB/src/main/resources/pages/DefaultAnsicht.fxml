@@ -11,19 +11,19 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="756.0" prefWidth="1344.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.DefaultAnsicht">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="756.0" prefWidth="1344.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.DefaultAnsicht">
    <children>
       <SplitPane layoutX="3.0" layoutY="184.0" prefHeight="549.0" prefWidth="1338.0" AnchorPane.bottomAnchor="23.0" AnchorPane.leftAnchor="3.0" AnchorPane.rightAnchor="3.0" AnchorPane.topAnchor="184.0">
         <items>
-            <TableView fx:id="tbData" prefHeight="550.0" prefWidth="1338.0" stylesheets="@../css/fullpackstyling.css">
+            <TableView fx:id="tbData" prefHeight="454.0" prefWidth="727.0" stylesheets="@../css/fullpackstyling.css">
                <columns>
-                  <TableColumn fx:id="ISBN" prefWidth="75.0" text="ISBN" />
-                  <TableColumn fx:id="title" prefWidth="75.0" text="Titel" />
+                  <TableColumn fx:id="ISBN" prefWidth="143.0" text="ISBN" />
+                  <TableColumn fx:id="title" prefWidth="239.0" text="Titel" />
                   <TableColumn fx:id="autor" prefWidth="75.0" text="Autor" />
                   <TableColumn fx:id="genre" prefWidth="75.0" text="Genre" />
                   <TableColumn fx:id="kurzb" prefWidth="75.0" text="Kurzbeschreibung" />
-                  <TableColumn fx:id="jahr" prefWidth="75.0" text="Ausgabejahr" />
-                  <TableColumn fx:id="pages" prefWidth="75.0" text="Seitenzahl" />
+                  <TableColumn fx:id="jahr" prefWidth="75.0" text="Erscheinungsjahr" />
+                  <TableColumn fx:id="pages" prefWidth="75.0" text="Seitenanzahl" />
                </columns>
                <columnResizePolicy>
                   <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
@@ -53,7 +53,7 @@
                   <Image url="@../icons/book.png" />
                </image>
             </ImageView>
-            <Button fx:id="btnLogin" layoutX="1142.0" layoutY="53.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="141.0" text="Login" />
+            <Button fx:id="btnLogin" layoutX="1202.0" layoutY="86.0" mnemonicParsing="false" prefHeight="33.0" prefWidth="87.0" stylesheets="@../css/fullpackstyling.css" text="Login" />
          </children>
       </Pane>
    </children>

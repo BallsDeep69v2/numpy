@@ -7,6 +7,8 @@ import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.ListView;
+import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -17,16 +19,19 @@ import java.util.ResourceBundle;
 public class NeueAusleihe implements Initializable {
 
     @FXML
+    private Button addbtn;
+
+    @FXML
     private Button backBtn;
 
     @FXML
-    private ChoiceBox<String> personcb;
-
-    @FXML
-    private ChoiceBox<String> idcb;
+    private ListView<?> personlistview;
 
     @FXML
     private Button scanbtn;
+
+    @FXML
+    private TextField searchtf;
 
 
     @Override

@@ -18,6 +18,39 @@ import java.util.ResourceBundle;
 
 public class BuchexemplarAnsicht implements Initializable {
 
+    @FXML
+    private TableColumn<?, ?> ISBN;
+
+    @FXML
+    private TableColumn<?, ?> autor;
+
+    @FXML
+    private Button backBtn;
+
+    @FXML
+    private TableColumn<?, ?> genre;
+
+    @FXML
+    private TableColumn<?, ?> jahr;
+
+    @FXML
+    private TableColumn<?, ?> kurzb;
+
+    @FXML
+    private TableColumn<?, ?> pages;
+
+    @FXML
+    private Text search;
+
+    @FXML
+    private TextField searchwordtf;
+
+    @FXML
+    private TableView<?> tbData;
+
+    @FXML
+    private TableColumn<?, ?> title;
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         Stage stage = ModLIBStage.STAGE;
@@ -31,38 +64,5 @@ public class BuchexemplarAnsicht implements Initializable {
                     }
                 });
     }
-
-    @FXML
-    private Button backBtn;
-
-    @FXML
-    private Text search;
-
-    @FXML
-    private TextField searchwordtf;
-
-    @FXML
-    private TableView<String> tbData;
-
-    @FXML
-    private TableColumn<String, Integer> ISBN;
-
-    @FXML
-    private TableColumn<String, String> title;
-
-    @FXML
-    private TableColumn<String, String> autor;
-
-    @FXML
-    private TableColumn<String, String> genre;
-
-    @FXML
-    private TableColumn<String, String> kurzb;
-
-    @FXML
-    private TableColumn<String, Integer> jahr;
-
-    @FXML
-    private TableColumn<String, String> pages;
 
 }

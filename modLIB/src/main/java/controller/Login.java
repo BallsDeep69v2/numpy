@@ -18,13 +18,16 @@ public class Login implements Initializable {
 
 
     @FXML
-    private TextField usernametf;
+    private Button cancelbtn;
+
+    @FXML
+    private Button loginbtn;
 
     @FXML
     private TextField passwtf;
 
     @FXML
-    private Button loginbtn;
+    private TextField usernametf;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {

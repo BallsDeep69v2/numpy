@@ -18,34 +18,32 @@ import java.util.ResourceBundle;
 
 public class PersonenAnsicht implements Initializable {
 
-
-
-        @FXML
-        private Text search;
-
-        @FXML
-        private TextField searchword;
-
-        @FXML
-        private TableView<String> tbData;
-
-        @FXML
-        private TableColumn<String, String> klasse1;
-
-        @FXML
-        private TableColumn<String, String> firstName;
-
-        @FXML
-        private TableColumn<String, String> lastName;
-
-        @FXML
-        private TableColumn<String, String> email;
-
-        @FXML
-        private TableColumn<String, String> klasse;
-
     @FXML
     private Button backBtn;
+
+    @FXML
+    private TableColumn<?, ?> email;
+
+    @FXML
+    private TableColumn<?, ?> firstName;
+
+    @FXML
+    private TableColumn<?, ?> klasse;
+
+    @FXML
+    private TableColumn<?, ?> klasse1;
+
+    @FXML
+    private TableColumn<?, ?> lastName;
+
+    @FXML
+    private Text search;
+
+    @FXML
+    private TextField searchword;
+
+    @FXML
+    private TableView<?> tbData;
 
 
         @Override

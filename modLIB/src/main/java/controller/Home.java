@@ -16,13 +16,22 @@ import java.util.ResourceBundle;
 
 public class Home implements Initializable {
     @FXML
+    private Button btnAnalyse;
+
+    @FXML
     private Button btnAusleihenAnsicht;
+
+    @FXML
+    private Button btnBuchtypenAnsicht;
 
     @FXML
     private Button btnExemplarAnsicht;
 
     @FXML
-    private Button btnBuchtypenAnsicht;
+    private Button btnLogout;
+
+    @FXML
+    private Button btnNeueAusleihe;
 
     @FXML
     private Button btnNeuerBuchtyp;
@@ -31,16 +40,7 @@ public class Home implements Initializable {
     private Button btnNeuesExemplar;
 
     @FXML
-    private Button btnNeueAusleihe;
-
-    @FXML
     private Button btnPersonenAnsicht;
-
-    @FXML
-    private Button btnAnalyse;
-
-    @FXML
-    private Button btnLogout;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {

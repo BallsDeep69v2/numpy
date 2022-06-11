@@ -20,19 +20,25 @@ public class NeuePerson implements Initializable {
 
 
     @FXML
+    private Button addbtn;
+
+    @FXML
+    private Button backBtn;
+
+    @FXML
+    private ChoiceBox<?> classcb;
+
+    @FXML
     private GridPane emailtf;
 
     @FXML
-    private ChoiceBox<String> classcb;
-
-    @FXML
-    private TextField nametf;
+    private TextField mailtf;
 
     @FXML
     private TextField nachtf;
 
     @FXML
-    private Button backBtn;
+    private TextField nametf;
 
 
     @Override

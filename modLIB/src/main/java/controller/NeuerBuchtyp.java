@@ -18,28 +18,34 @@ public class NeuerBuchtyp implements Initializable {
 
 
     @FXML
-    private Button backBtn;
-
-    @FXML
-    private TextField isbntf;
+    private Button addbtn;
 
     @FXML
     private TextField autortf;
 
     @FXML
-    private TextField titeltf;
+    private Button backBtn;
 
     @FXML
     private TextField genretf;
 
     @FXML
-    private TextField pagestf;
+    private TextField isbntf;
+
+    @FXML
+    private TextField jahrtf;
 
     @FXML
     private TextField kbtf;
 
     @FXML
-    private TextField jahrtf;
+    private TextField pagestf;
+
+    @FXML
+    private Button scanbtn;
+
+    @FXML
+    private TextField titeltf;
 
 
     @Override

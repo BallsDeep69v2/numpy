@@ -18,16 +18,16 @@ public class NeuesBuchexemplar implements Initializable {
 
 
     @FXML
+    private Button backBtn;
+
+    @FXML
+    private ChoiceBox<?> buechercb;
+
+    @FXML
     private Button insertbtn;
 
     @FXML
-    private ChoiceBox<String> typcb;
-
-    @FXML
-    private ChoiceBox<String> buechercb;
-
-    @FXML
-    private Button backBtn;
+    private ChoiceBox<?> typcb;
 
 
     @Override

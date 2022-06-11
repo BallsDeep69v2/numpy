@@ -17,31 +17,31 @@ import java.util.ResourceBundle;
 public class DefaultAnsicht implements Initializable {
 
     @FXML
-    private TableView<String> tbData;
+    private TableColumn<?, ?> ISBN;
 
     @FXML
-    private TableColumn<String, Integer> ISBN;
-
-    @FXML
-    private TableColumn<String, String> title;
-
-    @FXML
-    private TableColumn<String, String> autor;
-
-    @FXML
-    private TableColumn<String, String> genre;
-
-    @FXML
-    private TableColumn<String, String> kurzb;
-
-    @FXML
-    private TableColumn<String, Integer> jahr;
-
-    @FXML
-    private TableColumn<String, Integer> pages;
+    private TableColumn<?, ?> autor;
 
     @FXML
     private Button btnLogin;
+
+    @FXML
+    private TableColumn<?, ?> genre;
+
+    @FXML
+    private TableColumn<?, ?> jahr;
+
+    @FXML
+    private TableColumn<?, ?> kurzb;
+
+    @FXML
+    private TableColumn<?, ?> pages;
+
+    @FXML
+    private TableView<?> tbData;
+
+    @FXML
+    private TableColumn<?, ?> title;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {

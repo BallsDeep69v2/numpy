@@ -18,7 +18,19 @@ import java.util.ResourceBundle;
 public class AusleihenAnsicht implements Initializable {
 
     @FXML
+    private RadioButton adllradiobtn;
+
+    @FXML
     private Button backBtn;
+
+    @FXML
+    private TableColumn<?, ?> date;
+
+    @FXML
+    private TableColumn<?, ?> name;
+
+    @FXML
+    private RadioButton openradiotbn;
 
     @FXML
     private Text search;
@@ -27,25 +39,13 @@ public class AusleihenAnsicht implements Initializable {
     private TextField searchword;
 
     @FXML
-    private RadioButton open;
+    private TableColumn<?, ?> status;
 
     @FXML
-    private RadioButton closed;
+    private TableView<?> tbData;
 
     @FXML
-    private TableView<String> tbData;
-
-    @FXML
-    private TableColumn<String, Date> date;
-
-    @FXML
-    private TableColumn<String, String> name;
-
-    @FXML
-    private TableColumn<String, String> title;
-
-    @FXML
-    private TableColumn<String, String> status;
+    private TableColumn<?, ?> title;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {

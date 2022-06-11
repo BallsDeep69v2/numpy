@@ -9,6 +9,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
+import java.awt.event.KeyEvent;
 import java.io.IOException;
 import java.net.URL;
 import java.util.Objects;
@@ -31,18 +32,33 @@ public class Login implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        loginbtn.setOnAction(actionEvent -> {
 
+        cancelbtn.setOnAction(actionEvent -> ((Stage) loginbtn.getScene().getWindow()).close());
+
+        loginbtn.setOnAction(actionEvent -> {
             if (usernametf.getText().equals(passwtf.getText())) {
                 try {
                     ModLIBStage.STAGE.setScene(new Scene(FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/pages/Home.fxml")))));
                     ModLIBStage.STAGE.centerOnScreen();
-                    ((Stage)loginbtn.getScene().getWindow()).close();
+                    ((Stage) loginbtn.getScene().getWindow()).close();
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
             }
         });
+
+        usernametf.setOnKeyPressed(keyEvent ->
+
+        {
+            if (keyEvent.getCode().getCode() == KeyEvent.VK_ENTER) loginbtn.fire();
+        });
+
+        passwtf.setOnKeyPressed(keyEvent ->
+
+        {
+            if (keyEvent.getCode().getCode() == KeyEvent.VK_ENTER) loginbtn.fire();
+        });
+
     }
 
 }

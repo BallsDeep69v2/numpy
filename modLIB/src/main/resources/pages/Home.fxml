@@ -49,7 +49,7 @@
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
             </rowConstraints>
             <children>
-                <Button fx:id="btnExemplarAnsicht" contentDisplay="TOP" mnemonicParsing="false" prefHeight="199.0" prefWidth="266.0" stylesheets="@../css/fullpackstyling.css" text="Exemplarübersiht" GridPane.columnIndex="1">
+                <Button fx:id="btnExemplarAnsicht" contentDisplay="TOP" mnemonicParsing="false" prefHeight="199.0" prefWidth="266.0"  styleClass="bluebutton" stylesheets="@../css/fullpackstyling.css" text="Buchexemplar Übersicht" GridPane.columnIndex="1">
                     <graphic>
                         <ImageView fitHeight="50.0" preserveRatio="true">
                             <image>
@@ -58,7 +58,7 @@
                         </ImageView>
                     </graphic>
                 </Button>
-                <Button fx:id="btnBuchtypenAnsicht" contentDisplay="TOP" mnemonicParsing="false" prefHeight="199.0" prefWidth="266.0" stylesheets="@../css/fullpackstyling.css" text="Buchtypenübersicht" GridPane.columnIndex="2">
+                <Button fx:id="btnBuchtypenAnsicht" contentDisplay="TOP" mnemonicParsing="false" prefHeight="199.0" prefWidth="266.0" styleClass="bluebutton" stylesheets="@../css/fullpackstyling.css" text="Buchtypen Übersicht" GridPane.columnIndex="2">
                     <graphic>
                         <ImageView fitHeight="50.0" preserveRatio="true">
                             <image>
@@ -67,7 +67,7 @@
                         </ImageView>
                     </graphic>
                 </Button>
-                <Button fx:id="btnNeuerBuchtyp" contentDisplay="TOP" mnemonicParsing="false" prefHeight="199.0" prefWidth="266.0" stylesheets="@../css/fullpackstyling.css" text="neuer Buchtyp" GridPane.columnIndex="2" GridPane.rowIndex="1">
+                <Button fx:id="btnNeuerBuchtyp" contentDisplay="TOP" mnemonicParsing="false" prefHeight="199.0" prefWidth="266.0" styleClass="bluebutton" stylesheets="@../css/fullpackstyling.css" text="Neuer Buchtyp" GridPane.columnIndex="2" GridPane.rowIndex="1">
                     <graphic>
                         <ImageView fitHeight="50.0" preserveRatio="true">
                             <image>
@@ -76,7 +76,7 @@
                         </ImageView>
                     </graphic>
                 </Button>
-                <Button fx:id="btnNeuesExemplar" contentDisplay="TOP" mnemonicParsing="false" prefHeight="199.0" prefWidth="266.0" stylesheets="@../css/fullpackstyling.css" text="neues Buchexmplar" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                <Button fx:id="btnNeuesExemplar" contentDisplay="TOP" mnemonicParsing="false" prefHeight="199.0" prefWidth="266.0" styleClass="bluebutton" stylesheets="@../css/fullpackstyling.css" text="Neues Buchexemplar" GridPane.columnIndex="1" GridPane.rowIndex="1">
                     <graphic>
                         <ImageView fitHeight="50.0" preserveRatio="true">
                             <image>
@@ -85,7 +85,7 @@
                         </ImageView>
                     </graphic>
                 </Button>
-                <Button fx:id="btnNeueAusleihe" contentDisplay="TOP" mnemonicParsing="false" prefHeight="199.0" prefWidth="266.0" stylesheets="@../css/fullpackstyling.css" text="neue Ausleihe" GridPane.rowIndex="1">
+                <Button fx:id="btnNeueAusleihe" contentDisplay="TOP" mnemonicParsing="false" prefHeight="199.0" prefWidth="266.0" styleClass="bluebutton" stylesheets="@../css/fullpackstyling.css" text="Neue Ausleihe" GridPane.rowIndex="1">
                     <graphic>
                         <ImageView fitHeight="50.0" preserveRatio="true">
                             <image>
@@ -94,7 +94,7 @@
                         </ImageView>
                     </graphic>
                 </Button>
-                <Button fx:id="btnPersonenAnsicht" contentDisplay="TOP" mnemonicParsing="false" prefHeight="199.0" prefWidth="266.0" stylesheets="@../css/fullpackstyling.css" text="Personen" GridPane.rowIndex="2">
+                <Button fx:id="btnPersonenAnsicht" contentDisplay="TOP" mnemonicParsing="false" prefHeight="199.0" prefWidth="266.0" styleClass="bluebutton" stylesheets="@../css/fullpackstyling.css" text="Personen" GridPane.rowIndex="2">
                     <graphic>
                         <ImageView fitHeight="50.0" preserveRatio="true">
                             <image>
@@ -103,7 +103,7 @@
                         </ImageView>
                     </graphic>
                 </Button>
-                <Button fx:id="btnAnalyse" contentDisplay="TOP" mnemonicParsing="false" prefHeight="199.0" prefWidth="266.0" stylesheets="@../css/fullpackstyling.css" text="Analyse" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                <Button fx:id="btnAnalyse" contentDisplay="TOP" mnemonicParsing="false" prefHeight="199.0" prefWidth="266.0" styleClass="bluebutton" stylesheets="@../css/fullpackstyling.css" text="Statistiken" GridPane.columnIndex="1" GridPane.rowIndex="2">
                     <graphic>
                         <ImageView fitHeight="50.0" preserveRatio="true">
                             <image>
@@ -112,7 +112,7 @@
                         </ImageView>
                     </graphic>
                 </Button>
-                <Button fx:id="btnLogout" contentDisplay="TOP" mnemonicParsing="false" prefHeight="199.0" prefWidth="266.0" stylesheets="@../css/fullpackstyling.css" text="logout" GridPane.columnIndex="2" GridPane.rowIndex="2">
+                <Button fx:id="btnLogout" contentDisplay="TOP" mnemonicParsing="false" prefHeight="199.0" prefWidth="266.0" styleClass="bluebutton" stylesheets="@../css/fullpackstyling.css" text="Logout" GridPane.columnIndex="2" GridPane.rowIndex="2">
                     <graphic>
                         <ImageView fitHeight="50.0" preserveRatio="true">
                             <image>
@@ -121,7 +121,7 @@
                         </ImageView>
                     </graphic>
                 </Button>
-                <Button fx:id="btnAusleihenAnsicht" contentDisplay="TOP" mnemonicParsing="false" prefHeight="199.0" prefWidth="266.0" stylesheets="@../css/fullpackstyling.css" text="Ausleiheansicht">
+                <Button fx:id="btnAusleihenAnsicht" contentDisplay="TOP" mnemonicParsing="false" prefHeight="199.0" prefWidth="266.0" styleClass="bluebutton" stylesheets="@../css/fullpackstyling.css" text="Ausleihen Übersicht">
                     <graphic>
                         <ImageView fitHeight="50.0" preserveRatio="true">
                             <image>

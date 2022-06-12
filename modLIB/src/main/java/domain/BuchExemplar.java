@@ -12,8 +12,6 @@ import java.util.Objects;
 @Setter
 public class BuchExemplar {
     private static final List<BuchExemplar> BUCH_EXEMPLAR_LIST = new ArrayList<>();
-
-    @NonNull
     private Integer id;
 
     @NonNull

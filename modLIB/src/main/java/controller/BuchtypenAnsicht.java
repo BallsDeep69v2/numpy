@@ -2,7 +2,7 @@ package controller;
 
 import app.ModLIBStage;
 import domain.BuchTyp;
-import javafx.beans.binding.Bindings;
+import javafx.beans.property.SimpleStringProperty;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -41,13 +41,13 @@ public class BuchtypenAnsicht implements Initializable {
     private TableColumn<BuchTyp, String> genre;
 
     @FXML
-    private TableColumn<BuchTyp, Integer> jahr;
+    private TableColumn<BuchTyp, String> jahr;
 
     @FXML
     private TableColumn<BuchTyp, String> kurzb;
 
     @FXML
-    private TableColumn<BuchTyp, Integer> pages;
+    private TableColumn<BuchTyp, String> pages;
 
     @FXML
     private Text search;
@@ -76,9 +76,6 @@ public class BuchtypenAnsicht implements Initializable {
                 });
         initializeTableViews();
         loadData(new JdbcBuchTypRepository(new TestConnectionSupplier().getConnectionWithTestData()));
-
-        searchwordtf.styleProperty().bind(Bindings.when(searchwordtf.focusedProperty()).then("-fx-prompt-text-fill: derive(-fx-control-inner-background, -30%);").otherwise("-fx-prompt-text-fill: derive(-fx-control-inner-background, -30%);"));
-        searchwordtf.setFocusTraversable(false);
     }
 
     private void initializeTableViews() {
@@ -87,11 +84,19 @@ public class BuchtypenAnsicht implements Initializable {
         title.setCellValueFactory(new PropertyValueFactory<>("title"));
         kurzb.setCellValueFactory(new PropertyValueFactory<>("description"));
         genre.setCellValueFactory(new PropertyValueFactory<>("genre"));
-        pages.setCellValueFactory(new PropertyValueFactory<>("numberOfPages"));
-        jahr.setCellValueFactory(new PropertyValueFactory<>("year"));
+        //Falls Seitenzahl 0 ist, wird es als Leerstring angezeigt, um Verwirrung zu vermeiden
+        pages.setCellValueFactory(buchTypIntegerCellDataFeatures -> new SimpleStringProperty(
+                buchTypIntegerCellDataFeatures.getValue().getNumberOfPages() == 0? ""
+                        : buchTypIntegerCellDataFeatures.getValue().getNumberOfPages().toString())
+        );
+        //Falls das Jahr 0 ist, wird es als Leerstring angezeigt, um Verwirrung zu vermeiden
+        jahr.setCellValueFactory(buchTypIntegerCellDataFeatures -> new SimpleStringProperty(
+                buchTypIntegerCellDataFeatures.getValue().getYear() == 0 ? ""
+                        : buchTypIntegerCellDataFeatures.getValue().getYear().toString())
+        );
     }
 
-    private void loadData(BuchTypRepository repository){
+    private void loadData(BuchTypRepository repository) {
         tbData.getItems().addAll(repository.findAll());
     }
 }

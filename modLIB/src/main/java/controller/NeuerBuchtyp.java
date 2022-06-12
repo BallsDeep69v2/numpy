@@ -73,6 +73,10 @@ public class NeuerBuchtyp implements Initializable {
             try {
                 BuchTyp buchTyp = generateBuchTypFromTextFields();
                 repository.save(buchTyp);
+                Alert alert = new Alert(Alert.AlertType.INFORMATION, "Buchtyp erfolgreich hinzugefuegt");
+                alert.setTitle("Meldung");
+                alert.show();
+                backBtn.fire();
             } catch (IllegalArgumentException e) {
                 Alert alert = new Alert(Alert.AlertType.ERROR, "Geben Sie bitte valide Zahlen bei Jahr und Seitenzahl ein oder lassen sie diese Felder frei");
                 alert.show();

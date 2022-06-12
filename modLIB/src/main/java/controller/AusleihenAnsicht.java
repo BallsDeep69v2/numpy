@@ -56,7 +56,8 @@ public class AusleihenAnsicht implements Initializable {
     @FXML
     private TableColumn<Ausleihe, String> title;
 
-    private ToggleGroup toggleGroup;
+    @FXML
+    private ToggleGroup toggleGroup = new ToggleGroup();
 
     @SneakyThrows
     @Override
@@ -73,7 +74,11 @@ public class AusleihenAnsicht implements Initializable {
                 });
         initializeTableView();
         initializeToggleGroup();
-        loadData(new JdbcAusleiheRepository(new TestConnectionSupplier().getConnectionWithTestData()));
+
+        AusleiheRepository ausleiheRepository = new JdbcAusleiheRepository(new TestConnectionSupplier().getConnectionWithTestData());
+        loadData(ausleiheRepository);
+        adllradiobtn.setOnAction(actionEvent -> loadData(ausleiheRepository));
+        openradiotbn.setOnAction(actionEvent -> loadData(ausleiheRepository));
     }
 
     private void initializeTableView() {
@@ -88,6 +93,7 @@ public class AusleihenAnsicht implements Initializable {
     }
 
     private void loadData(AusleiheRepository repository) {
+        tbData.getItems().clear();
         if (adllradiobtn.isSelected())
             tbData.getItems().addAll(repository.findAll());
         else {

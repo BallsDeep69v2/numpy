@@ -2,6 +2,7 @@ package controller;
 
 import app.ModLIBStage;
 import domain.Ausleihe;
+import javafx.beans.binding.Bindings;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -74,6 +75,9 @@ public class AusleihenAnsicht implements Initializable {
                 });
         initializeTableView();
         initializeToggleGroup();
+
+        searchword.styleProperty().bind(Bindings.when(searchword.focusedProperty()).then("-fx-prompt-text-fill: derive(-fx-control-inner-background, -30%);").otherwise("-fx-prompt-text-fill: derive(-fx-control-inner-background, -30%);"));
+        searchword.setFocusTraversable(false);
 
         AusleiheRepository ausleiheRepository = new JdbcAusleiheRepository(new TestConnectionSupplier().getConnectionWithTestData());
         loadData(ausleiheRepository);

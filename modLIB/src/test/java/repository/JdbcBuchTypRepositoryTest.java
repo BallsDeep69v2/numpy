@@ -10,7 +10,6 @@ import repository.setup.TestConnectionSupplier;
 import java.sql.Connection;
 import java.sql.SQLException;
 
-import static org.junit.jupiter.api.Assertions.*;
 import static org.assertj.core.api.Assertions.assertThat;
 
 class JdbcBuchTypRepositoryTest {
@@ -22,7 +21,7 @@ class JdbcBuchTypRepositoryTest {
 
     @BeforeEach
     void createRepository() throws SQLException {
-        connection = connectionSupplier.getConnection();
+        connection = connectionSupplier.getConnectionWithEmptyTables();
         buchTypRepository = new JdbcBuchTypRepository(connection);
     }
 
@@ -39,7 +38,15 @@ class JdbcBuchTypRepositoryTest {
 
             buchTypRepository.save(buchTypToAdd);
 
-            assertThat(buchTypRepository.findByISBN(buchTypToAdd.getIsbn())).isNotEmpty();
+            assertThat(buchTypRepository.findByISBN(buchTypToAdd.getIsbn())).isPresent();
+        }
+
+        @Test
+        void savesBuchtypWithAllAttributes(){
+            BuchTyp buchTypToAdd = new BuchTyp("1234", "irgendwas", "irgendwer", "tolle Buch", "Online Marketing", 2018, 500);
+            buchTypRepository.save(buchTypToAdd);
+            //Vergleich, ob alle Attribute passen, daher mit toString()
+            assertThat(buchTypRepository.findByISBN(buchTypToAdd.getIsbn())).get().asString().isEqualTo(buchTypToAdd.toString());
         }
     }
 

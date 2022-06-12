@@ -2,9 +2,6 @@ package controller;
 
 import app.ModLIBStage;
 import domain.Ausleihe;
-import domain.BuchExemplar;
-import domain.BuchTyp;
-import domain.Person;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -13,13 +10,16 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import lombok.SneakyThrows;
 import repository.AusleiheRepository;
+import repository.JdbcAusleiheRepository;
+import sql.TestConnectionSupplier;
+
 
 import java.io.IOException;
 import java.net.URL;
 import java.sql.Date;
 import java.text.SimpleDateFormat;
-import java.time.LocalDate;
 
 import java.util.Objects;
 import java.util.ResourceBundle;
@@ -58,6 +58,7 @@ public class AusleihenAnsicht implements Initializable {
 
     private ToggleGroup toggleGroup;
 
+    @SneakyThrows
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         Stage stage = ModLIBStage.STAGE;
@@ -71,7 +72,8 @@ public class AusleihenAnsicht implements Initializable {
                     }
                 });
         initializeTableView();
-        loadData(null);
+        initializeToggleGroup();
+        loadData(new JdbcAusleiheRepository(new TestConnectionSupplier().getConnectionWithTestData()));
     }
 
     private void initializeTableView() {
@@ -86,15 +88,16 @@ public class AusleihenAnsicht implements Initializable {
     }
 
     private void loadData(AusleiheRepository repository) {
-        Person person = new Person();
-        BuchTyp buchtyp = new BuchTyp("isbn", "Troestlers Meisterwerke fuer Jung und Alt", "Wilhem Arthur Ferdinand Emanuel Tröstler");
-        BuchExemplar exemplar = new BuchExemplar(5, buchtyp);
-        Ausleihe ausleihe = new Ausleihe(exemplar, person, LocalDate.now());
-        tbData.getItems().add(ausleihe);
+        if (adllradiobtn.isSelected())
+            tbData.getItems().addAll(repository.findAll());
+        else {
+            tbData.getItems().addAll(repository.findAllPending());
+        }
     }
 
     private void initializeToggleGroup() {
         adllradiobtn.setToggleGroup(toggleGroup);
         openradiotbn.setToggleGroup(toggleGroup);
+        adllradiobtn.setSelected(true);
     }
 }

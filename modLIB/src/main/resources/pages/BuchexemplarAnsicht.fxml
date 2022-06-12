@@ -70,13 +70,9 @@
         <items>
             <TableView fx:id="tbData" prefHeight="417.0" prefWidth="869.0" stylesheets="@../css/fullpackstyling.css">
                <columns>
-                  <TableColumn fx:id="ISBN" prefWidth="75.0" text="ID" />
+                  <TableColumn fx:id="id" prefWidth="75.0" text="ID" />
+                  <TableColumn fx:id="ISBN" prefWidth="75.0" text="ISBN" />
                   <TableColumn fx:id="title" prefWidth="75.0" text="Titel" />
-                  <TableColumn fx:id="autor" prefWidth="75.0" text="Autor" />
-                  <TableColumn fx:id="genre" prefWidth="75.0" text="Genre" />
-                  <TableColumn fx:id="kurzb" prefWidth="75.0" text="Kurzbeschreibung" />
-                  <TableColumn fx:id="jahr" prefWidth="75.0" text="Ausgabejahr" />
-                  <TableColumn fx:id="pages" prefWidth="75.0" text="Seitenzahl" />
                </columns>
                <columnResizePolicy>
                   <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />

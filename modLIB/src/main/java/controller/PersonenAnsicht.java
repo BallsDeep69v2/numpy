@@ -13,7 +13,11 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import lombok.SneakyThrows;
+import repository.JdbcSchuelerRepository;
 import repository.SchuelerRepository;
+import sql.TestConnectionSupplier;
+
 
 import java.io.IOException;
 import java.net.URL;
@@ -46,6 +50,7 @@ public class PersonenAnsicht implements Initializable {
     @FXML
     private TableView<Person> tbData;
 
+    @SneakyThrows
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         Stage stage = ModLIBStage.STAGE;
@@ -59,7 +64,7 @@ public class PersonenAnsicht implements Initializable {
                     }
                 });
         initializeTableView();
-        loadData(null); //machen wir, wenn die Datenbank funktioniert
+        loadData(new JdbcSchuelerRepository(new TestConnectionSupplier().getConnectionWithTestData()));
     }
 
     private void initializeTableView() {
@@ -70,6 +75,6 @@ public class PersonenAnsicht implements Initializable {
     }
 
     private void loadData(SchuelerRepository repository) {//lädt aktuell nur Testdaten
-        tbData.getItems().add(new Person("Wilhem Arthur Ferdinand Emanuel", "Tröstler", "2BHIF", "wilhem.troestler@htlstp.at"));
+        tbData.getItems().addAll(repository.findAll());
     }
 }

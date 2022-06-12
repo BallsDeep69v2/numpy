@@ -16,7 +16,7 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="756.0" prefWidth="1344.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.NeuerBuchtyp">
     <children>
-        <Pane layoutY="-2.0" prefHeight="139.0" prefWidth="1344.0" style="-fx-background-color: #2D75E8;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="-2.0">
+        <Pane layoutY="-2.0" prefHeight="139.0" prefWidth="1344.0" style="-fx-background-color: #3eaae9;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="-2.0">
             <children>
                 <GridPane hgap="10.0" layoutX="8.0" layoutY="-3.0" prefHeight="152.0" prefWidth="1330.0">
                     <columnConstraints>

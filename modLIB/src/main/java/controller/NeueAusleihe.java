@@ -2,6 +2,7 @@ package controller;
 
 import app.ModLIBStage;
 import domain.Person;
+import javafx.beans.binding.Bindings;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -47,6 +48,9 @@ public class NeueAusleihe implements Initializable {
                         e.printStackTrace();
                     }
                 });
+
+        searchtf.styleProperty().bind(Bindings.when(searchtf.focusedProperty()).then("-fx-prompt-text-fill: derive(-fx-control-inner-background, -30%);").otherwise("-fx-prompt-text-fill: derive(-fx-control-inner-background, -30%);"));
+        searchtf.setFocusTraversable(false);
 
     }
 

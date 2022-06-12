@@ -31,7 +31,7 @@
             </TableView>
         </items>
       </SplitPane>
-      <Pane prefHeight="173.0" prefWidth="1344.0" style="-fx-background-color: #2D75E8;">
+      <Pane prefHeight="173.0" prefWidth="1344.0" style="-fx-background-color: #3eaae9;">
          <children>
             <Label layoutX="130.0" layoutY="31.0" text="modLIB" textFill="WHITE">
                <font>

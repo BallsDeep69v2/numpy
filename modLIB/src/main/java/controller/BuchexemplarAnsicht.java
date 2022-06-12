@@ -2,6 +2,7 @@ package controller;
 
 import app.ModLIBStage;
 import domain.BuchExemplar;
+import javafx.beans.binding.Bindings;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -62,6 +63,9 @@ public class BuchexemplarAnsicht implements Initializable {
                 });
         initializeTableViews();
         loadData(new JdbcBuchExemplarRepository(new TestConnectionSupplier().getConnectionWithTestData()));
+
+        searchwordtf.styleProperty().bind(Bindings.when(searchwordtf.focusedProperty()).then("-fx-prompt-text-fill: derive(-fx-control-inner-background, -30%);").otherwise("-fx-prompt-text-fill: derive(-fx-control-inner-background, -30%);"));
+        searchwordtf.setFocusTraversable(false);
     }
 
     private void initializeTableViews() {

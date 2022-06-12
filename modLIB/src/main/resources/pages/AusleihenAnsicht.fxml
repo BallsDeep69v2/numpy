@@ -20,7 +20,7 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="756.0" prefWidth="1344.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.AusleihenAnsicht">
    <children>
-      <Pane layoutY="-2.0" prefHeight="139.0" prefWidth="1344.0" style="-fx-background-color: #2D75E8;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="-2.0">
+      <Pane layoutY="-2.0" prefHeight="139.0" prefWidth="1344.0" style="-fx-background-color: #3eaae9;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="-2.0">
          <children>
             <GridPane hgap="10.0" layoutY="-5.0" prefHeight="154.0" prefWidth="1338.0">
                <columnConstraints>
@@ -48,7 +48,7 @@
                      <font>
                         <Font size="18.0" />
                      </font></Text>
-                  <TextField fx:id="searchword" prefHeight="26.0" prefWidth="433.0" styleClass="bluetextfield" stylesheets="@../css/fullpackstyling.css" text="Suchwort" GridPane.columnIndex="2" GridPane.rowIndex="1">
+                  <TextField fx:id="searchword" prefHeight="26.0" prefWidth="433.0" styleClass="bluetextfield" stylesheets="@../css/fullpackstyling.css" promptText="Suchwort" GridPane.columnIndex="2" GridPane.rowIndex="1">
                      <font>
                         <Font size="18.0" />
                      </font></TextField>

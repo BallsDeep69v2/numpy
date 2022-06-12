@@ -2,6 +2,7 @@ package controller;
 
 import app.ModLIBStage;
 import domain.Person;
+import javafx.beans.binding.Bindings;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -17,7 +18,6 @@ import lombok.SneakyThrows;
 import repository.JdbcSchuelerRepository;
 import repository.SchuelerRepository;
 import sql.TestConnectionSupplier;
-
 
 import java.io.IOException;
 import java.net.URL;
@@ -50,21 +50,30 @@ public class PersonenAnsicht implements Initializable {
     @FXML
     private TableView<Person> tbData;
 
+    @FXML
+    private Button newPersonbtn;
+
+    @FXML
+    private Button csvImportbtn;
+
+
     @SneakyThrows
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         Stage stage = ModLIBStage.STAGE;
-        backBtn.setOnAction(
-                actionEvent -> {
-                    try {
-                        stage.setScene(new Scene(FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/pages/Home.fxml")))));
+        backBtn.setOnAction(actionEvent -> {
+            try {
+                stage.setScene(new Scene(FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/pages/Home.fxml")))));
 
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-                });
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        });
         initializeTableView();
         loadData(new JdbcSchuelerRepository(new TestConnectionSupplier().getConnectionWithTestData()));
+
+        searchword.styleProperty().bind(Bindings.when(searchword.focusedProperty()).then("-fx-prompt-text-fill: derive(-fx-control-inner-background, -30%);").otherwise("-fx-prompt-text-fill: derive(-fx-control-inner-background, -30%);"));
+        searchword.setFocusTraversable(false);
     }
 
     private void initializeTableView() {

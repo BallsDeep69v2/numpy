@@ -1,6 +1,7 @@
 package controller;
 
 import app.ModLIBStage;
+import javafx.beans.binding.Bindings;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -9,6 +10,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
 import java.awt.event.KeyEvent;
@@ -46,23 +48,23 @@ public class Login implements Initializable {
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
-            }else {
+            } else {
                 Alert alert = new Alert(Alert.AlertType.ERROR, "Benutzername bzw. Passwort falsch");
+                ((Stage) alert.getDialogPane().getScene().getWindow()).getIcons().add(new Image("/icons/book_blue.png"));
                 alert.show();
             }
         });
 
-        usernametf.setOnKeyPressed(keyEvent ->
-
-        {
+        usernametf.setOnKeyPressed(keyEvent -> {
             if (keyEvent.getCode().getCode() == KeyEvent.VK_ENTER) loginbtn.fire();
         });
 
-        passwordTf.setOnKeyPressed(keyEvent ->
-
-        {
+        passwordTf.setOnKeyPressed(keyEvent -> {
             if (keyEvent.getCode().getCode() == KeyEvent.VK_ENTER) loginbtn.fire();
         });
+
+        usernametf.styleProperty().bind(Bindings.when(usernametf.focusedProperty()).then("-fx-prompt-text-fill: derive(-fx-control-inner-background, -30%);").otherwise("-fx-prompt-text-fill: derive(-fx-control-inner-background, -30%);"));
+        passwordTf.styleProperty().bind(Bindings.when(passwordTf.focusedProperty()).then("-fx-prompt-text-fill: derive(-fx-control-inner-background, -30%);").otherwise("-fx-prompt-text-fill: derive(-fx-control-inner-background, -30%);"));
 
     }
 

@@ -2,6 +2,7 @@ package controller;
 
 import app.ModLIBStage;
 import domain.BuchTyp;
+import javafx.beans.binding.Bindings;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -75,6 +76,9 @@ public class BuchtypenAnsicht implements Initializable {
                 });
         initializeTableViews();
         loadData(new JdbcBuchTypRepository(new TestConnectionSupplier().getConnectionWithTestData()));
+
+        searchwordtf.styleProperty().bind(Bindings.when(searchwordtf.focusedProperty()).then("-fx-prompt-text-fill: derive(-fx-control-inner-background, -30%);").otherwise("-fx-prompt-text-fill: derive(-fx-control-inner-background, -30%);"));
+        searchwordtf.setFocusTraversable(false);
     }
 
     private void initializeTableViews() {

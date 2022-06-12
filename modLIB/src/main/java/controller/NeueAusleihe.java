@@ -1,6 +1,7 @@
 package controller;
 
 import app.ModLIBStage;
+import domain.Person;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -25,7 +26,7 @@ public class NeueAusleihe implements Initializable {
     private Button backBtn;
 
     @FXML
-    private ListView<?> personlistview;
+    private ListView<Person> personlistview;
 
     @FXML
     private Button scanbtn;
@@ -46,5 +47,6 @@ public class NeueAusleihe implements Initializable {
                         e.printStackTrace();
                     }
                 });
+
     }
 }

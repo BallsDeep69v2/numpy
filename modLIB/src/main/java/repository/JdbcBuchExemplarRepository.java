@@ -41,6 +41,22 @@ public class JdbcBuchExemplarRepository implements BuchExemplarRepository {
     }
 
     @Override
+    public int getNumberOfBooksFromType(BuchTyp buchTyp) {
+        var sql = """
+                select count(buchexemplar_id) as numberOfBooks
+                from BuchExemplar
+                where buchexemplar_buchtyp_isbn = ?;""";
+        try (var statement = connection.prepareStatement(sql)) {
+            statement.setString(1, buchTyp.getIsbn());
+            var resultSet = statement.executeQuery();
+            resultSet.next();
+            return resultSet.getInt("numberOfBooks");
+        } catch (SQLException throwables) {
+            throw new RuntimeSQLException(throwables.getMessage(), throwables.getCause());
+        }
+    }
+
+    @Override
     public List<BuchExemplar> findByBuchTyp(BuchTyp buchTyp) {
         var sql = """
                 select *

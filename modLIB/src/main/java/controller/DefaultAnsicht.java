@@ -52,7 +52,7 @@ public class DefaultAnsicht implements Initializable {
                 actionEvent -> {
                     try {
                         stage.setScene(new Scene(FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/pages/Login.fxml")))));
-                        stage.getIcons().add(new Image("/icons/book_blue.png"));
+                        stage.getIcons().add(new Image("/icons/book.png"));
                         stage.setTitle("Login");
                         stage.centerOnScreen();
                         stage.show();

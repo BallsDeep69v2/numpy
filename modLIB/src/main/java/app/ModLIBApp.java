@@ -16,7 +16,7 @@ public class ModLIBApp extends Application {
         ModLIBStage.setSTAGE(stage);
         stage.setScene(new Scene(FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/pages/DefaultAnsicht.fxml")))));
         stage.setTitle("modLIB");
-        stage.getIcons().add(new Image("/icons/book_blue.png"));
+        stage.getIcons().add(new Image("/icons/book.png"));
         stage.show();
 
     }

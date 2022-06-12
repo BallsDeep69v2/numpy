@@ -1,5 +1,7 @@
 package controller;
+
 import app.ModLIBStage;
+import domain.BuchTyp;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -8,8 +10,10 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import repository.BuchTypRepository;
 
 import java.io.IOException;
 import java.net.URL;
@@ -20,25 +24,25 @@ public class BuchtypenAnsicht implements Initializable {
 
 
     @FXML
-    private TableColumn<?, ?> ISBN;
+    private TableColumn<BuchTyp, String> ISBN;
 
     @FXML
-    private TableColumn<?, ?> autor;
+    private TableColumn<BuchTyp, String> autor;
 
     @FXML
     private Button backBtn;
 
     @FXML
-    private TableColumn<?, ?> genre;
+    private TableColumn<BuchTyp, String> genre;
 
     @FXML
-    private TableColumn<?, ?> jahr;
+    private TableColumn<BuchTyp, Integer> jahr;
 
     @FXML
-    private TableColumn<?, ?> kurzb;
+    private TableColumn<BuchTyp, String> kurzb;
 
     @FXML
-    private TableColumn<?, ?> pages;
+    private TableColumn<BuchTyp, Integer> pages;
 
     @FXML
     private Text search;
@@ -47,10 +51,10 @@ public class BuchtypenAnsicht implements Initializable {
     private TextField searchwordtf;
 
     @FXML
-    private TableView<?> tbData;
+    private TableView<BuchTyp> tbData;
 
     @FXML
-    private TableColumn<?, ?> title;
+    private TableColumn<BuchTyp, String> title;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -64,5 +68,26 @@ public class BuchtypenAnsicht implements Initializable {
                         e.printStackTrace();
                     }
                 });
+        initializeTableViews();
+        loadData(null);
+    }
+
+    private void initializeTableViews() {
+        ISBN.setCellValueFactory(new PropertyValueFactory<>("isbn"));
+        autor.setCellValueFactory(new PropertyValueFactory<>("author"));
+        title.setCellValueFactory(new PropertyValueFactory<>("title"));
+        kurzb.setCellValueFactory(new PropertyValueFactory<>("description"));
+        genre.setCellValueFactory(new PropertyValueFactory<>("genre"));
+        pages.setCellValueFactory(new PropertyValueFactory<>("numberOfPages"));
+        jahr.setCellValueFactory(new PropertyValueFactory<>("year"));
+    }
+
+    private void loadData(BuchTypRepository repository){
+        tbData.getItems().add(new BuchTyp("TroestlerInc",
+                "Die neuen Leiden des jungen Csambals",
+                "Wilhem Arthur Ferdinand Emanuel Tröstler",
+                "Eine herzzerreißende Epik über das Schicksal des HTL-Entrepreneurs Christian Csambal",
+                "Erfolg",
+                2018, 3000));
     }
 }

@@ -11,6 +11,8 @@ public interface BuchExemplarRepository {
     //Liefert alle Buchexemplare von der DB
     List<BuchExemplar> findAll();
 
+    int getNumberOfBooksFromType(BuchTyp buchTyp);
+
     //Liefert alle Buchexemplare von einem BuchTyp
     //Wenn Buchtyp nicht vorhanden - Exception
     List<BuchExemplar> findByBuchTyp(BuchTyp buchTyp);

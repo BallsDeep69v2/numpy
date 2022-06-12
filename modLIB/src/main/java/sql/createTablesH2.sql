@@ -35,7 +35,7 @@ CREATE TABLE Ausleihe
 --ausleihe_datum ist das Datum, an dem das Buch ausgeborgt wurde
 --ausleihe_status ist 0, wenn das Buch noch nicht zurueckgegeben wurde, und 1, wenn es zurueckgegeben wurde
 	ausleihe_buchexemplar_id int not null references buchexemplar on delete cascade
-	,ausleihe_schueler_id int not null references person	on delete cascade
+	,ausleihe_schueler_id int not null references Schueler	on delete cascade
 	,ausleihe_datum date not null
     ,ausleihe_status bit not null
     ,constraint ausleihe_pk primary key (ausleihe_buchexemplar_id, ausleihe_schueler_id, ausleihe_datum)

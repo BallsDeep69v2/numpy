@@ -6,6 +6,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
@@ -25,7 +26,7 @@ public class Login implements Initializable {
     private Button loginbtn;
 
     @FXML
-    private TextField passwtf;
+    private PasswordField passwordTf;
 
     @FXML
     private TextField usernametf;
@@ -36,7 +37,7 @@ public class Login implements Initializable {
         cancelbtn.setOnAction(actionEvent -> ((Stage) loginbtn.getScene().getWindow()).close());
 
         loginbtn.setOnAction(actionEvent -> {
-            if (usernametf.getText().equals(passwtf.getText())) {
+            if (usernametf.getText().equals(passwordTf.getText())) {
                 try {
                     ModLIBStage.STAGE.setScene(new Scene(FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/pages/Home.fxml")))));
                     ModLIBStage.STAGE.centerOnScreen();
@@ -53,7 +54,7 @@ public class Login implements Initializable {
             if (keyEvent.getCode().getCode() == KeyEvent.VK_ENTER) loginbtn.fire();
         });
 
-        passwtf.setOnKeyPressed(keyEvent ->
+        passwordTf.setOnKeyPressed(keyEvent ->
 
         {
             if (keyEvent.getCode().getCode() == KeyEvent.VK_ENTER) loginbtn.fire();

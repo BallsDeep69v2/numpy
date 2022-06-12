@@ -1,8 +1,10 @@
 package repository;
 
+import domain.BuchTyp;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Nested;
+import org.junit.jupiter.api.Test;
 import repository.setup.TestConnectionSupplier;
 
 import java.sql.Connection;
@@ -31,8 +33,19 @@ class JdbcBuchExemplarRepositoryTest {
     }
 
     @Nested
-    class Saving{
+    class Saving {
         //ist im AusleiheRepository schon getestet
+    }
+
+    @Nested
+    class Finding {
+        @Test
+        void findNumberOfTypeWorks(){
+            BuchTyp buchtyp = new BuchTyp("isbn", "buchtyp", "test");
+            buchTypRepository.save(buchtyp);
+            exemplarRepository.saveMultiple(buchtyp, 5);
+            assertThat(exemplarRepository.getNumberOfBooksFromType(buchtyp)).isEqualTo(5);
+        }
     }
 
 }

@@ -85,7 +85,7 @@
                   <TableColumn fx:id="date" prefWidth="75.0" text="Ausleihungsdatum" />
                   <TableColumn fx:id="name" prefWidth="75.0" text="Personenname" />
                   <TableColumn fx:id="title" prefWidth="75.0" text="Buchtitel" />
-                  <TableColumn fx:id="status" prefWidth="75.0" text="Status" />
+                  <TableColumn fx:id="status" prefWidth="75.0" text="Zurückgegeben?" />
                </columns>
                <columnResizePolicy>
                   <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />

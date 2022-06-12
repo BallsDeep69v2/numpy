@@ -13,7 +13,11 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import lombok.SneakyThrows;
 import repository.BuchTypRepository;
+import repository.JdbcBuchTypRepository;
+import sql.TestConnectionSupplier;
+
 
 import java.io.IOException;
 import java.net.URL;
@@ -56,6 +60,7 @@ public class BuchtypenAnsicht implements Initializable {
     @FXML
     private TableColumn<BuchTyp, String> title;
 
+    @SneakyThrows
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         Stage stage = ModLIBStage.STAGE;
@@ -69,7 +74,7 @@ public class BuchtypenAnsicht implements Initializable {
                     }
                 });
         initializeTableViews();
-        loadData(null);
+        loadData(new JdbcBuchTypRepository(new TestConnectionSupplier().getConnectionWithTestData()));
     }
 
     private void initializeTableViews() {
@@ -83,11 +88,6 @@ public class BuchtypenAnsicht implements Initializable {
     }
 
     private void loadData(BuchTypRepository repository){
-        tbData.getItems().add(new BuchTyp("TroestlerInc",
-                "Die neuen Leiden des jungen Csambals",
-                "Wilhem Arthur Ferdinand Emanuel Tröstler",
-                "Eine herzzerreißende Epik über das Schicksal des HTL-Entrepreneurs Christian Csambal",
-                "Erfolg",
-                2018, 3000));
+        tbData.getItems().addAll(repository.findAll());
     }
 }

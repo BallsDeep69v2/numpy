@@ -28,7 +28,7 @@ class JdbcAusleiheRepositoryTest {
 
     @BeforeEach
     void createRepository() throws SQLException {
-        connection = connectionSupplier.getConnection();
+        connection = connectionSupplier.getConnectionWithEmptyTables();
         ausleiheRepository = new JdbcAusleiheRepository(connection);
         schuelerRepository = new JdbcSchuelerRepository(connection);
         exemplarRepository = new JdbcBuchExemplarRepository(connection);

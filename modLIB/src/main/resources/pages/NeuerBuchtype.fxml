@@ -78,7 +78,7 @@
                 <TextField fx:id="genretf" stylesheets="@../css/fullpackstyling.css" GridPane.columnIndex="3" GridPane.rowIndex="1" />
                 <TextField fx:id="pagestf" stylesheets="@../css/fullpackstyling.css" GridPane.columnIndex="1" GridPane.rowIndex="3" />
                 <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Kurzbeschreibung" GridPane.halignment="RIGHT" GridPane.rowIndex="2" />
-                <TextField fx:id="kbtf" stylesheets="@../css/fullpackstyling.css" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                <TextField fx:id="descriptionTF" stylesheets="@../css/fullpackstyling.css" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                 <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Ausgabejahr" GridPane.columnIndex="2" GridPane.halignment="RIGHT" GridPane.rowIndex="2" />
                 <TextField fx:id="jahrtf" stylesheets="@../css/fullpackstyling.css" GridPane.columnIndex="3" GridPane.rowIndex="2" />
             <Button fx:id="scanbtn" mnemonicParsing="false" prefHeight="25.0" prefWidth="114.0" styleClass="bluebutton" stylesheets="@../css/fullpackstyling.css" text="Einscannen" textFill="WHITE" GridPane.columnIndex="2" GridPane.halignment="RIGHT" GridPane.rowIndex="3" />

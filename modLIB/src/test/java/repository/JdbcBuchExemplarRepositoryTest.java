@@ -22,7 +22,7 @@ class JdbcBuchExemplarRepositoryTest {
 
     @BeforeEach
     void createRepository() throws SQLException {
-        connection = connectionSupplier.getConnection();
+        connection = connectionSupplier.getConnectionWithEmptyTables();
         buchTypRepository = new JdbcBuchTypRepository(connection);
         exemplarRepository = new JdbcBuchExemplarRepository(connection);
     }

@@ -20,7 +20,7 @@ public class JdbcPersonRepositoryTest {
 
     @BeforeEach
     void createRepository() throws SQLException {
-        connection = connectionSupplier.getConnection();
+        connection = connectionSupplier.getConnectionWithEmptyTables();
         schuelerRepository = new JdbcSchuelerRepository(connection);
     }
 

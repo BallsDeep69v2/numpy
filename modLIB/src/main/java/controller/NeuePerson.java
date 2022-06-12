@@ -1,15 +1,21 @@
 package controller;
 
 import app.ModLIBStage;
+import domain.Person;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
+import lombok.SneakyThrows;
+import repository.JdbcSchuelerRepository;
+import repository.SchuelerRepository;
+import sql.TestConnectionSupplier;
 
 import java.io.IOException;
 import java.net.URL;
@@ -26,7 +32,7 @@ public class NeuePerson implements Initializable {
     private Button backBtn;
 
     @FXML
-    private ChoiceBox<?> classcb;
+    private ChoiceBox<String> classcb;
 
     @FXML
     private GridPane emailtf;
@@ -41,6 +47,7 @@ public class NeuePerson implements Initializable {
     private TextField nametf;
 
 
+    @SneakyThrows
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         Stage stage = ModLIBStage.STAGE;
@@ -53,5 +60,25 @@ public class NeuePerson implements Initializable {
                         e.printStackTrace();
                     }
                 });
+
+        initializeAddButton(new JdbcSchuelerRepository(new TestConnectionSupplier().getConnectionWithTestData()));
+    }
+
+    private void initializeAddButton(SchuelerRepository repository) {
+        addbtn.setOnAction(actionEvent -> {
+            try {
+                Person toAdd = generatePersonFromTextFields();
+                repository.save(toAdd);
+            } catch (IllegalArgumentException e) {
+                Alert alert = new Alert(Alert.AlertType.ERROR, "Sie müssen zuerst alle Felder ausfüllen, bevor Sie den Schüler hinzufügen können");
+                alert.show();
+            }
+        });
+    }
+
+    private Person generatePersonFromTextFields() {
+        if (nametf.getText().isBlank() || nachtf.getText().isBlank() || mailtf.getText().isBlank() || !classcb.isShowing())
+            throw new IllegalArgumentException();
+        return new Person(nachtf.getText(), nachtf.getText(), classcb.getValue(), mailtf.getText());
     }
 }

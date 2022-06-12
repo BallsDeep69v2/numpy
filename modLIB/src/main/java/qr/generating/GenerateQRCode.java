@@ -20,7 +20,7 @@ import java.util.HashMap;
 public class GenerateQRCode {
 
     public static void createQRImage(String isbn, String exemplarNumber) throws WriterException, IOException, InvalidDataException {
-        createQRImage(isbn, exemplarNumber, ResourcesPath.RESOURCES_PATH);
+        createQRImage(isbn, exemplarNumber, ResourcesPath.getRessourcePath());
     }
 
     public static void createQRImage(String isbn, String exemplarNumber, Path resourcesPath) throws WriterException, IOException, InvalidDataException {

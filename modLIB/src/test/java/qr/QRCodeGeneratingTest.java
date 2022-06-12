@@ -18,21 +18,21 @@ public class QRCodeGeneratingTest {
 
     @AfterEach
     void clearTestResources() throws IOException {
-        Files.walk(ResourcesPath.TEST_RESOURCES_PATH).filter(Files::isRegularFile).map(Path::toFile).forEach(File::delete);
+        Files.walk(ResourcesPath.getRessourcePath()).filter(Files::isRegularFile).map(Path::toFile).forEach(File::delete);
     }
 
     @Nested
     class Generating {
         @Test
         void generateQRCode() throws IOException, WriterException {
-            GenerateQRCode.createQRImage("1234567890123", "01", ResourcesPath.TEST_RESOURCES_PATH);
+            GenerateQRCode.createQRImage("1234567890123", "01", ResourcesPath.getRessourcePath());
 
-            Assertions.assertThat(Files.list(ResourcesPath.TEST_RESOURCES_PATH)).containsExactly(Path.of(ResourcesPath.TEST_RESOURCES_PATH + File.separator + "qrCode1234567890123-01.png"));
+            Assertions.assertThat(Files.list(ResourcesPath.getRessourcePath())).containsExactly(Path.of(ResourcesPath.getRessourcePath() + File.separator + "qrCode1234567890123-01.png"));
         }
 
         @Test
         void failsWhenISBNOrExemplarNumberIsInvalid() throws IOException, WriterException {
-            Assertions.assertThatThrownBy(() -> GenerateQRCode.createQRImage("000111", "1", ResourcesPath.TEST_RESOURCES_PATH));
+            Assertions.assertThatThrownBy(() -> GenerateQRCode.createQRImage("000111", "1", ResourcesPath.getRessourcePath()));
         }
     }
 

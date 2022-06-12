@@ -16,7 +16,7 @@ import java.nio.file.Path;
 public class PrintPDF {
 
     public static boolean printGeneratedPDFFileByDefaultPrinter() {
-        return printGeneratedPDFFileByDefaultPrinter(ResourcesPath.RESOURCES_PATH);
+        return printGeneratedPDFFileByDefaultPrinter(ResourcesPath.getRessourcePath());
     }
 
     public static boolean printGeneratedPDFFileByDefaultPrinter(Path path) {

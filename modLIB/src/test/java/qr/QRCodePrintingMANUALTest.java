@@ -14,15 +14,15 @@ import java.nio.file.Path;
 public class QRCodePrintingMANUALTest {
     public static void main(String[] args) throws IOException, WriterException {
 
-        GenerateQRCode.createQRImage("1234567890123", "01", ResourcesPath.TEST_RESOURCES_PATH);
-        GenerateQRCode.createQRImage("2345678901234", "02", ResourcesPath.TEST_RESOURCES_PATH);
-        GenerateQRCode.createQRImage("1112225556986", "11", ResourcesPath.TEST_RESOURCES_PATH);
+        GenerateQRCode.createQRImage("1234567890123", "01", ResourcesPath.getTestResourcePath());
+        GenerateQRCode.createQRImage("2345678901234", "02", ResourcesPath.getTestResourcePath());
+        GenerateQRCode.createQRImage("1112225556986", "11", ResourcesPath.getTestResourcePath());
 
-        GeneratePDF.generatePDFFileWithAllExistingQRCodes(ResourcesPath.TEST_RESOURCES_PATH);
+        GeneratePDF.generatePDFFileWithAllExistingQRCodes(ResourcesPath.getTestResourcePath());
 
-        if(PrintPDF.printGeneratedPDFFileByDefaultPrinter(ResourcesPath.TEST_RESOURCES_PATH)){
-            Files.walk(ResourcesPath.TEST_RESOURCES_PATH).filter(Files::exists).map(Path::toFile).forEach(File::delete);
+        if(PrintPDF.printGeneratedPDFFileByDefaultPrinter(ResourcesPath.getTestResourcePath())){
+            Files.walk(ResourcesPath.getTestResourcePath()).filter(Files::exists).map(Path::toFile).forEach(File::delete);
         }
-        Files.walk(ResourcesPath.TEST_RESOURCES_PATH).filter(path -> path.toString().endsWith(".pdf")).map(Path::toFile).forEach(File::delete);
+        Files.walk(ResourcesPath.getTestResourcePath()).filter(path -> path.toString().endsWith(".pdf")).map(Path::toFile).forEach(File::delete);
     }
 }

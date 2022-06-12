@@ -17,7 +17,7 @@ import java.util.List;
 public class GeneratePDF {
 
     public static void generatePDFFileWithAllExistingQRCodes() {
-        generatePDFFileWithAllExistingQRCodes(ResourcesPath.RESOURCES_PATH);
+        generatePDFFileWithAllExistingQRCodes(ResourcesPath.getRessourcePath());
     }
 
     public static void generatePDFFileWithAllExistingQRCodes(Path path) {

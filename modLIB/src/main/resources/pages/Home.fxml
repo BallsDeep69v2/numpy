@@ -103,11 +103,11 @@
                         </ImageView>
                     </graphic>
                 </Button>
-                <Button fx:id="btnAnalyse" contentDisplay="TOP" mnemonicParsing="false" prefHeight="199.0" prefWidth="266.0" styleClass="bluebutton" stylesheets="@../css/fullpackstyling.css" text="Statistiken" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                <Button fx:id="btnQRCodes" contentDisplay="TOP" mnemonicParsing="false" prefHeight="199.0" prefWidth="266.0" styleClass="bluebutton" stylesheets="@../css/fullpackstyling.css" text="QR Codes" GridPane.columnIndex="1" GridPane.rowIndex="2">
                     <graphic>
                         <ImageView fitHeight="50.0" preserveRatio="true">
                             <image>
-                                <Image url="@../icons/chart-line.png" />
+                                <Image url="@../icons/qrcode.png" />
                             </image>
                         </ImageView>
                     </graphic>

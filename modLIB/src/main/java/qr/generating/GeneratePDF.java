@@ -45,7 +45,7 @@ public class GeneratePDF {
             }
         } catch (DocumentException | IOException e) {
             e.printStackTrace();
-        }finally {
+        } finally {
             document.close();
         }
     }

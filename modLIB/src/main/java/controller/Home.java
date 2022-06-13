@@ -16,7 +16,7 @@ import java.util.ResourceBundle;
 public class Home implements Initializable {
 
     @FXML
-    private Button btnAnalyse;
+    private Button btnQRCodes;
 
     @FXML
     private Button btnAusleihenAnsicht;
@@ -104,9 +104,9 @@ public class Home implements Initializable {
             }
         });
 
-        btnAnalyse.setOnAction(actionEvent -> {
+        btnQRCodes.setOnAction(actionEvent -> {
             try {
-                stage.setScene(new Scene(FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/pages/Statistiken.fxml")))));
+                stage.setScene(new Scene(FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/pages/QRCodes.fxml")))));
             } catch (IOException e) {
                 e.printStackTrace();
             }

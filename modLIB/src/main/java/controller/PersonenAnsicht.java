@@ -13,16 +13,22 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.text.Text;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import lombok.SneakyThrows;
 import repository.JdbcSchuelerRepository;
 import repository.SchuelerRepository;
 import sql.TestConnectionSupplier;
 
+import java.io.File;
 import java.io.IOException;
 import java.net.URL;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.sql.SQLException;
 import java.util.Objects;
 import java.util.ResourceBundle;
+import java.util.stream.Collectors;
 
 public class PersonenAnsicht implements Initializable {
 
@@ -57,9 +63,16 @@ public class PersonenAnsicht implements Initializable {
     private Button csvImportbtn;
 
 
+    @FXML
+    private Button deleteAllBtn;
+
+    SchuelerRepository repository;
+
     @SneakyThrows
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        repository = new JdbcSchuelerRepository(new TestConnectionSupplier().getConnectionWithTestData());
+
         Stage stage = ModLIBStage.STAGE;
         backBtn.setOnAction(actionEvent -> {
             try {
@@ -72,6 +85,28 @@ public class PersonenAnsicht implements Initializable {
         initializeTableView();
         loadData(new JdbcSchuelerRepository(new TestConnectionSupplier().getConnectionWithTestData()));
 
+        deleteAllBtn.setOnAction(actionEvent -> {
+            repository.deleteAll();
+            loadData(repository);
+        });
+        csvImportbtn.setOnAction(actionEvent -> {
+
+            File file = chooseAFile(stage);
+            if (file != null) {
+
+                try {
+                    repository.saveAll(Files.lines(
+                                    Path.of(file.getPath()))
+                            .skip(1)
+                            .map(this::personFromString)
+                            .collect(Collectors.toList()));
+                    loadData(repository);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+
+            }
+        });
         searchword.styleProperty().bind(Bindings.when(searchword.focusedProperty()).then("-fx-prompt-text-fill: derive(-fx-control-inner-background, -30%);").otherwise("-fx-prompt-text-fill: derive(-fx-control-inner-background, -30%);"));
         searchword.setFocusTraversable(false);
     }
@@ -83,7 +118,21 @@ public class PersonenAnsicht implements Initializable {
         email.setCellValueFactory(new PropertyValueFactory<>("eMail"));
     }
 
-    private void loadData(SchuelerRepository repository) {//lädt aktuell nur Testdaten
+    private void loadData(SchuelerRepository repository) {
+        //lädt aktuell nur Testdaten
+        tbData.getItems().clear();
         tbData.getItems().addAll(repository.findAll());
+    }
+
+
+    private File chooseAFile(Stage stage) {
+        FileChooser fileChooser = new FileChooser();
+        File file = fileChooser.showOpenDialog(stage);
+        return file;
+    }
+
+    private Person personFromString(String string) {
+        String[] splitted = string.split(",");
+        return new Person(splitted[0], splitted[1], splitted[4], " ");
     }
 }

@@ -122,7 +122,7 @@ public record JdbcSchuelerRepository(Connection connection)
 
     @Override
     public boolean delete(Person s) {
-        if(s.getId() == null) throw new IllegalArgumentException("ID des Schuelers darf nicht null sein");
+        if (s.getId() == null) throw new IllegalArgumentException("ID des Schuelers darf nicht null sein");
         var sql = """
                 delete from Schueler
                 where schueler_id = ?;""";
@@ -134,6 +134,17 @@ public record JdbcSchuelerRepository(Connection connection)
         } catch (SQLException throwables) {
             throw new RuntimeSQLException(throwables.getMessage(), throwables.getCause());
         }
+    }
+
+    @Override
+    public void deleteAll() {
+        String sql = " delete from Schueler ";
+        try (var statement = connection.prepareStatement(sql)) {
+            statement.executeUpdate();
+        } catch (SQLException e) {
+            throw new RuntimeSQLException(e.getMessage(), e.getCause());
+        }
+
     }
 
     private Person getSchuelerFromResultSet(ResultSet set) throws SQLException {

@@ -18,4 +18,6 @@ public interface SchuelerRepository {
 
     //Liefert true, wenn Schueler geloescht wurde, und false, wenn kein passender Schueler geloescht wurde
     boolean delete(Person s);
+
+    void deleteAll();
 }

@@ -16,25 +16,25 @@ import java.nio.charset.StandardCharsets;
 
 public class HttpConnection {
 
-
     private static final String urlLink = "https://www.googleapis.com/books/v1/volumes?q=isbn:";
 
     public static BuchTyp getBookInfosPerISBN(String isbn) {
-        URL url = null;
+        URL url;
 
         try {
             url = new URL(urlLink + isbn);
+            String line;
+
             HttpURLConnection connection = (HttpURLConnection) url.openConnection();
             connection.connect();
+
             BufferedReader br = new BufferedReader(new InputStreamReader(connection.getInputStream(), StandardCharsets.UTF_8));
-            String line = null;
             StringBuilder httpResponse = new StringBuilder();
             while ((line = br.readLine()) != null) {
                 httpResponse.append(line);
             }
             br.close();
             connection.disconnect();
-            System.out.println(httpResponse);
 
             JSONParser parser = new JSONParser();
             JSONObject jsonObject = null;
@@ -44,6 +44,7 @@ public class HttpConnection {
                 e.printStackTrace();
             }
 
+            assert jsonObject != null;
             JSONArray items = (JSONArray) jsonObject.get("items");
             JSONObject itemInfos = (JSONObject) items.get(0);
             JSONObject volumeInfo = (JSONObject) itemInfos.get("volumeInfo");
@@ -52,6 +53,7 @@ public class HttpConnection {
             String author = volumeInfo.getOrDefault("authors", "").toString();
             String description = volumeInfo.getOrDefault("description", "").toString();
             String genre = volumeInfo.getOrDefault("genre", "").toString();
+
             int year, pageCount;
             try {
                 year = Integer.parseInt(volumeInfo.getOrDefault("publishedDate", "").toString());

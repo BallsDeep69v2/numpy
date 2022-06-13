@@ -37,7 +37,7 @@
                         <RowConstraints />
                     </rowConstraints>
                     <children>
-                        <Label text="Personenansicht" textFill="WHITE" GridPane.rowIndex="1" GridPane.rowSpan="6">
+                        <Label text="Personen" textFill="WHITE" GridPane.rowIndex="1" GridPane.rowSpan="6">
                             <font>
                                 <Font size="48.0" />
                             </font>

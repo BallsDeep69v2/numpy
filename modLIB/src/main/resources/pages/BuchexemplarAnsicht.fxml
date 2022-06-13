@@ -37,7 +37,7 @@
                   <RowConstraints />
               </rowConstraints>
                <children>
-                  <Label text="Bücheransicht" textFill="WHITE" GridPane.rowIndex="1" GridPane.rowSpan="6">
+                  <Label text="Buchexemplare" textFill="WHITE" GridPane.rowIndex="1" GridPane.rowSpan="6">
                      <font>
                         <Font size="48.0" />
                      </font>
@@ -46,7 +46,7 @@
                      <font>
                         <Font size="18.0" />
                      </font></Text>
-                  <TextField fx:id="searchwordtf" prefHeight="26.0" prefWidth="311.0" styleClass="bluetextfield" stylesheets="@../css/fullpackstyling.css" promptText="Suchwort" GridPane.columnIndex="2" GridPane.rowIndex="1">
+                  <TextField fx:id="searchwordtf" prefHeight="26.0" prefWidth="311.0" promptText="Suchwort" styleClass="bluetextfield" stylesheets="@../css/fullpackstyling.css" GridPane.columnIndex="2" GridPane.rowIndex="1">
                      <font>
                         <Font size="18.0" />
                      </font></TextField>

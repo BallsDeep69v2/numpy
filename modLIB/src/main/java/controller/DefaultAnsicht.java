@@ -1,6 +1,9 @@
 package controller;
 
 import app.ModLIBStage;
+import domain.BuchExemplar;
+import domain.BuchTyp;
+import javafx.beans.property.SimpleStringProperty;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -8,8 +11,13 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
+import lombok.SneakyThrows;
+import repository.BuchTypRepository;
+import repository.JdbcBuchTypRepository;
+import sql.TestConnectionSupplier;
 
 import java.io.IOException;
 import java.net.URL;
@@ -19,32 +27,33 @@ import java.util.ResourceBundle;
 public class DefaultAnsicht implements Initializable {
 
     @FXML
-    private TableColumn<?, ?> ISBN;
+    private TableColumn<BuchTyp, String> ISBN;
 
     @FXML
-    private TableColumn<?, ?> autor;
+    private TableColumn<BuchTyp, String> autor;
 
     @FXML
     private Button btnLogin;
 
     @FXML
-    private TableColumn<?, ?> genre;
+    private TableColumn<BuchTyp, String> genre;
 
     @FXML
-    private TableColumn<?, ?> jahr;
+    private TableColumn<BuchTyp, String> jahr;
 
     @FXML
-    private TableColumn<?, ?> kurzb;
+    private TableColumn<BuchTyp, String> kurzb;
 
     @FXML
-    private TableColumn<?, ?> pages;
+    private TableColumn<BuchTyp, String> pages;
 
     @FXML
-    private TableView<?> tbData;
+    private TableView<BuchTyp> tbData;
 
     @FXML
-    private TableColumn<?, ?> title;
+    private TableColumn<BuchTyp, String> title;
 
+    @SneakyThrows
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
@@ -53,7 +62,7 @@ public class DefaultAnsicht implements Initializable {
                 actionEvent -> {
                     try {
                         stage.setScene(new Scene(FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/pages/Login.fxml")))));
-                        stage.getIcons().add(new Image("/icons/book.png"));
+                        stage.getIcons().add(new Image("/icons/book_blue.png"));
                         stage.setTitle("Login");
                         stage.centerOnScreen();
                         stage.show();
@@ -61,5 +70,29 @@ public class DefaultAnsicht implements Initializable {
                         e.printStackTrace();
                     }
                 });
+        initializeTableViews();
+        loadData(new JdbcBuchTypRepository(new TestConnectionSupplier().getConnectionWithTestData()));
+    }
+
+    private void initializeTableViews() {
+        ISBN.setCellValueFactory(new PropertyValueFactory<>("isbn"));
+        autor.setCellValueFactory(new PropertyValueFactory<>("author"));
+        title.setCellValueFactory(new PropertyValueFactory<>("title"));
+        kurzb.setCellValueFactory(new PropertyValueFactory<>("description"));
+        genre.setCellValueFactory(new PropertyValueFactory<>("genre"));
+        //Falls Seitenzahl 0 ist, wird es als Leerstring angezeigt, um Verwirrung zu vermeiden
+        pages.setCellValueFactory(buchTypIntegerCellDataFeatures -> new SimpleStringProperty(
+                buchTypIntegerCellDataFeatures.getValue().getNumberOfPages() == 0? ""
+                        : buchTypIntegerCellDataFeatures.getValue().getNumberOfPages().toString())
+        );
+        //Falls das Jahr 0 ist, wird es als Leerstring angezeigt, um Verwirrung zu vermeiden
+        jahr.setCellValueFactory(buchTypIntegerCellDataFeatures -> new SimpleStringProperty(
+                buchTypIntegerCellDataFeatures.getValue().getYear() == 0 ? ""
+                        : buchTypIntegerCellDataFeatures.getValue().getYear().toString())
+        );
+    }
+
+    private void loadData(BuchTypRepository repository) {
+        tbData.getItems().addAll(repository.findAll());
     }
 }

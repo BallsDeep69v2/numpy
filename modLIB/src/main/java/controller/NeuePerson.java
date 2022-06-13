@@ -13,6 +13,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 import lombok.SneakyThrows;
+import org.w3c.dom.Text;
 import repository.JdbcSchuelerRepository;
 import repository.SchuelerRepository;
 import sql.TestConnectionSupplier;
@@ -32,8 +33,7 @@ public class NeuePerson implements Initializable {
     private Button backBtn;
 
     @FXML
-    private ChoiceBox<String> classcb;
-
+    private TextField klasseTF;
     @FXML
     private GridPane emailtf;
 
@@ -69,6 +69,10 @@ public class NeuePerson implements Initializable {
             try {
                 Person toAdd = generatePersonFromTextFields();
                 repository.save(toAdd);
+                Alert alert = new Alert(Alert.AlertType.INFORMATION, "Person erfolgreich hinzugefuegt");
+                alert.setTitle("Meldung");
+                alert.show();
+                backBtn.fire();
             } catch (IllegalArgumentException e) {
                 Alert alert = new Alert(Alert.AlertType.ERROR, "Sie müssen zuerst alle Felder ausfüllen, bevor Sie den Schüler hinzufügen können");
                 alert.show();
@@ -77,8 +81,8 @@ public class NeuePerson implements Initializable {
     }
 
     private Person generatePersonFromTextFields() {
-        if (nametf.getText().isBlank() || nachtf.getText().isBlank() || mailtf.getText().isBlank() || !classcb.isShowing())
+        if (nametf.getText().isBlank() || nachtf.getText().isBlank() || mailtf.getText().isBlank() || klasseTF.getText().isBlank())
             throw new IllegalArgumentException();
-        return new Person(nachtf.getText(), nachtf.getText(), classcb.getValue(), mailtf.getText());
+        return new Person(nametf.getText(), nachtf.getText(), klasseTF.getText(), mailtf.getText());
     }
 }

@@ -94,6 +94,7 @@ public record JdbcSchuelerRepository(Connection connection)
         } catch (SQLException sqlE) {
             throw new RuntimeSQLException(sqlE.getMessage(), sqlE.getCause());
         }
+
     }
 
     @Override

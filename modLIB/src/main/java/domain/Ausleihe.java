@@ -23,7 +23,10 @@ public class Ausleihe {
     @NonNull
     private LocalDate beginDate;
 
-    //status ist false, wenn das Buch noch ausgeborgt ist, und true, wenn es zurueckgegeben wurde
+    /**
+     * false = wenn noch nicht zurückgegeben
+     * true = wenn zurückgegeben
+     */
     private boolean status;
 
     public Ausleihe(@NonNull BuchExemplar exemplar, @NonNull Person ausleiher, @NonNull LocalDate beginDate) {

@@ -15,13 +15,19 @@ public class BuchTyp {
 
     @NonNull
     private String isbn;
+
     @NonNull
     private String title;
+
     @NonNull
     private String author;
+
     private String description;
+
     private String genre;
+
     private Integer year;
+
     private Integer numberOfPages;
 
     public BuchTyp(@NonNull String isbn, @NonNull String title, @NonNull String author) {

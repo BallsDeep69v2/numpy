@@ -40,11 +40,11 @@ public class Person {
         this(1, "Max", "Muster", "4BHIF", "email");
     }
 
-    public static boolean addSchueler(Person person) {
+    public static boolean addPerson(Person person) {
         return PERSON_LIST.add(person);
     }
 
-    public static boolean removeSchueler(Person person) {
+    public static boolean removePerson(Person person) {
         return PERSON_LIST.remove(person);
     }
 
@@ -63,6 +63,10 @@ public class Person {
             var splitLine = line.split(";");
             return new Person(splitLine[0], splitLine[1], splitLine[4], null);
         }).forEach(PERSON_LIST::add);
+    }
+
+    public static Set<String> getAllSchoolClasses() {
+        return PERSON_LIST.stream().map(person -> person.schoolClass).collect(Collectors.toSet());
     }
 
     @Override
@@ -96,9 +100,5 @@ public class Person {
 
     public StringProperty eMailProperty() {
         return new SimpleStringProperty(eMail);
-    }
-
-    public static Set<String> getAllSchoolClasses() {
-        return PERSON_LIST.stream().map(person -> person.schoolClass).collect(Collectors.toSet());
     }
 }

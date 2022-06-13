@@ -12,6 +12,8 @@ import java.util.Objects;
 @Setter
 public class BuchExemplar {
     private static final List<BuchExemplar> BUCH_EXEMPLAR_LIST = new ArrayList<>();
+
+    @NonNull
     private Integer id;
 
     @NonNull
@@ -43,12 +45,12 @@ public class BuchExemplar {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        BuchExemplar exemplar = (BuchExemplar) o;
-        return Objects.equals(id, exemplar.id);
+        BuchExemplar that = (BuchExemplar) o;
+        return id.equals(that.id) && typ.getIsbn().equals(that.typ.getIsbn());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id);
+        return Objects.hash(id, typ.getIsbn());
     }
 }

@@ -60,23 +60,14 @@ public class NeuePerson implements Initializable {
                 e.printStackTrace();
             }
         });
-
-        initializeAddButton(new JdbcSchuelerRepository(new TestConnectionSupplier().getConnectionWithTestData()));
-
-        ObservableList<String> schoolClasses = FXCollections.observableArrayList();
-        schoolClasses.addAll(Person.getAllSchoolClasses());
-
-        classcb.setItems(schoolClasses);
-        classcb.getSelectionModel().selectFirst();
-    }
-
-    private void initializeAddButton(SchuelerRepository repository) {
         addbtn.setOnAction(actionEvent -> {
             try {
                 Person toAdd = generatePersonFromTextFields();
-                repository.save(toAdd);
+                Person.PERSON_LIST.add(toAdd);
+                new JdbcSchuelerRepository(new TestConnectionSupplier().getConnectionWithTestData()).save(toAdd);
                 Alert alert = new Alert(Alert.AlertType.INFORMATION, "Person erfolgreich hinzugefuegt");
                 alert.setTitle("Meldung");
+                ((Stage) alert.getDialogPane().getScene().getWindow()).getIcons().add(new Image("/icons/book_blue.png"));
                 alert.show();
                 backBtn.fire();
             } catch (IllegalArgumentException e) {
@@ -85,6 +76,12 @@ public class NeuePerson implements Initializable {
                 alert.show();
             }
         });
+
+        ObservableList<String> schoolClasses = FXCollections.observableArrayList();
+        schoolClasses.addAll(Person.getAllSchoolClasses());
+
+        classcb.setItems(schoolClasses);
+        classcb.getSelectionModel().selectFirst();
     }
 
     private Person generatePersonFromTextFields() {

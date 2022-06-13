@@ -93,7 +93,7 @@ public class PersonenAnsicht implements Initializable {
             File file = fileChooser.showOpenDialog(ModLIBStage.STAGE);
 
             try {
-                if (file.exists()) Person.createPersonsFromCSVFile(file.toPath());
+                if (file != null && file.exists()) Person.createPersonsFromCSVFile(file.toPath());
                 else throw new IOException();
             } catch (IOException e) {
                 Alert alert = new Alert(Alert.AlertType.ERROR, "Datei könnte nicht gefunden/geöffnet werden!");

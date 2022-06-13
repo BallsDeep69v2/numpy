@@ -36,8 +36,9 @@ public class NeuePerson implements Initializable {
 
     @FXML
     private ChoiceBox<String> classcb;
+
     @FXML
-    private GridPane emailtf;
+    private TextField classtf;
 
     @FXML
     private TextField mailtf;
@@ -60,11 +61,24 @@ public class NeuePerson implements Initializable {
                 e.printStackTrace();
             }
         });
+
+        initializeAddButton(new JdbcSchuelerRepository(new TestConnectionSupplier().getConnectionWithTestData()));
+
+        ObservableList<String> schoolClasses = FXCollections.observableArrayList();
+        schoolClasses.addAll(Person.getAllSchoolClasses());
+
+        classcb.setItems(schoolClasses);
+        classcb.getSelectionModel().selectFirst();
+
+        classtf.textProperty().bindBidirectional(classcb.valueProperty());
+    }
+
+    private void initializeAddButton(SchuelerRepository repository) {
         addbtn.setOnAction(actionEvent -> {
             try {
                 Person toAdd = generatePersonFromTextFields();
                 Person.PERSON_LIST.add(toAdd);
-                new JdbcSchuelerRepository(new TestConnectionSupplier().getConnectionWithTestData()).save(toAdd);
+                repository.save(toAdd);
                 Alert alert = new Alert(Alert.AlertType.INFORMATION, "Person erfolgreich hinzugefuegt");
                 alert.setTitle("Meldung");
                 ((Stage) alert.getDialogPane().getScene().getWindow()).getIcons().add(new Image("/icons/book_blue.png"));
@@ -76,17 +90,11 @@ public class NeuePerson implements Initializable {
                 alert.show();
             }
         });
-
-        ObservableList<String> schoolClasses = FXCollections.observableArrayList();
-        schoolClasses.addAll(Person.getAllSchoolClasses());
-
-        classcb.setItems(schoolClasses);
-        classcb.getSelectionModel().selectFirst();
     }
 
     private Person generatePersonFromTextFields() {
-        if (nametf.getText().isBlank() || nachtf.getText().isBlank() || mailtf.getText().isBlank() || classcb.getSelectionModel().isEmpty())
+        if (nametf.getText().isBlank() || nachtf.getText().isBlank() || mailtf.getText().isBlank() || classtf.getText().isBlank())
             throw new IllegalArgumentException();
-        return new Person(nametf.getText(), nachtf.getText(), classcb.getValue(), mailtf.getText());
+        return new Person(nametf.getText(), nachtf.getText(), classtf.getText(), mailtf.getText());
     }
 }

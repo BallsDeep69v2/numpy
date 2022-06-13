@@ -28,7 +28,6 @@ public class Person {
     @NonNull
     private String lastName;
 
-    @NonNull
     private String schoolClass;
 
     private String eMail;

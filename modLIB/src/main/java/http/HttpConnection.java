@@ -19,14 +19,9 @@ public class HttpConnection {
 
     private static final String urlLink = "https://www.googleapis.com/books/v1/volumes?q=isbn:";
 
-    public static void main(String[] args) throws IOException, ParseException {
-        //9783458317500
-        System.out.println(getBookInfosPerISBN("9783458317500"));
-    }
-
     public static BuchTyp getBookInfosPerISBN(String isbn) {
-
         URL url = null;
+
         try {
             url = new URL(urlLink + isbn);
             HttpURLConnection connection = (HttpURLConnection) url.openConnection();

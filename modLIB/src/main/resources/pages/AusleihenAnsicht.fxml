@@ -39,7 +39,7 @@
                   <RowConstraints />
                </rowConstraints>
                <children>
-                  <Label prefHeight="70.0" prefWidth="375.0" text="Ausleihenansicht" textFill="WHITE" GridPane.rowIndex="1" GridPane.rowSpan="6">
+                  <Label prefHeight="70.0" prefWidth="375.0" text="Ausleihungen" textFill="WHITE" GridPane.rowIndex="1" GridPane.rowSpan="6">
                      <font>
                         <Font size="48.0" />
                      </font>
@@ -48,7 +48,7 @@
                      <font>
                         <Font size="18.0" />
                      </font></Text>
-                  <TextField fx:id="searchword" prefHeight="26.0" prefWidth="433.0" styleClass="bluetextfield" stylesheets="@../css/fullpackstyling.css" promptText="Suchwort" GridPane.columnIndex="2" GridPane.rowIndex="1">
+                  <TextField fx:id="searchword" prefHeight="26.0" prefWidth="433.0" promptText="Suchwort" styleClass="bluetextfield" stylesheets="@../css/fullpackstyling.css" GridPane.columnIndex="2" GridPane.rowIndex="1">
                      <font>
                         <Font size="18.0" />
                      </font></TextField>

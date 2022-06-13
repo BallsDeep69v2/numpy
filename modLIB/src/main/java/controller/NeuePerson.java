@@ -54,7 +54,7 @@ public class NeuePerson implements Initializable {
         backBtn.setOnAction(
                 actionEvent -> {
                     try {
-                        stage.setScene(new Scene(FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/pages/Home.fxml")))));
+                        stage.setScene(new Scene(FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/pages/PersonenAnsicht.fxml")))));
 
                     } catch (IOException e) {
                         e.printStackTrace();

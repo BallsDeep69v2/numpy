@@ -74,6 +74,15 @@ public class PersonenAnsicht implements Initializable {
 
         searchword.styleProperty().bind(Bindings.when(searchword.focusedProperty()).then("-fx-prompt-text-fill: derive(-fx-control-inner-background, -30%);").otherwise("-fx-prompt-text-fill: derive(-fx-control-inner-background, -30%);"));
         searchword.setFocusTraversable(false);
+
+        newPersonbtn.setOnAction(actionEvent -> {
+            try {
+                stage.setScene(new Scene(FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/pages/NeuePerson.fxml")))));
+
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        });
     }
 
     private void initializeTableView() {

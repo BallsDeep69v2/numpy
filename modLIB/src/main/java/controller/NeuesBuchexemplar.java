@@ -11,6 +11,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.SingleSelectionModel;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
 import javafx.util.StringConverter;
 import lombok.SneakyThrows;
@@ -86,11 +87,13 @@ public class NeuesBuchexemplar implements Initializable {
         insertbtn.setOnAction(actionEvent -> {
             if (typcb.getSelectionModel().isEmpty()) {
                 Alert alert = new Alert(Alert.AlertType.ERROR, "Wählen Sie einen Buchtyp aus");
+                ((Stage) alert.getDialogPane().getScene().getWindow()).getIcons().add(new Image("/icons/book_blue.png"));
                 alert.show();
             } else {
                 repository.saveMultiple(typcb.getValue(), buechercb.getValue());
                 Alert alert = new Alert(Alert.AlertType.INFORMATION, buechercb.getValue() + " Buchexemplare erfolgreich hinzugefuegt");
                 alert.setTitle("Meldung");
+                ((Stage) alert.getDialogPane().getScene().getWindow()).getIcons().add(new Image("/icons/book_blue.png"));
                 alert.show();
                 backBtn.fire();
             }

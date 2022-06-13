@@ -9,6 +9,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
 import lombok.SneakyThrows;
 import repository.BuchTypRepository;
@@ -75,10 +76,12 @@ public class NeuerBuchtyp implements Initializable {
                 repository.save(buchTyp);
                 Alert alert = new Alert(Alert.AlertType.INFORMATION, "Buchtyp erfolgreich hinzugefuegt");
                 alert.setTitle("Meldung");
+                ((Stage) alert.getDialogPane().getScene().getWindow()).getIcons().add(new Image("/icons/book_blue.png"));
                 alert.show();
                 backBtn.fire();
             } catch (IllegalArgumentException e) {
                 Alert alert = new Alert(Alert.AlertType.ERROR, "Geben Sie bitte valide Zahlen bei Jahr und Seitenzahl ein oder lassen sie diese Felder frei");
+                ((Stage) alert.getDialogPane().getScene().getWindow()).getIcons().add(new Image("/icons/book_blue.png"));
                 alert.show();
                 jahrtf.clear();
                 pagestf.clear();

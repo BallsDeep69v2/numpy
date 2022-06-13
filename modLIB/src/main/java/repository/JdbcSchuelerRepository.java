@@ -39,7 +39,7 @@ public record JdbcSchuelerRepository(Connection connection)
         try (var statement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
             statement.setString(1, s.getFirstName());
             statement.setString(2, s.getLastName());
-            statement.setString(3, s.getKlasse());
+            statement.setString(3, s.getSchoolClass());
             statement.setString(4, s.getEMail());
 
             statement.executeUpdate();
@@ -110,7 +110,7 @@ public record JdbcSchuelerRepository(Connection connection)
         try (var statement = connection.prepareStatement(sql)) {
             statement.setString(1, s.getFirstName());
             statement.setString(2, s.getLastName());
-            statement.setString(3, s.getKlasse());
+            statement.setString(3, s.getSchoolClass());
             statement.setString(4, s.getEMail());
             statement.setInt(5, s.getId());
 

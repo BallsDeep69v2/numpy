@@ -2,6 +2,8 @@ package controller;
 
 import app.ModLIBStage;
 import domain.Person;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -10,10 +12,10 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 import lombok.SneakyThrows;
-import org.w3c.dom.Text;
 import repository.JdbcSchuelerRepository;
 import repository.SchuelerRepository;
 import sql.TestConnectionSupplier;
@@ -33,7 +35,7 @@ public class NeuePerson implements Initializable {
     private Button backBtn;
 
     @FXML
-    private TextField klasseTF;
+    private ChoiceBox<String> classcb;
     @FXML
     private GridPane emailtf;
 
@@ -51,17 +53,21 @@ public class NeuePerson implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         Stage stage = ModLIBStage.STAGE;
-        backBtn.setOnAction(
-                actionEvent -> {
-                    try {
-                        stage.setScene(new Scene(FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/pages/PersonenAnsicht.fxml")))));
-
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-                });
+        backBtn.setOnAction(actionEvent -> {
+            try {
+                stage.setScene(new Scene(FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/pages/PersonenAnsicht.fxml")))));
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        });
 
         initializeAddButton(new JdbcSchuelerRepository(new TestConnectionSupplier().getConnectionWithTestData()));
+
+        ObservableList<String> schoolClasses = FXCollections.observableArrayList();
+        schoolClasses.addAll(Person.getAllSchoolClasses());
+
+        classcb.setItems(schoolClasses);
+        classcb.getSelectionModel().selectFirst();
     }
 
     private void initializeAddButton(SchuelerRepository repository) {
@@ -75,14 +81,15 @@ public class NeuePerson implements Initializable {
                 backBtn.fire();
             } catch (IllegalArgumentException e) {
                 Alert alert = new Alert(Alert.AlertType.ERROR, "Sie müssen zuerst alle Felder ausfüllen, bevor Sie den Schüler hinzufügen können");
+                ((Stage) alert.getDialogPane().getScene().getWindow()).getIcons().add(new Image("/icons/book_blue.png"));
                 alert.show();
             }
         });
     }
 
     private Person generatePersonFromTextFields() {
-        if (nametf.getText().isBlank() || nachtf.getText().isBlank() || mailtf.getText().isBlank() || klasseTF.getText().isBlank())
+        if (nametf.getText().isBlank() || nachtf.getText().isBlank() || mailtf.getText().isBlank() || classcb.getSelectionModel().isEmpty())
             throw new IllegalArgumentException();
-        return new Person(nametf.getText(), nachtf.getText(), klasseTF.getText(), mailtf.getText());
+        return new Person(nametf.getText(), nachtf.getText(), classcb.getValue(), mailtf.getText());
     }
 }

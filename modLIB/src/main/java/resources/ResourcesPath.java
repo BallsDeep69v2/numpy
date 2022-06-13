@@ -9,10 +9,6 @@ public class ResourcesPath {
     private static final Path resourcePath = Path.of("C:" + File.separator + "Users" + File.separator + System.getenv("USERNAME") + File.separator + "modLIB" + File.separator + "qrCodes");
     private static final Path testResourcePath = Path.of(getUsersProjectRootDirectory() + File.separator + "testResources");
 
-    public static void main(String[] args) {
-        System.out.println(Path.of("C:" + File.separator + "Users" + File.separator + System.getenv("USERNAME") + File.separator + "modLIB" + File.separator + "qrCodes"));
-    }
-
     public static Path getRessourcePath() {
         if (!resourcePath.toFile().exists()) resourcePath.toFile().mkdirs();
         return resourcePath;

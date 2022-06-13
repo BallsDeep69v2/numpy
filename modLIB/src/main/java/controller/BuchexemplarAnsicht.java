@@ -56,7 +56,6 @@ public class BuchexemplarAnsicht implements Initializable {
                 actionEvent -> {
                     try {
                         stage.setScene(new Scene(FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/pages/Home.fxml")))));
-
                     } catch (IOException e) {
                         e.printStackTrace();
                     }

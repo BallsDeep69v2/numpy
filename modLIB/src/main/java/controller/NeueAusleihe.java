@@ -8,7 +8,6 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
@@ -39,19 +38,21 @@ public class NeueAusleihe implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         Stage stage = ModLIBStage.STAGE;
-        backBtn.setOnAction(
-                actionEvent -> {
-                    try {
-                        stage.setScene(new Scene(FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/pages/Home.fxml")))));
 
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-                });
-
-        searchtf.styleProperty().bind(Bindings.when(searchtf.focusedProperty()).then("-fx-prompt-text-fill: derive(-fx-control-inner-background, -30%);").otherwise("-fx-prompt-text-fill: derive(-fx-control-inner-background, -30%);"));
+        //initialize content
         searchtf.setFocusTraversable(false);
 
+        //binding
+        searchtf.styleProperty().bind(Bindings.when(searchtf.focusedProperty()).then("-fx-prompt-text-fill: derive(-fx-control-inner-background, -30%);").otherwise("-fx-prompt-text-fill: derive(-fx-control-inner-background, -30%);"));
+
+        //setOnAction for buttons
+        backBtn.setOnAction(actionEvent -> {
+            try {
+                stage.setScene(new Scene(FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/pages/Home.fxml")))));
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        });
     }
 
 }

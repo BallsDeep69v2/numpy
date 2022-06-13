@@ -9,7 +9,6 @@ import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
-import javafx.scene.text.Text;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import lombok.SneakyThrows;
@@ -40,9 +39,6 @@ public class PersonenAnsicht implements Initializable {
     private TableColumn<Person, String> lastName;
 
     @FXML
-    private Text search;
-
-    @FXML
     private TextField searchword;
 
     @FXML
@@ -58,16 +54,19 @@ public class PersonenAnsicht implements Initializable {
     @SneakyThrows
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-
-        List<Person> persons = Person.PERSON_LIST;
         Stage stage = ModLIBStage.STAGE;
+        List<Person> persons = Person.PERSON_LIST;
 
-
+        //initialize content
         tbData.getItems().addAll(persons);
         initializeTableView();
 //        loadData(new JdbcSchuelerRepository(new TestConnectionSupplier().getConnectionWithTestData()));
+        searchword.setFocusTraversable(false);
 
+        //binding
+        searchword.styleProperty().bind(Bindings.when(searchword.focusedProperty()).then("-fx-prompt-text-fill: derive(-fx-control-inner-background, -30%);").otherwise("-fx-prompt-text-fill: derive(-fx-control-inner-background, -30%);"));
 
+        //setOnAction for buttons
         backBtn.setOnAction(actionEvent -> {
             try {
                 stage.setScene(new Scene(FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/pages/Home.fxml")))));
@@ -103,10 +102,6 @@ public class PersonenAnsicht implements Initializable {
                 tbData.getItems().addAll(Person.PERSON_LIST);
             }
         });
-
-        searchword.styleProperty().bind(Bindings.when(searchword.focusedProperty()).then("-fx-prompt-text-fill: derive(-fx-control-inner-background, -30%);").otherwise("-fx-prompt-text-fill: derive(-fx-control-inner-background, -30%);"));
-        searchword.setFocusTraversable(false);
-
     }
 
     private void initializeTableView() {

@@ -1,7 +1,6 @@
 package controller;
 
 import app.ModLIBStage;
-import domain.BuchExemplar;
 import domain.BuchTyp;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -10,7 +9,6 @@ import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
-import javafx.scene.control.SingleSelectionModel;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
 import javafx.util.StringConverter;
@@ -23,12 +21,10 @@ import sql.TestConnectionSupplier;
 
 import java.io.IOException;
 import java.net.URL;
-import java.util.List;
 import java.util.Objects;
 import java.util.ResourceBundle;
 
 public class NeuesBuchexemplar implements Initializable {
-
 
     @FXML
     private Button backBtn;
@@ -47,23 +43,21 @@ public class NeuesBuchexemplar implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         Stage stage = ModLIBStage.STAGE;
-        backBtn.setOnAction(
-                actionEvent -> {
-                    try {
-                        stage.setScene(new Scene(FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/pages/Home.fxml")))));
 
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-                });
-
+        //initialize content
+        fillBuchtypChoiceBox(new JdbcBuchTypRepository(new TestConnectionSupplier().getConnectionWithTestData()));
         buechercb.getItems().addAll(1, 2, 3, 4, 5);
         buechercb.setValue(1);
 
-        fillBuchtypChoiceBox(new JdbcBuchTypRepository(new TestConnectionSupplier().getConnectionWithTestData()));
-
+        //setOnAction for buttons
         initializeInsertBtn(new JdbcBuchExemplarRepository(new TestConnectionSupplier().getConnectionWithTestData()));
-
+        backBtn.setOnAction(actionEvent -> {
+            try {
+                stage.setScene(new Scene(FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/pages/Home.fxml")))));
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        });
     }
 
     private void fillBuchtypChoiceBox(BuchTypRepository repository) {
@@ -72,7 +66,7 @@ public class NeuesBuchexemplar implements Initializable {
 
             @Override
             public String toString(BuchTyp buchTyp) {
-                if(buchTyp == null) return "";
+                if (buchTyp == null) return "";
                 return buchTyp.getIsbn() + " , " + buchTyp.getTitle() + " , " + buchTyp.getAuthor();
             }
 

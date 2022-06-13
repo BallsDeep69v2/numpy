@@ -1,7 +1,6 @@
 package controller;
 
 import app.ModLIBStage;
-
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -15,6 +14,7 @@ import java.util.Objects;
 import java.util.ResourceBundle;
 
 public class Home implements Initializable {
+
     @FXML
     private Button btnAnalyse;
 
@@ -42,11 +42,12 @@ public class Home implements Initializable {
     @FXML
     private Button btnPersonenAnsicht;
 
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-
         Stage stage = ModLIBStage.STAGE;
 
+        //setOnAction for buttons
         btnAusleihenAnsicht.setOnAction(actionEvent -> {
             try {
                 stage.setScene(new Scene(FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/pages/AusleihenAnsicht.fxml")))));
@@ -118,6 +119,5 @@ public class Home implements Initializable {
                 e.printStackTrace();
             }
         });
-
     }
 }

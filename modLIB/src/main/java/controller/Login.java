@@ -21,7 +21,6 @@ import java.util.ResourceBundle;
 
 public class Login implements Initializable {
 
-
     @FXML
     private Button cancelbtn;
 
@@ -34,9 +33,15 @@ public class Login implements Initializable {
     @FXML
     private TextField usernametf;
 
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
+        //binding
+        usernametf.styleProperty().bind(Bindings.when(usernametf.focusedProperty()).then("-fx-prompt-text-fill: derive(-fx-control-inner-background, -30%);").otherwise("-fx-prompt-text-fill: derive(-fx-control-inner-background, -30%);"));
+        passwordTf.styleProperty().bind(Bindings.when(passwordTf.focusedProperty()).then("-fx-prompt-text-fill: derive(-fx-control-inner-background, -30%);").otherwise("-fx-prompt-text-fill: derive(-fx-control-inner-background, -30%);"));
+
+        //setOnAction for buttons
         cancelbtn.setOnAction(actionEvent -> ((Stage) loginbtn.getScene().getWindow()).close());
 
         loginbtn.setOnAction(actionEvent -> {
@@ -62,10 +67,6 @@ public class Login implements Initializable {
         passwordTf.setOnKeyPressed(keyEvent -> {
             if (keyEvent.getCode().getCode() == KeyEvent.VK_ENTER) loginbtn.fire();
         });
-
-        usernametf.styleProperty().bind(Bindings.when(usernametf.focusedProperty()).then("-fx-prompt-text-fill: derive(-fx-control-inner-background, -30%);").otherwise("-fx-prompt-text-fill: derive(-fx-control-inner-background, -30%);"));
-        passwordTf.styleProperty().bind(Bindings.when(passwordTf.focusedProperty()).then("-fx-prompt-text-fill: derive(-fx-control-inner-background, -30%);").otherwise("-fx-prompt-text-fill: derive(-fx-control-inner-background, -30%);"));
-
     }
 
 }

@@ -12,13 +12,11 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
-import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import lombok.SneakyThrows;
 import repository.BuchExemplarRepository;
 import repository.JdbcBuchExemplarRepository;
 import sql.TestConnectionSupplier;
-
 
 import java.io.IOException;
 import java.net.URL;
@@ -37,9 +35,6 @@ public class BuchexemplarAnsicht implements Initializable {
     private TableColumn<BuchExemplar, String> id;
 
     @FXML
-    private Text search;
-
-    @FXML
     private TextField searchwordtf;
 
     @FXML
@@ -48,23 +43,28 @@ public class BuchexemplarAnsicht implements Initializable {
     @FXML
     private TableColumn<BuchExemplar, String> title;
 
+
     @SneakyThrows
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         Stage stage = ModLIBStage.STAGE;
-        backBtn.setOnAction(
-                actionEvent -> {
-                    try {
-                        stage.setScene(new Scene(FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/pages/Home.fxml")))));
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-                });
+
+        //initialize content
         initializeTableViews();
         loadData(new JdbcBuchExemplarRepository(new TestConnectionSupplier().getConnectionWithTestData()));
-
-        searchwordtf.styleProperty().bind(Bindings.when(searchwordtf.focusedProperty()).then("-fx-prompt-text-fill: derive(-fx-control-inner-background, -30%);").otherwise("-fx-prompt-text-fill: derive(-fx-control-inner-background, -30%);"));
         searchwordtf.setFocusTraversable(false);
+
+        //binding
+        searchwordtf.styleProperty().bind(Bindings.when(searchwordtf.focusedProperty()).then("-fx-prompt-text-fill: derive(-fx-control-inner-background, -30%);").otherwise("-fx-prompt-text-fill: derive(-fx-control-inner-background, -30%);"));
+
+        //setOnAction for buttons
+        backBtn.setOnAction(actionEvent -> {
+            try {
+                stage.setScene(new Scene(FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/pages/Home.fxml")))));
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        });
     }
 
     private void initializeTableViews() {
@@ -76,5 +76,4 @@ public class BuchexemplarAnsicht implements Initializable {
     private void loadData(BuchExemplarRepository repository) {
         tbData.getItems().addAll(repository.findAll());
     }
-
 }

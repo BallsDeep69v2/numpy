@@ -1,7 +1,5 @@
 package controller;
 
-import app.ModLIBStage;
-import domain.BuchExemplar;
 import domain.BuchTyp;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.fxml.FXML;
@@ -53,25 +51,28 @@ public class DefaultAnsicht implements Initializable {
     @FXML
     private TableColumn<BuchTyp, String> title;
 
+
     @SneakyThrows
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        Stage loginStage = new Stage();
 
-        Stage stage = new Stage();
-        btnLogin.setOnAction(
-                actionEvent -> {
-                    try {
-                        stage.setScene(new Scene(FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/pages/Login.fxml")))));
-                        stage.getIcons().add(new Image("/icons/book_blue.png"));
-                        stage.setTitle("Login");
-                        stage.centerOnScreen();
-                        stage.show();
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-                });
+        //initialize content
         initializeTableViews();
         loadData(new JdbcBuchTypRepository(new TestConnectionSupplier().getConnectionWithTestData()));
+
+        //setOnAction for buttons
+        btnLogin.setOnAction(actionEvent -> {
+            try {
+                loginStage.setScene(new Scene(FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/pages/Login.fxml")))));
+                loginStage.getIcons().add(new Image("/icons/book_blue.png"));
+                loginStage.setTitle("Login");
+                loginStage.centerOnScreen();
+                loginStage.show();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        });
     }
 
     private void initializeTableViews() {
@@ -81,15 +82,9 @@ public class DefaultAnsicht implements Initializable {
         kurzb.setCellValueFactory(new PropertyValueFactory<>("description"));
         genre.setCellValueFactory(new PropertyValueFactory<>("genre"));
         //Falls Seitenzahl 0 ist, wird es als Leerstring angezeigt, um Verwirrung zu vermeiden
-        pages.setCellValueFactory(buchTypIntegerCellDataFeatures -> new SimpleStringProperty(
-                buchTypIntegerCellDataFeatures.getValue().getNumberOfPages() == 0? ""
-                        : buchTypIntegerCellDataFeatures.getValue().getNumberOfPages().toString())
-        );
+        pages.setCellValueFactory(buchTypIntegerCellDataFeatures -> new SimpleStringProperty(buchTypIntegerCellDataFeatures.getValue().getNumberOfPages() == 0 ? "" : buchTypIntegerCellDataFeatures.getValue().getNumberOfPages().toString()));
         //Falls das Jahr 0 ist, wird es als Leerstring angezeigt, um Verwirrung zu vermeiden
-        jahr.setCellValueFactory(buchTypIntegerCellDataFeatures -> new SimpleStringProperty(
-                buchTypIntegerCellDataFeatures.getValue().getYear() == 0 ? ""
-                        : buchTypIntegerCellDataFeatures.getValue().getYear().toString())
-        );
+        jahr.setCellValueFactory(buchTypIntegerCellDataFeatures -> new SimpleStringProperty(buchTypIntegerCellDataFeatures.getValue().getYear() == 0 ? "" : buchTypIntegerCellDataFeatures.getValue().getYear().toString()));
     }
 
     private void loadData(BuchTypRepository repository) {

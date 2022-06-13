@@ -22,6 +22,7 @@ import java.util.Objects;
 import java.util.ResourceBundle;
 
 public class NeuerBuchtyp implements Initializable {
+
     @FXML
     private Button addbtn;
 
@@ -57,16 +58,16 @@ public class NeuerBuchtyp implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         Stage stage = ModLIBStage.STAGE;
-        backBtn.setOnAction(
-                actionEvent -> {
-                    try {
-                        stage.setScene(new Scene(FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/pages/Home.fxml")))));
 
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-                });
+        //setOnAction for buttons
         initializeAddButton(new JdbcBuchTypRepository(new TestConnectionSupplier().getConnectionWithTestData()));
+        backBtn.setOnAction(actionEvent -> {
+            try {
+                stage.setScene(new Scene(FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/pages/Home.fxml")))));
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        });
     }
 
     private void initializeAddButton(BuchTypRepository repository) {

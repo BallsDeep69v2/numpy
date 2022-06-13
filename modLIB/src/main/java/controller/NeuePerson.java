@@ -13,7 +13,6 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
-import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 import lombok.SneakyThrows;
 import repository.JdbcSchuelerRepository;
@@ -26,7 +25,6 @@ import java.util.Objects;
 import java.util.ResourceBundle;
 
 public class NeuePerson implements Initializable {
-
 
     @FXML
     private Button addbtn;
@@ -54,6 +52,19 @@ public class NeuePerson implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         Stage stage = ModLIBStage.STAGE;
+
+        //initialize content
+        ObservableList<String> schoolClasses = FXCollections.observableArrayList();
+        schoolClasses.addAll(Person.getAllSchoolClasses());
+
+        classcb.setItems(schoolClasses);
+        classcb.getSelectionModel().selectFirst();
+
+        //binding
+        classtf.textProperty().bindBidirectional(classcb.valueProperty());
+
+        //setOnAction for buttons
+        initializeAddButton(new JdbcSchuelerRepository(new TestConnectionSupplier().getConnectionWithTestData()));
         backBtn.setOnAction(actionEvent -> {
             try {
                 stage.setScene(new Scene(FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/pages/PersonenAnsicht.fxml")))));
@@ -61,16 +72,6 @@ public class NeuePerson implements Initializable {
                 e.printStackTrace();
             }
         });
-
-        initializeAddButton(new JdbcSchuelerRepository(new TestConnectionSupplier().getConnectionWithTestData()));
-
-        ObservableList<String> schoolClasses = FXCollections.observableArrayList();
-        schoolClasses.addAll(Person.getAllSchoolClasses());
-
-        classcb.setItems(schoolClasses);
-        classcb.getSelectionModel().selectFirst();
-
-        classtf.textProperty().bindBidirectional(classcb.valueProperty());
     }
 
     private void initializeAddButton(SchuelerRepository repository) {

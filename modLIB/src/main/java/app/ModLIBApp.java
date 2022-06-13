@@ -1,11 +1,10 @@
 package app;
 
-
 import javafx.application.Application;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
-import javafx.fxml.FXMLLoader;
 
 import java.util.Objects;
 
@@ -18,6 +17,5 @@ public class ModLIBApp extends Application {
         stage.setTitle("modLIB");
         stage.getIcons().add(new Image("/icons/book_blue.png"));
         stage.show();
-
     }
 }

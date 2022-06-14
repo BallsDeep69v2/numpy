@@ -177,7 +177,7 @@ public class JdbcAusleiheRepository implements AusleiheRepository {
     }
 
     private Ausleihe getAusleiheFromResultSet(ResultSet set) throws SQLException {
-        return new Ausleihe(buchExemplarRepository.findById(set.getInt("ausleihe_buchexemplar_id")).orElseThrow(), buchTypRepository.findByISBN(set.getInt("ausleihe_buchexemplar_isbn")).orElseThrow(), personRepository.findBySchuelerID(set.getInt("ausleihe_person_id")).orElseThrow(), set.getDate("ausleihe_datum").toLocalDate(), convertBitToBoolean(set.getInt("ausleihe_status")));
+        return new Ausleihe(buchExemplarRepository.findById(set.getInt("ausleihe_buchexemplar_id")).orElseThrow(), buchTypRepository.findByISBN(set.getString("ausleihe_buchexemplar_isbn")).orElseThrow(), personRepository.findBySchuelerID(set.getInt("ausleihe_person_id")).orElseThrow(), set.getDate("ausleihe_datum").toLocalDate(), convertBitToBoolean(set.getInt("ausleihe_status")));
     }
 
     private Boolean convertBitToBoolean(int bit) {

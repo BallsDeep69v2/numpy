@@ -47,7 +47,7 @@ public class JdbcBuchExemplarRepository implements BuchExemplarRepository {
                 from BuchExemplar
                 where buchexemplar_buchtyp_isbn = ?;""";
         try (var statement = connection.prepareStatement(sql)) {
-            statement.setLong(1, buchTyp.getIsbn());
+            statement.setString(1, buchTyp.getIsbn());
             var resultSet = statement.executeQuery();
             resultSet.next();
             return resultSet.getInt("numberOfBooks");
@@ -63,7 +63,7 @@ public class JdbcBuchExemplarRepository implements BuchExemplarRepository {
                 from BuchExemplar
                 where buchexemplar_buchtyp_isbn = ?;""";
         try (var statement = connection.prepareStatement(sql)) {
-            statement.setLong(1, buchTyp.getIsbn());
+            statement.setString(1, buchTyp.getIsbn());
             var resultSet = statement.executeQuery();
             List<BuchExemplar> exemplare = new ArrayList<>();
 
@@ -82,7 +82,7 @@ public class JdbcBuchExemplarRepository implements BuchExemplarRepository {
                 insert into BuchExemplar(buchexemplar_buchtyp_isbn)
                 values(?);""";
         try (var statement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
-            statement.setLong(1, buchTyp.getIsbn());
+            statement.setString(1, buchTyp.getIsbn());
 
             statement.executeUpdate();
             ResultSet generatedKey = statement.getGeneratedKeys();
@@ -134,7 +134,7 @@ public class JdbcBuchExemplarRepository implements BuchExemplarRepository {
                 where buchExemplar_id = ? and buchexemplar_buchtyp_isbn = ?""";
         try (var statement = connection.prepareStatement(sql)) {
             statement.setInt(1, buchExemplar.getId());
-            statement.setLong(2, buchExemplar.getTyp().getIsbn());
+            statement.setString(2, buchExemplar.getTyp().getIsbn());
 
             int update = statement.executeUpdate();
             return update == 1;
@@ -144,6 +144,6 @@ public class JdbcBuchExemplarRepository implements BuchExemplarRepository {
     }
 
     private BuchExemplar getBuchExemplarFromResultSet(ResultSet set) throws SQLException {
-        return new BuchExemplar(set.getInt("buchexemplar_id"), buchTypRepository.findByISBN(set.getInt("buchexemplar_buchtyp_isbn")).orElseThrow());
+        return new BuchExemplar(set.getInt("buchexemplar_id"), buchTypRepository.findByISBN(set.getString("buchexemplar_buchtyp_isbn")).orElseThrow());
     }
 }

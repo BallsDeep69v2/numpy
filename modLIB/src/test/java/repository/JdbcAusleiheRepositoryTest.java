@@ -42,7 +42,7 @@ class JdbcAusleiheRepositoryTest {
 
     void fillDBWithStandardTestData() {
         Person person = new Person();
-        BuchTyp buchtyp = new BuchTyp(1234567890123, "buchtyp", "test");
+        BuchTyp buchtyp = new BuchTyp("1234567890123", "buchtyp", "test");
         schuelerRepository.save(person);
         buchTypRepository.save(buchtyp);
         var exemplar = exemplarRepository.save(buchtyp);
@@ -56,7 +56,7 @@ class JdbcAusleiheRepositoryTest {
         @Test
         void saveSingleAusleiheWorks() {
             Person person = new Person();
-            BuchTyp buchtyp = new BuchTyp(1234567890123, "buchtyp", "test");
+            BuchTyp buchtyp = new BuchTyp("1234567890123", "buchtyp", "test");
             schuelerRepository.save(person);
             buchTypRepository.save(buchtyp);
             var exemplar = exemplarRepository.save(buchtyp);

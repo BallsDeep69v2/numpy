@@ -18,7 +18,7 @@ public class HttpConnection {
 
     private static final String urlLink = "https://www.googleapis.com/books/v1/volumes?q=isbn:";
 
-    public static BuchTyp getBookInfosPerISBN(int isbn) {
+    public static BuchTyp getBookInfosPerISBN(String isbn) {
         URL url;
 
         try {

@@ -13,7 +13,7 @@ import javafx.stage.Stage;
 import lombok.SneakyThrows;
 import repository.AusleiheRepository;
 import repository.JdbcAusleiheRepository;
-import sql.TestConnectionSupplier;
+import sql.DatabaseConnection;
 
 import java.io.IOException;
 import java.net.URL;
@@ -50,7 +50,7 @@ public class AusleihenAnsicht implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         Stage stage = ModLIBStage.STAGE;
-        AusleiheRepository ausleiheRepository = new JdbcAusleiheRepository(new TestConnectionSupplier().getConnectionWithTestData());
+        AusleiheRepository ausleiheRepository = new JdbcAusleiheRepository(DatabaseConnection.DATABASE_CONNECTION);
 
         //initialize content
         initializeTableView();

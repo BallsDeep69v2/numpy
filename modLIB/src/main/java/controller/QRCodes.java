@@ -60,7 +60,6 @@ public class QRCodes implements Initializable {
             ((Stage) alert.getDialogPane().getScene().getWindow()).getIcons().add(new Image("/icons/book_blue.png"));
             Optional<ButtonType> result = alert.showAndWait();
             if (result.isPresent() && result.get() == ButtonType.OK) {
-                System.out.println("deleting");
                 try {
                     Files.walk(ResourcesPath.getRessourcePath()).filter(path -> path.toFile().exists() && path.toFile().getName().endsWith(".png")).map(Path::toFile).forEach(File::delete);
                 } catch (IOException e) {

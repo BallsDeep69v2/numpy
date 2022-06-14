@@ -14,7 +14,7 @@ import javafx.stage.Stage;
 import lombok.SneakyThrows;
 import repository.BuchTypRepository;
 import repository.JdbcBuchTypRepository;
-import sql.TestConnectionSupplier;
+import sql.DatabaseConnection;
 
 import java.io.IOException;
 import java.net.URL;
@@ -60,7 +60,7 @@ public class NeuerBuchtyp implements Initializable {
         Stage stage = ModLIBStage.STAGE;
 
         //setOnAction for buttons
-        initializeAddButton(new JdbcBuchTypRepository(new TestConnectionSupplier().getConnectionWithTestData()));
+        initializeAddButton(new JdbcBuchTypRepository(DatabaseConnection.DATABASE_CONNECTION));
         backBtn.setOnAction(actionEvent -> {
             try {
                 stage.setScene(new Scene(FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/pages/Home.fxml")))));
@@ -93,7 +93,7 @@ public class NeuerBuchtyp implements Initializable {
     private BuchTyp generateBuchTypFromTextFields() {
         if (isbntf.getText().isBlank() || titeltf.getText().isBlank() || autortf.getText().isBlank())
             throw new IllegalArgumentException();
-        BuchTyp buchTyp = new BuchTyp(isbntf.getText(), titeltf.getText(), autortf.getText());
+        BuchTyp buchTyp = new BuchTyp(Integer.parseInt(isbntf.getText()), titeltf.getText(), autortf.getText());
         if (!genretf.getText().isBlank()) buchTyp.setGenre(genretf.getText());
         if (!descriptionTF.getText().isBlank()) buchTyp.setDescription(descriptionTF.getText());
         if (!pagestf.getText().isBlank()) buchTyp.setNumberOfPages(Integer.parseInt(pagestf.getText()));

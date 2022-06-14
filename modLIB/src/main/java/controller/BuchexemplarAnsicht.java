@@ -16,7 +16,7 @@ import javafx.stage.Stage;
 import lombok.SneakyThrows;
 import repository.BuchExemplarRepository;
 import repository.JdbcBuchExemplarRepository;
-import sql.TestConnectionSupplier;
+import sql.DatabaseConnection;
 
 import java.io.IOException;
 import java.net.URL;
@@ -51,7 +51,7 @@ public class BuchexemplarAnsicht implements Initializable {
 
         //initialize content
         initializeTableViews();
-        loadData(new JdbcBuchExemplarRepository(new TestConnectionSupplier().getConnectionWithTestData()));
+        loadData(new JdbcBuchExemplarRepository(DatabaseConnection.DATABASE_CONNECTION));
         searchwordtf.setFocusTraversable(false);
 
         //binding
@@ -68,7 +68,7 @@ public class BuchexemplarAnsicht implements Initializable {
     }
 
     private void initializeTableViews() {
-        ISBN.setCellValueFactory(buchExemplarStringCellDataFeatures -> new SimpleStringProperty(buchExemplarStringCellDataFeatures.getValue().getTyp().getIsbn()));
+        ISBN.setCellValueFactory(buchExemplarStringCellDataFeatures -> new SimpleStringProperty(buchExemplarStringCellDataFeatures.getValue().getTyp().getIsbn().toString()));
         id.setCellValueFactory(buchExemplarStringCellDataFeatures -> new SimpleStringProperty(buchExemplarStringCellDataFeatures.getValue().getId().toString()));
         title.setCellValueFactory(buchExemplarStringCellDataFeatures -> new SimpleStringProperty(buchExemplarStringCellDataFeatures.getValue().getTyp().getTitle()));
     }

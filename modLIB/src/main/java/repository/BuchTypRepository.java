@@ -12,7 +12,7 @@ public interface BuchTypRepository {
 
     //Speichert einen neuen BuchTyp in der DB
     //Wenn die ISBN schon vorhanden - Exception
-    Optional<BuchTyp> findByISBN(String isbn);
+    Optional<BuchTyp> findByISBN(int isbn);
 
     //Speichert einen neuen BuchTyp in der DB
     //Wenn die ISBN schon vorhanden - Exception

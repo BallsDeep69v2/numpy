@@ -15,7 +15,7 @@ import javafx.stage.Stage;
 import lombok.SneakyThrows;
 import repository.BuchTypRepository;
 import repository.JdbcBuchTypRepository;
-import sql.TestConnectionSupplier;
+import sql.DatabaseConnection;
 
 import java.io.IOException;
 import java.net.URL;
@@ -59,7 +59,7 @@ public class DefaultAnsicht implements Initializable {
 
         //initialize content
         initializeTableViews();
-        loadData(new JdbcBuchTypRepository(new TestConnectionSupplier().getConnectionWithTestData()));
+        loadData(new JdbcBuchTypRepository(DatabaseConnection.DATABASE_CONNECTION));
 
         //setOnAction for buttons
         btnLogin.setOnAction(actionEvent -> {

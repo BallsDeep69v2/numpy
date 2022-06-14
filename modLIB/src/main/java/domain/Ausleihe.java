@@ -12,10 +12,12 @@ import java.util.Objects;
 @ToString
 @AllArgsConstructor
 public class Ausleihe {
-    private static final List<Ausleihe> AUSLEIHE_LIST = new ArrayList<>();
 
     @NonNull
     private BuchExemplar exemplar;
+
+    @NonNull
+    private BuchTyp buchtyp;
 
     @NonNull
     private Person ausleiher;
@@ -29,19 +31,12 @@ public class Ausleihe {
      */
     private boolean status;
 
-    public Ausleihe(@NonNull BuchExemplar exemplar, @NonNull Person ausleiher, @NonNull LocalDate beginDate) {
+    public Ausleihe(@NonNull BuchExemplar exemplar, @NonNull BuchTyp buchtyp, @NonNull Person ausleiher, @NonNull LocalDate beginDate) {
         this.exemplar = exemplar;
+        this.buchtyp = buchtyp;
         this.ausleiher = ausleiher;
         this.beginDate = beginDate;
         this.status = false;
-    }
-
-    public static boolean addAusleihe(Ausleihe ausleihe) {
-        return AUSLEIHE_LIST.add(ausleihe);
-    }
-
-    public static boolean removeAusleihe(Ausleihe ausleihe) {
-        return AUSLEIHE_LIST.remove(ausleihe);
     }
 
     @Override

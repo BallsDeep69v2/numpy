@@ -7,17 +7,15 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
+import java.util.stream.Collectors;
 
-public record JdbcSchuelerRepository(Connection connection)
-        implements SchuelerRepository {
+public record JdbcPersonRepository(Connection connection) implements PersonRepository {
     @Override
     public List<Person> findAll() {
         var sql = """
                 select *
-                from Schueler;""";
+                from Person;""";
         try (var statement = connection.prepareStatement(sql)) {
             var resultSet = statement.executeQuery();
             List<Person> person = new ArrayList<>();
@@ -34,7 +32,7 @@ public record JdbcSchuelerRepository(Connection connection)
     @Override
     public Person save(Person s) {
         var sql = """
-                insert into Schueler(schueler_vorname , schueler_nachname , schueler_klasse , schueler_email)
+                insert into Person(person_vorname , person_nachname , person_klasse , person_email)
                 values( ? , ? , ? , ? );""";
         try (var statement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
             statement.setString(1, s.getFirstName());
@@ -60,8 +58,8 @@ public record JdbcSchuelerRepository(Connection connection)
     public Optional<Person> findBySchuelerID(int schuelerID) {
         var sql = """
                 select *
-                from Schueler
-                where schueler_id = ?;
+                from Person
+                where person_id = ?;
                 """;
         try (var statement = connection.prepareStatement(sql)) {
             statement.setInt(1, schuelerID);
@@ -101,12 +99,12 @@ public record JdbcSchuelerRepository(Connection connection)
     public Optional<Person> update(Person s) {
         if (s.getId() == null) throw new IllegalArgumentException("ID darf fuer diese Methode nicht leer sein");
         var sql = """
-                update Schueler
-                set schueler_vorname = ?,
-                schueler_nachname = ?,
-                schueler_klasse = ?,
-                schueler_email = ?
-                where schueler_id = ?;""";
+                update Person
+                set person_vorname = ?,
+                person_nachname = ?,
+                person_klasse = ?,
+                person_email = ?
+                where person_id = ?;""";
         try (var statement = connection.prepareStatement(sql)) {
             statement.setString(1, s.getFirstName());
             statement.setString(2, s.getLastName());
@@ -125,8 +123,8 @@ public record JdbcSchuelerRepository(Connection connection)
     public boolean delete(Person s) {
         if (s.getId() == null) throw new IllegalArgumentException("ID des Schuelers darf nicht null sein");
         var sql = """
-                delete from Schueler
-                where schueler_id = ?;""";
+                delete from Person
+                where person_id = ?;""";
         try (var statement = connection.prepareStatement(sql)) {
             statement.setInt(1, s.getId());
 
@@ -139,7 +137,7 @@ public record JdbcSchuelerRepository(Connection connection)
 
     @Override
     public void deleteAll() {
-        String sql = " delete from Schueler ";
+        String sql = " delete from Person ";
         try (var statement = connection.prepareStatement(sql)) {
             statement.executeUpdate();
         } catch (SQLException e) {
@@ -148,11 +146,24 @@ public record JdbcSchuelerRepository(Connection connection)
 
     }
 
+    public Set<String> getAllSchoolClasses() {
+        var sql = """
+                select distinct person_klasse
+                from Person;""";
+        try (var statement = connection.prepareStatement(sql)) {
+            var resultSet = statement.executeQuery();
+            Set<String> classes = new TreeSet<>();
+
+            while (resultSet.next()) {
+                classes.add(resultSet.getString(1));
+            }
+            return classes;
+        } catch (SQLException throwables) {
+            throw new RuntimeSQLException(throwables.getMessage(), throwables.getCause());
+        }
+    }
+
     private Person getSchuelerFromResultSet(ResultSet set) throws SQLException {
-        return new Person(set.getInt("schueler_id"),
-                set.getString("schueler_vorname"),
-                set.getString("schueler_nachname"),
-                set.getString("schueler_klasse"),
-                set.getString("schueler_email"));
+        return new Person(set.getInt("person_id"), set.getString("person_vorname"), set.getString("person_nachname"), set.getString("person_klasse"), set.getString("person_email"));
     }
 }

@@ -17,7 +17,7 @@ import repository.BuchExemplarRepository;
 import repository.BuchTypRepository;
 import repository.JdbcBuchExemplarRepository;
 import repository.JdbcBuchTypRepository;
-import sql.TestConnectionSupplier;
+import sql.DatabaseConnection;
 
 import java.io.IOException;
 import java.net.URL;
@@ -45,12 +45,12 @@ public class NeuesBuchexemplar implements Initializable {
         Stage stage = ModLIBStage.STAGE;
 
         //initialize content
-        fillBuchtypChoiceBox(new JdbcBuchTypRepository(new TestConnectionSupplier().getConnectionWithTestData()));
+        fillBuchtypChoiceBox(new JdbcBuchTypRepository(DatabaseConnection.DATABASE_CONNECTION));
         buechercb.getItems().addAll(1, 2, 3, 4, 5);
         buechercb.setValue(1);
 
         //setOnAction for buttons
-        initializeInsertBtn(new JdbcBuchExemplarRepository(new TestConnectionSupplier().getConnectionWithTestData()));
+        initializeInsertBtn(new JdbcBuchExemplarRepository(DatabaseConnection.DATABASE_CONNECTION));
         backBtn.setOnAction(actionEvent -> {
             try {
                 stage.setScene(new Scene(FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/pages/Home.fxml")))));

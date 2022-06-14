@@ -15,9 +15,9 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
 import lombok.SneakyThrows;
-import repository.JdbcSchuelerRepository;
-import repository.SchuelerRepository;
-import sql.TestConnectionSupplier;
+import repository.JdbcPersonRepository;
+import repository.PersonRepository;
+import sql.DatabaseConnection;
 
 import java.io.IOException;
 import java.net.URL;
@@ -52,10 +52,11 @@ public class NeuePerson implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         Stage stage = ModLIBStage.STAGE;
+        JdbcPersonRepository personRepository = new JdbcPersonRepository(DatabaseConnection.DATABASE_CONNECTION);
 
         //initialize content
         ObservableList<String> schoolClasses = FXCollections.observableArrayList();
-        schoolClasses.addAll(Person.getAllSchoolClasses());
+        schoolClasses.addAll(personRepository.getAllSchoolClasses());
 
         classcb.setItems(schoolClasses);
         classcb.getSelectionModel().selectFirst();
@@ -64,7 +65,7 @@ public class NeuePerson implements Initializable {
         classtf.textProperty().bindBidirectional(classcb.valueProperty());
 
         //setOnAction for buttons
-        initializeAddButton(new JdbcSchuelerRepository(new TestConnectionSupplier().getConnectionWithTestData()));
+        initializeAddButton(personRepository);
         backBtn.setOnAction(actionEvent -> {
             try {
                 stage.setScene(new Scene(FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/pages/PersonenAnsicht.fxml")))));
@@ -74,11 +75,10 @@ public class NeuePerson implements Initializable {
         });
     }
 
-    private void initializeAddButton(SchuelerRepository repository) {
+    private void initializeAddButton(PersonRepository repository) {
         addbtn.setOnAction(actionEvent -> {
             try {
                 Person toAdd = generatePersonFromTextFields();
-                Person.PERSON_LIST.add(toAdd);
                 repository.save(toAdd);
                 Alert alert = new Alert(Alert.AlertType.INFORMATION, "Person erfolgreich hinzugefuegt");
                 alert.setTitle("Meldung");

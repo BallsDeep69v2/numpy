@@ -5,7 +5,7 @@ import domain.Person;
 import java.util.List;
 import java.util.Optional;
 
-public interface SchuelerRepository {
+public interface PersonRepository {
     List<Person> findAll();
 
     Person save(Person s);

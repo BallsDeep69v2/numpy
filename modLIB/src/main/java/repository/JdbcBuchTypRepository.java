@@ -31,7 +31,7 @@ public record JdbcBuchTypRepository(Connection connection) implements BuchTypRep
     }
 
     @Override
-    public Optional<BuchTyp> findByISBN(String isbn) {
+    public Optional<BuchTyp> findByISBN(int isbn) {
         Objects.requireNonNull(isbn);
         var sql = """
                 select *
@@ -39,7 +39,7 @@ public record JdbcBuchTypRepository(Connection connection) implements BuchTypRep
                 where buchtyp_isbn = ?;
                 """;
         try (var statement = connection.prepareStatement(sql)) {
-            statement.setString(1, isbn);
+            statement.setInt(1, isbn);
 
             var resultSet = statement.executeQuery();
             if (resultSet.next()) {
@@ -59,7 +59,7 @@ public record JdbcBuchTypRepository(Connection connection) implements BuchTypRep
                 insert into Buchtyp
                 values(?,?,?,?,?,?,?);""";
         try (var statement = connection.prepareStatement(sql)) {
-            statement.setString(1, buchTyp.getIsbn());
+            statement.setInt(1, buchTyp.getIsbn());
             statement.setString(2, buchTyp.getTitle());
             statement.setString(3, buchTyp.getAuthor());
             if (buchTyp.getDescription() == null) {
@@ -131,7 +131,7 @@ public record JdbcBuchTypRepository(Connection connection) implements BuchTypRep
             } else {
                 statement.setInt(6, buchTyp.getNumberOfPages());
             }
-            statement.setString(7, buchTyp.getIsbn());
+            statement.setInt(7, buchTyp.getIsbn());
 
             statement.executeUpdate();
             return findByISBN(buchTyp.getIsbn());
@@ -146,7 +146,7 @@ public record JdbcBuchTypRepository(Connection connection) implements BuchTypRep
                 delete from Buchtyp
                 where buchtyp_isbn = ?;""";
         try (var statement = connection.prepareStatement(sql)) {
-            statement.setString(1, buchTyp.getIsbn());
+            statement.setInt(1, buchTyp.getIsbn());
 
             int update = statement.executeUpdate();
             return update == 1;
@@ -156,7 +156,7 @@ public record JdbcBuchTypRepository(Connection connection) implements BuchTypRep
     }
 
     private BuchTyp getBuchTypFromResultSet(ResultSet set) throws SQLException {
-        return new BuchTyp(set.getString("buchtyp_isbn"),
+        return new BuchTyp(set.getInt("buchtyp_isbn"),
                 set.getString("buchtyp_titel"),
                 set.getString("buchtyp_autor"),
                 set.getString("buchtyp_beschreibung"),

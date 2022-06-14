@@ -14,12 +14,14 @@ public class JdbcAusleiheRepository implements AusleiheRepository {
 
     private final Connection connection;
     private final JdbcBuchExemplarRepository buchExemplarRepository;
-    private final JdbcSchuelerRepository schuelerRepository;
+    private final JdbcPersonRepository personRepository;
+    private final JdbcBuchTypRepository buchTypRepository;
 
     public JdbcAusleiheRepository(Connection connection) {
         this.connection = connection;
         buchExemplarRepository = new JdbcBuchExemplarRepository(connection);
-        schuelerRepository = new JdbcSchuelerRepository(connection);
+        personRepository = new JdbcPersonRepository(connection);
+        buchTypRepository = new JdbcBuchTypRepository(connection);
     }
 
     @Override
@@ -40,12 +42,32 @@ public class JdbcAusleiheRepository implements AusleiheRepository {
         }
     }
 
+    public List<Ausleihe> findBySearchword(String searchWord) {
+        var sql = """
+                select *
+                from Ausleihe
+                inner join Person on ausleihe_person_id = person_id
+                inner join Buchexemplar on ausleihe_buchexemplar_id = 
+                where auslei""";
+        try (var statement = connection.prepareStatement(sql)) {
+            var resultSet = statement.executeQuery();
+            List<Ausleihe> ausleihen = new ArrayList<>();
+
+            while (resultSet.next()) {
+                ausleihen.add(getAusleiheFromResultSet(resultSet));
+            }
+            return ausleihen;
+        } catch (SQLException throwables) {
+            throw new RuntimeSQLException(throwables.getMessage(), throwables.getCause());
+        }
+    }
+
     @Override
     public List<Ausleihe> findAllPending() {
         var sql = """
                 select *
                 from Ausleihe
-                where ausleihe_status = false;""";
+                where ausleihe_status = 0;""";
         try (var statement = connection.prepareStatement(sql)) {
             var resultSet = statement.executeQuery();
             List<Ausleihe> ausleihen = new ArrayList<>();
@@ -64,7 +86,7 @@ public class JdbcAusleiheRepository implements AusleiheRepository {
         var sql = """
                 select *
                 from Ausleihe
-                where ausleihe_status = false
+                where ausleihe_status = 0
                 and ausleihe_buchexemplar_id = ?;""";
         try (var statement = connection.prepareStatement(sql)) {
             statement.setInt(1, buchExemplar.getId());
@@ -90,10 +112,10 @@ public class JdbcAusleiheRepository implements AusleiheRepository {
                 insert into ausleihe
                 values(?,?,?,?);""";
         try (var statement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
-            statement.setInt(1,ausleihe.getExemplar().getId());
-            statement.setInt(2,ausleihe.getAusleiher().getId());
-            statement.setDate(3,Date.valueOf(ausleihe.getBeginDate()));
-            statement.setBoolean(4,ausleihe.isStatus());
+            statement.setInt(1, ausleihe.getExemplar().getId());
+            statement.setInt(2, ausleihe.getAusleiher().getId());
+            statement.setDate(3, Date.valueOf(ausleihe.getBeginDate()));
+            statement.setInt(4, convertBooleanToBit(ausleihe.isStatus()));
 
             statement.executeUpdate();
             ResultSet generatedKey = statement.getGeneratedKeys();
@@ -114,7 +136,7 @@ public class JdbcAusleiheRepository implements AusleiheRepository {
                 update ausleihe
                 set ausleihe_status = ?;""";
         try (var statement = connection.prepareStatement(sql)) {
-            statement.setBoolean(1,ausleihe.isStatus());
+            statement.setInt(1, convertBooleanToBit(ausleihe.isStatus()));
 
             statement.executeUpdate();
         } catch (SQLException throwables) {
@@ -127,10 +149,10 @@ public class JdbcAusleiheRepository implements AusleiheRepository {
         var sql = """
                 delete 
                 from Ausleihe
-                where ausleihe_buchexemplar_id = ? and ausleihe_schueler_id = ? and ausleihe_datum = ?;""";
+                where ausleihe_buchexemplar_id = ? and ausleihe_person_id = ? and ausleihe_datum = ?;""";
         try (var statement = connection.prepareStatement(sql)) {
-            statement.setInt(1,ausleihe.getExemplar().getId());
-            statement.setInt(2,ausleihe.getAusleiher().getId());
+            statement.setInt(1, ausleihe.getExemplar().getId());
+            statement.setInt(2, ausleihe.getAusleiher().getId());
             statement.setDate(3, Date.valueOf(ausleihe.getBeginDate()));
 
             statement.executeUpdate();
@@ -144,7 +166,7 @@ public class JdbcAusleiheRepository implements AusleiheRepository {
         var sql = """
                 delete 
                 from Ausleihe
-                where ausleihe_status = true and ausleihe_datum < ?;""";
+                where ausleihe_status = 1 and ausleihe_datum < ?;""";
         try (var statement = connection.prepareStatement(sql)) {
             statement.setDate(1, Date.valueOf(date));
 
@@ -155,9 +177,15 @@ public class JdbcAusleiheRepository implements AusleiheRepository {
     }
 
     private Ausleihe getAusleiheFromResultSet(ResultSet set) throws SQLException {
-        return new Ausleihe(buchExemplarRepository.findById(set.getInt("ausleihe_buchexemplar_id")).orElseThrow(),
-                schuelerRepository.findBySchuelerID(set.getInt("ausleihe_schueler_id")).orElseThrow(),
-                set.getDate("ausleihe_datum").toLocalDate(),
-                set.getBoolean("ausleihe_status"));
+        return new Ausleihe(buchExemplarRepository.findById(set.getInt("ausleihe_buchexemplar_id")).orElseThrow(), buchTypRepository.findByISBN(set.getInt("ausleihe_buchexemplar_isbn")).orElseThrow(), personRepository.findBySchuelerID(set.getInt("ausleihe_person_id")).orElseThrow(), set.getDate("ausleihe_datum").toLocalDate(), convertBitToBoolean(set.getInt("ausleihe_status")));
+    }
+
+    private Boolean convertBitToBoolean(int bit) {
+        return bit == 1;
+    }
+
+    private int convertBooleanToBit(boolean bool) {
+        if (bool) return 1;
+        return 0;
     }
 }

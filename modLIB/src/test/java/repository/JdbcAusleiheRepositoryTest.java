@@ -22,7 +22,7 @@ class JdbcAusleiheRepositoryTest {
     private Connection connection;
 
     private JdbcAusleiheRepository ausleiheRepository;
-    private JdbcSchuelerRepository schuelerRepository;
+    private JdbcPersonRepository schuelerRepository;
     private JdbcBuchExemplarRepository exemplarRepository;
     private JdbcBuchTypRepository buchTypRepository;
 
@@ -30,7 +30,7 @@ class JdbcAusleiheRepositoryTest {
     void createRepository() throws SQLException {
         connection = connectionSupplier.getConnectionWithEmptyTables();
         ausleiheRepository = new JdbcAusleiheRepository(connection);
-        schuelerRepository = new JdbcSchuelerRepository(connection);
+        schuelerRepository = new JdbcPersonRepository(connection);
         exemplarRepository = new JdbcBuchExemplarRepository(connection);
         buchTypRepository = new JdbcBuchTypRepository(connection);
     }
@@ -42,11 +42,11 @@ class JdbcAusleiheRepositoryTest {
 
     void fillDBWithStandardTestData() {
         Person person = new Person();
-        BuchTyp buchtyp = new BuchTyp("isbn", "buchtyp", "test");
+        BuchTyp buchtyp = new BuchTyp(1234567890123, "buchtyp", "test");
         schuelerRepository.save(person);
         buchTypRepository.save(buchtyp);
         var exemplar = exemplarRepository.save(buchtyp);
-        Ausleihe ausleihe = new Ausleihe(exemplar, person, LocalDate.now());
+        Ausleihe ausleihe = new Ausleihe(exemplar,buchtyp, person, LocalDate.now());
 
         ausleiheRepository.save(ausleihe);
     }
@@ -56,11 +56,11 @@ class JdbcAusleiheRepositoryTest {
         @Test
         void saveSingleAusleiheWorks() {
             Person person = new Person();
-            BuchTyp buchtyp = new BuchTyp("isbn", "buchtyp", "test");
+            BuchTyp buchtyp = new BuchTyp(1234567890123, "buchtyp", "test");
             schuelerRepository.save(person);
             buchTypRepository.save(buchtyp);
             var exemplar = exemplarRepository.save(buchtyp);
-            Ausleihe ausleihe = new Ausleihe(exemplar, person, LocalDate.now());
+            Ausleihe ausleihe = new Ausleihe(exemplar,buchtyp, person, LocalDate.now());
             ausleiheRepository.save(ausleihe);
 
             assertThat(ausleiheRepository.findAll()).containsExactly(ausleihe);

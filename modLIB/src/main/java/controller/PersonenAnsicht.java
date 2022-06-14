@@ -12,19 +12,24 @@ import javafx.scene.image.Image;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import lombok.SneakyThrows;
-import repository.SchuelerRepository;
+import repository.JdbcPersonRepository;
+import repository.PersonRepository;
+import sql.DatabaseConnection;
 
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
-import java.util.List;
 import java.util.Objects;
+import java.util.Optional;
 import java.util.ResourceBundle;
 
 public class PersonenAnsicht implements Initializable {
 
     @FXML
     private Button backBtn;
+
+    @FXML
+    private Button deleteAllBtn;
 
     @FXML
     private TableColumn<Person, String> email;
@@ -55,12 +60,11 @@ public class PersonenAnsicht implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         Stage stage = ModLIBStage.STAGE;
-        List<Person> persons = Person.PERSON_LIST;
+        JdbcPersonRepository personRepository = new JdbcPersonRepository(DatabaseConnection.DATABASE_CONNECTION);
 
         //initialize content
-        tbData.getItems().addAll(persons);
         initializeTableView();
-//        loadData(new JdbcSchuelerRepository(new TestConnectionSupplier().getConnectionWithTestData()));
+        loadData(personRepository);
         searchword.setFocusTraversable(false);
 
         //binding
@@ -92,15 +96,25 @@ public class PersonenAnsicht implements Initializable {
             File file = fileChooser.showOpenDialog(ModLIBStage.STAGE);
 
             try {
-                if (file != null && file.exists()) Person.createPersonsFromCSVFile(file.toPath());
+                if (file != null && file.exists()) Person.createPersonsFromCSVFile(file.toPath(), personRepository);
                 else throw new IOException();
             } catch (IOException e) {
                 Alert alert = new Alert(Alert.AlertType.ERROR, "Datei könnte nicht gefunden/geöffnet werden!");
                 ((Stage) alert.getDialogPane().getScene().getWindow()).getIcons().add(new Image("/icons/book_blue.png"));
                 alert.show();
             } finally {
-                tbData.getItems().addAll(Person.PERSON_LIST);
+                loadData(personRepository);
             }
+        });
+
+        deleteAllBtn.setOnAction(actionEvent -> {
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Wollen Sie wirklich alle Personen löschen?\nDiese Handlung kann nicht rückgängig gemacht werden!");
+            ((Stage) alert.getDialogPane().getScene().getWindow()).getIcons().add(new Image("/icons/book_blue.png"));
+            Optional<ButtonType> result = alert.showAndWait();
+            if (result.isPresent() && result.get() == ButtonType.OK) {
+                personRepository.deleteAll();
+                loadData(personRepository);
+            }//else canceled
         });
     }
 
@@ -111,7 +125,9 @@ public class PersonenAnsicht implements Initializable {
         email.setCellValueFactory(personStringCellDataFeatures -> personStringCellDataFeatures.getValue().eMailProperty());
     }
 
-    private void loadData(SchuelerRepository repository) {//lädt aktuell nur Testdaten
+    private void loadData(PersonRepository repository) {
+        tbData.getItems().clear();
+        tbData.refresh();
         tbData.getItems().addAll(repository.findAll());
     }
 }

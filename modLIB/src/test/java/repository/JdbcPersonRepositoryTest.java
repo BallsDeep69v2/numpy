@@ -16,12 +16,12 @@ public class JdbcPersonRepositoryTest {
     private final TestConnectionSupplier connectionSupplier = new TestConnectionSupplier();
     private Connection connection;
 
-    private JdbcSchuelerRepository schuelerRepository;
+    private JdbcPersonRepository schuelerRepository;
 
     @BeforeEach
     void createRepository() throws SQLException {
         connection = connectionSupplier.getConnectionWithEmptyTables();
-        schuelerRepository = new JdbcSchuelerRepository(connection);
+        schuelerRepository = new JdbcPersonRepository(connection);
     }
 
     @AfterEach

@@ -3,12 +3,11 @@ package domain;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import lombok.*;
+import repository.JdbcPersonRepository;
 
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -18,7 +17,6 @@ import java.util.stream.Collectors;
 @ToString
 @AllArgsConstructor
 public class Person {
-    public static final List<Person> PERSON_LIST = new ArrayList<>();
 
     private Integer id;
 
@@ -28,6 +26,7 @@ public class Person {
     @NonNull
     private String lastName;
 
+    @NonNull
     private String schoolClass;
 
     private String eMail;
@@ -40,15 +39,7 @@ public class Person {
         this(1, "Max", "Muster", "4BHIF", "email");
     }
 
-    public static boolean addPerson(Person person) {
-        return PERSON_LIST.add(person);
-    }
-
-    public static boolean removePerson(Person person) {
-        return PERSON_LIST.remove(person);
-    }
-
-    public static void createPersonsFromCSVFile(Path pathToCSVFile) throws IOException {
+    public static void createPersonsFromCSVFile(Path pathToCSVFile, JdbcPersonRepository personRepository) throws IOException {
         Files.readAllLines(pathToCSVFile.toAbsolutePath()).stream().filter(line -> {
             var splitLine = line.split(";");
             if (splitLine.length != 5 && !splitLine[0].isEmpty() && !splitLine[1].isEmpty() && !splitLine[4].isEmpty())
@@ -62,11 +53,7 @@ public class Person {
         }).map(line -> {
             var splitLine = line.split(";");
             return new Person(splitLine[0], splitLine[1], splitLine[4], null);
-        }).forEach(PERSON_LIST::add);
-    }
-
-    public static Set<String> getAllSchoolClasses() {
-        return PERSON_LIST.stream().map(person -> person.schoolClass).collect(Collectors.toSet());
+        }).forEach(personRepository::save);
     }
 
     @Override

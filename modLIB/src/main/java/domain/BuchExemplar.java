@@ -21,7 +21,7 @@ public class BuchExemplar {
 
     public BuchExemplar(@NonNull Integer id, @NonNull BuchTyp typ) {
         this.id = id;
-        setTyp(typ);
+        this.typ = typ;
     }
 
     public static List<BuchExemplar> getBuchExemplarList() {

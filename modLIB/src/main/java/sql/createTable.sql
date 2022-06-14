@@ -7,7 +7,7 @@ drop table if exists Buchtyp
 
 CREATE TABLE Buchtyp
 (
-    buchtyp_isbn         numeric(13, 0) PRIMARY KEY,
+    buchtyp_isbn         nvarchar(13) PRIMARY KEY,
     buchtyp_titel        nVarchar(100) Not Null,
     buchtyp_autor        nvarchar(100) Not Null,
     buchtyp_beschreibung nvarchar(900),
@@ -19,7 +19,7 @@ CREATE TABLE Buchtyp
 CREATE TABLE Buchexemplar
 (
     buchexemplar_id           numeric(2, 0),
-    buchexemplar_buchtyp_isbn numeric(13, 0) Not Null references Buchtyp (buchtyp_isbn) On delete No Action,
+    buchexemplar_buchtyp_isbn nvarchar(13) Not Null references Buchtyp (buchtyp_isbn) On delete No Action,
     constraint buchexemplar_pk primary key (buchexemplar_id, buchexemplar_buchtyp_isbn)
 
 );
@@ -36,7 +36,7 @@ CREATE TABLE Person
 CREATE TABLE Ausleihe
 (
     ausleihe_buchexemplar_id   numeric(2, 0)  not null,
-    ausleihe_buchexemplar_isbn numeric(13, 0) not null,
+    ausleihe_buchexemplar_isbn nvarchar(13) not null,
     ausleihe_person_id         int            not null references Person on delete cascade,
     ausleihe_datum             date           not null,
     ausleihe_status            bit            not null,

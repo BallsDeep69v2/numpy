@@ -1,7 +1,9 @@
 package domain;
 
+import javafx.util.converter.BigIntegerStringConverter;
 import lombok.*;
 
+import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -14,7 +16,7 @@ public class BuchTyp {
     private static final List<BuchTyp> BUCH_TYP_LIST = new ArrayList<>();
 
     @NonNull
-    private Long isbn;
+    private String isbn;
 
     @NonNull
     private String title;
@@ -30,7 +32,7 @@ public class BuchTyp {
 
     private Integer numberOfPages;
 
-    public BuchTyp(@NonNull Long isbn, @NonNull String title, @NonNull String author) {
+    public BuchTyp(@NonNull String isbn, @NonNull String title, @NonNull String author) {
         this.isbn = isbn;
         this.title = title;
         this.author = author;

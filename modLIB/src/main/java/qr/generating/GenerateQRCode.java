@@ -24,7 +24,7 @@ public class GenerateQRCode {
     }
 
     public static void createQRImage(String isbn, String exemplarNumber, Path resourcesPath) throws WriterException, IOException, InvalidDataException {
-        if (isbn.length() != 13 || exemplarNumber.length() != 2) {
+        if (isbn.length() < 10 || isbn.length() > 13 || exemplarNumber.length() != 2) {
             throw new InvalidDataException("isbn must have an size of 13 and exemplar-number must have an size of 2");
         }
 

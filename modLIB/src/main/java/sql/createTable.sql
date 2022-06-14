@@ -18,7 +18,7 @@ CREATE TABLE Buchtyp
 
 CREATE TABLE Buchexemplar
 (
-    buchexemplar_id           numeric(2, 0) identity (1,1),
+    buchexemplar_id           numeric(2, 0),
     buchexemplar_buchtyp_isbn numeric(13, 0) Not Null references Buchtyp (buchtyp_isbn) On delete No Action,
     constraint buchexemplar_pk primary key (buchexemplar_id, buchexemplar_buchtyp_isbn)
 
